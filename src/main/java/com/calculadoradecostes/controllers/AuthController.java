@@ -32,7 +32,6 @@ import com.calculadoradecostes.repository.UserRepository;
 import com.calculadoradecostes.security.jwt.JwtUtils;
 import com.calculadoradecostes.security.services.UserDetailsImpl;
 
-//Comentario
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
