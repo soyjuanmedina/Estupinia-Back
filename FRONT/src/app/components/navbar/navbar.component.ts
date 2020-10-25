@@ -9,17 +9,21 @@ import { TokenStorageService } from '../../_services/token-storage.service';
 })
 export class NavbarComponent implements OnInit {
 
-  form: any = {};
+  loginForm: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  loginErrorMessage = '';
+  registerErrorMessage = '';
   roles: string[] = [];
+  registerForm: any = {};
+  isSuccessfulRegistered = false;
+  isFailedRegistered = false;
 
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService) { }
 
-  onSubmit(): void {
-    this.authService.login(this.form).subscribe(
+  onSubmitLoginForm(): void {
+    this.authService.login(this.loginForm).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
@@ -30,8 +34,22 @@ export class NavbarComponent implements OnInit {
         this.reloadPage();
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.loginErrorMessage = err.error.message;
         this.isLoginFailed = true;
+      }
+    );
+  }
+
+  onSubmitRegisterForm(): void {
+    this.authService.register(this.registerForm).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessfulRegistered = true;
+        this.isFailedRegistered = false;
+      },
+      err => {
+        this.registerErrorMessage = err.error.message;
+        this.isFailedRegistered = true;
       }
     );
   }

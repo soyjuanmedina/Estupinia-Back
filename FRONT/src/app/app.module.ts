@@ -9,12 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CalculadoraDeCostesPage } from './pages/calculadora-costes/calculadora-costes.page';
-import { CalculadoraDePreciosPage } from './pages/calculadora-precios/calculadora-precios.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HosteleriaBusiness } from './components/businessTypes/hosteleria/hosteleria.component';
 import { AppService } from './app.service';
-import { RegisterPage } from './pages/register/register.page';
 import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 
 @NgModule({
@@ -22,10 +20,8 @@ import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
     AppComponent,
     NavbarComponent,
     CalculadoraDeCostesPage,
-    CalculadoraDePreciosPage,
     ContactPage,
     HosteleriaBusiness,
-    RegisterPage,
     ProfilePage
   ],
   imports: [
