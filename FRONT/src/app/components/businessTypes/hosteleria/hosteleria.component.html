@@ -1,0 +1,325 @@
+<div>
+  <div class="col-lg-12 ml-auto top-30" id="section0">
+    <p class="lead">Un restaurante, ¡¡estupendo!!. Bueno, lo primero de todo vamos a ponerle nombre.
+      También, si lo deseas, puedes cargar algunos de nuestros ejemplos para inspirarte.
+    </p>
+  </div>
+
+  <div class="clearfix">
+    <div class="float-right">
+      <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
+        data-target="#loadExampleModal">
+        Cargar ejemplo <i class="fas fa-question-circle"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="nombre">
+    <div class="card-header">
+      <h5>Nombre</h5>
+    </div>
+    <div class="card-body">
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="business.name">Nombre</label>
+          <input type="text" class="form-control" id="business.name" placeholder="Nombre"
+            [(ngModel)]="business.name" [name]="business.name">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="step < 1" id="section1">
+  <div class="col-lg-12 ml-auto top-30">
+    <p class="lead">Fenomeno, seguro que {{business.name}} será todo un éxito, pero para
+      lograrlo vamos a hacer algunos cálculos. De momento vamos a calcular los ingresos
+      previstos.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h5>Ingresos</h5>
+    </div>
+    <div class="card-body">
+      <h6 class="card-title">Clientes</h6>
+      <p class="lead">Supone la principal fuente de ingresos de un negocio de hosteleria,
+        vamos a estimar la cantidad de clientes por mes y su ticket medio. Puedes añadir comentarios
+        para justificar tus cálculos.
+      </p>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="business.customers.esteemed">
+            Clientes
+            <span *ngIf="!business.customers.monthly">diarios</span>
+            <span *ngIf="business.customers.monthly">mensuales</span>
+            estimados
+          </label>
+          <input type="number" class="form-control" id="business.customers.esteemed"
+            placeholder="Clientes" [(ngModel)]="business.customers.esteemed"
+            [name]="business.customers.esteemed">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="business.customers.averageTicket">Ticket medio</label>
+          <input type="number" class="form-control" id="business.customers.averageTicket"
+            placeholder="Ticket medio" [(ngModel)]="business.customers.averageTicket"
+            [name]="business.customers.averageTicket">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="business.customers.monthly"
+            [(ngModel)]="business.customers.monthly" [name]="business.customers.monthly">
+          <label class="form-check-label" for="business.customers.monthly">
+            Mensuales
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="business.customers.commentary">Comentarios</label>
+        <textarea class="form-control" id="business.customers.commentary" rows="3"
+          [(ngModel)]="business.customers.commentary"
+          [name]="business.customers.commentary"></textarea>
+      </div>
+
+      <h6 class="card-title">Otros ingresos</h6>
+      <p class="lead">Quizá hayas pensado obtener ingresos por otros medios,
+        como por ejemplo la venta de merchandising. Si es así, este es el lugar para añadirlos.
+        Una vez que hayas añadido todos los ingresos que esperas obtener pulsa el botón
+        continuar. Recuerda que los comentarios ayudarán a los inversores a comprender tus números
+      </p>
+
+      <div class="col-lg-12 mx-auto top-30 clearfix">
+        <div class="float-right">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+            data-target="#addAccountingNoteModal" (click)="selectedArray = business.incomes">
+            Añadir Ingreso
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row top-30" *ngFor="let income of business.incomes">
+        <h6>{{income.name}}</h6>
+        <div class="col-md-12" *ngIf="income.commentary">
+          <textarea class="form-control" id="income.commentary" rows="2"
+            [(ngModel)]="income.commentary" [name]="income.commentary"></textarea>
+        </div>
+        <div class="col-md-12" [ngClass]="{'top-30': income.commentary }">
+          <div class="input-group">
+            <input type="number" class="form-control" [id]="income.name" [value]="income.amount"
+              [(ngModel)]="income.amount" [name]="income.name">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                (click)="deleteAccountingNote('incomes', business.incomes, income)"><i
+                  class="fas fa-trash-alt float-right text-danger"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div [hidden]="step < 2" id="section2">
+  <div class="col-lg-12 ml-auto top-30">
+    <p class="lead">Ahora tenemos que tener en cuenta los gastos. Estos los vamos a dividir
+      entre los fijos y los variables.
+    </p>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h5>Gastos fijos</h5>
+    </div>
+    <div class="card-body">
+      <p class="lead">Los gastos fijos de la hostelería suelen incluir el alquiler, personal,
+        gestoria
+        y otros, pero no dudes en añadir o eliminar los que necesites.
+        Una vez que hayas añadido todos los gastos fijos que esperas tener pulsa el botón
+        continuar.
+      </p>
+
+      <div class="col-lg-12 mx-auto top-30 clearfix">
+        <div class="float-right">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+            data-target="#addAccountingNoteModal" (click)="selectedArray = business.costs.fixed">
+            Añadir Gasto Fijo
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row top-30" *ngFor="let fixedCost of business.costs.fixed">
+        <h6>{{fixedCost.name}}</h6>
+        <div class="col-md-12" *ngIf="fixedCost.commentary">
+          <textarea class="form-control" id="fixedCost.commentary" rows="2"
+            [(ngModel)]="fixedCost.commentary" [name]="fixedCost.commentary"></textarea>
+        </div>
+        <div class="col-md-12" [ngClass]="{'top-30': fixedCost.commentary }">
+          <div class="input-group">
+            <input type="number" class="form-control" [id]="fixedCost.name"
+              [value]="fixedCost.amount" [(ngModel)]="fixedCost.amount" [name]="fixedCost.name">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                (click)="deleteAccountingNote('fixedCost', business.costs.fixed, fixedCost)"><i
+                  class="fas fa-trash-alt float-right text-danger"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div [hidden]="step < 3" id="section3" class="top-30">
+  <div class="card">
+    <div class="card-header">
+      <h5>Gastos variables</h5>
+    </div>
+    <div class="card-body">
+
+      <p class="lead">Los gastos variables de la hostelería suelen incluir la luz,
+        el agua, el teléfono y otros, así que no dudes en añadir o eliminar los que
+        tendrás en tu negocio.
+        Una vez que hayas añadido todos los gastos variables que esperas tener pulsa el botón
+        calcular y veremos la viabilidad de tu negocio.
+      </p>
+
+      <div class="col-lg-12 mx-auto top-30 clearfix">
+        <div class="float-right">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+            data-target="#addAccountingNoteModal"
+            (click)="selectedArray = business.costs.variables">
+            Añadir Gasto Variable
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row top-30" *ngFor="let variableCost of business.costs.variables">
+        <h6>{{variableCost.name}}</h6>
+        <div class="col-md-12" *ngIf="variableCost.commentary">
+          <textarea class="form-control" id="variableCost.commentary" rows="2"
+            [(ngModel)]="variableCost.commentary" [name]="variableCost.commentary"></textarea>
+        </div>
+        <div class="col-md-12" [ngClass]="{'top-30': variableCost.commentary }">
+          <div class="input-group">
+            <input type="number" class="form-control" [id]="variableCost.name"
+              [value]="variableCost.amount" [(ngModel)]="variableCost.amount"
+              [name]="variableCost.name">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                (click)="deleteAccountingNote('variableCost', business.costs.variables, variableCost)"><i
+                  class="fas fa-trash-alt float-right text-danger"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12 mx-auto top-30 bottom-30" *ngIf="step < 3">
+  <button type="button" class="btn btn-primary btn-lg btn-block" (click)="next()">Continuar
+  </button>
+</div>
+
+<div class="col-lg-12 mx-auto top-100 bottom-30" *ngIf="step >= 3">
+  <button type="button" class="btn btn-primary btn-lg btn-block" (click)="calculate()">Calcular
+  </button>
+</div>
+<section [hidden]="!calculated" [ngClass]="{'bg-primary': result > 0, 'bg-danger': result <= 0 }"
+  class="page-section bg-primary text-white mb-0" id="result">
+  <div class="container">
+    <!-- Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-white">Resultado</h2>
+    <!-- Icon Divider-->
+    <div class="divider-custom divider-light">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+      <div class="divider-custom-line"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 ml-auto text-center">
+        <p class="lead" *ngIf="result >= 0">¡¡Enhorabuena!! {{business.name}} Parece que es viable
+        </p>
+        <p class="lead" *ngIf="result < 0">!!Ups!! {{business.name}} no alcanza el punto de
+          equilibrio, quizá valga la pena revisar esos números.
+        </p>
+        <p class="lead">Los ingresos previstos son: {{totalRevenue}}</p>
+        <p class="lead">Los gastos fijos son: {{totalFixedCosts}}</p>
+        <p class="lead">Los gastos varriables son: {{totalVariableExpends}}</p>
+        <p class="lead">Lo que te llevaría a unos
+          <span *ngIf="result < 0">gastos</span><span *ngIf="result >= 0">beneficios</span>
+          mensuales de: {{result}}</p>
+      </div>
+
+    </div>
+    <div class="text-center mt-4">
+      <div class="btn btn-xl btn-outline-light" (click)="calcAgain()">
+        Volver a calcular
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal addAccountingNoteModal -->
+<div class="modal fade" id="addAccountingNoteModal" tabindex="-1" role="dialog"
+  aria-labelledby="addAccountingNoteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAccountingNoteModal">Añadir Movimiento contable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>asdfsafds</h6>
+        <label for="accountingNoteName">Nombre</label>
+        <input type="text" class="form-control" [(ngModel)]="accountingNoteName"
+          id="accountingNoteName">
+
+        <label for="accountingNoteAmount">Ingreso</label>
+        <input type="number" class="form-control" [(ngModel)]="accountingNoteAmount"
+          id="accountingNoteAmount">
+
+        <label for="accountingNoteCommentary">Comentario</label>
+        <textarea class="form-control" id="accountingNoteCommentary" rows="3"
+          [(ngModel)]="accountingNoteCommentary" [name]="accountingNoteCommentary"></textarea>
+
+
+        <button class="btn btn-primary top-30" data-dismiss="modal" (click)="addAccountingNote()">
+          Añadir
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal loadExampleModal -->
+<div class="modal fade" id="loadExampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="loadExampleModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loadExampleModal">Cargar Ejemplo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-primary" data-dismiss="modal" (click)="loadExample('lacueva')">
+          La Cueva
+        </button>
+
+        <button class="btn btn-primary ml-1" data-dismiss="modal" (click)="loadExample('elveloz')">
+          Catering El Veloz
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

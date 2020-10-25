@@ -1,0 +1,59 @@
+{
+  "investments": [
+    {
+      "type": "Inmovilizado material",
+      "costs": [
+        {
+          "name": "Reforma y acondicionamiento del local",
+          "amount": 30000
+        },
+        {
+          "name": " Maquinaria de hostelería",
+          "amount": 10000
+        },
+        {
+          "name": "Herramientas y utensilios de cocina",
+          "amount": 5000
+        },
+        {
+          "name": "Mobiliario y decoración",
+          "amount": 10000
+        },
+        {
+          "name": "Equipos informáticos",
+          "amount": 2000
+        }
+      ]
+    },
+    {
+      "type": "Inmovilizado intangible",
+      "costs": [
+        {
+          "name": "Programas informáticos de gestión",
+          "amount": 1000
+        }
+      ]
+    },
+    {
+      "type": "Activo del balance",
+      "costs": [
+        {
+          "name": "Dos meses de alquiler del local",
+          "amount": 4800
+        },
+        {
+          "name": "Captación de clientes y la publicidad de lanzamiento",
+          "amount": 3000
+        },
+        {
+          "name": "Existencias iniciales",
+          "amount": 6000
+        },
+        {
+          "name": "Tesorería inicial",
+          "amount": 10000
+        }
+      ]
+    }
+  ]
+}
