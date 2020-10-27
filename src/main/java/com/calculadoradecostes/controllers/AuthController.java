@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.calculadoradecostes.models.ERole;
+import com.calculadoradecostes.models.Project;
 import com.calculadoradecostes.models.Role;
 import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.payload.request.LoginRequest;
@@ -64,12 +65,15 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
+		
+		List<Project> projects = userDetails.getProjects();
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
 												 userDetails.getEmail(), 
-												 roles));
+												 roles,
+												 projects));
 	}
 
 	@PostMapping("/signup")

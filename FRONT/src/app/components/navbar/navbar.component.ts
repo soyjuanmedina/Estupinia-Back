@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
+import { UserService } from '../../_services/user.service';
+declare var $: any;
 
 @Component({
   selector: 'navbar-component',
@@ -10,8 +12,6 @@ import { TokenStorageService } from '../../_services/token-storage.service';
 export class NavbarComponent implements OnInit {
 
   loginForm: any = {};
-  isLoggedIn = false;
-  isLoginFailed = false;
   loginErrorMessage = '';
   registerErrorMessage = '';
   roles: string[] = [];
@@ -20,30 +20,40 @@ export class NavbarComponent implements OnInit {
   isFailedRegistered = false;
 
   constructor(private authService: AuthService,
-    private tokenStorage: TokenStorageService) { }
+    private tokenStorage: TokenStorageService, public _userService: UserService) { }
 
-  onSubmitLoginForm(): void {
+  openLoginModal() {
+    $('#LoginModal').modal('show');
+    $('.nav-tabs a[href="#nav-login"]').tab('show');
+  }
+
+  openRegisterModal() {
+    $('#LoginModal').modal('show');
+    $('.nav-tabs a[href="#nav-register"]').tab('show');
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  login() {
     this.authService.login(this.loginForm).subscribe(
       data => {
+        $('#LoginModal').modal('hide');
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
+        this._userService.user = data;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
       },
       err => {
         this.loginErrorMessage = err.error.message;
-        this.isLoginFailed = true;
       }
     );
   }
 
-  onSubmitRegisterForm(): void {
+  register() {
     this.authService.register(this.registerForm).subscribe(
       data => {
-        console.log(data);
         this.isSuccessfulRegistered = true;
         this.isFailedRegistered = false;
       },
@@ -54,15 +64,7 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
-
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
   }
 
 }

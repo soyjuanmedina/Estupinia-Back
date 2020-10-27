@@ -1,3 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="navbar-nav mr-auto">
+  </ul>
+  <button type="button" class="btn btn-primary btn-sm" (click)="openLoginModal()"
+    *ngIf="!_userService.user">
+    Login</button>&nbsp;
+  <button type="button" class="btn btn-primary btn-sm" id="registerButton"
+    *ngIf="!_userService.user" (click)="openRegisterModal()">Registro</button>
+  <button type="button" class="btn btn-primary btn-sm" id="registerButton" *ngIf="_userService.user"
+    (click)="logout()">Logout</button>
+</nav>
+
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
   <div class="container">
     <div class="navbar-brand js-scroll-trigger">Calculadoras para Startups</div>
@@ -20,15 +32,6 @@
             [routerLink]="['/contacto']">Contacto</a>
         </li>
       </ul>
-
-      <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
-        data-target="#LoginModal">
-        Login <i class="fas fa-question-circle"></i></button>
-
-      <button type="button" class="btn btn-primary btn-sm bottom-30" [routerLink]="['/register']">
-        Registro <i class="fas fa-question-circle"></i></button>
-
-
     </div>
   </div>
 </nav>
@@ -40,7 +43,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="LoginModal">Login</h5>
+        <h5 class="modal-title" id="LoginModal">Autenticación</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,42 +55,40 @@
           <div class="col-xs-12 ">
             <nav>
               <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab"
-                  href="#nav-login" role="tab" aria-controls="nav-login"
-                  aria-selected="true">Login</a>
+                <a class="nav-item nav-link" id="nav-login-tab" data-toggle="tab" href="#nav-login"
+                  role="tab" aria-controls="nav-login" aria-selected="true">Login</a>
                 <a class="nav-item nav-link" id="nav-register-tab" data-toggle="tab"
                   href="#nav-register" role="tab" aria-controls="nav-register"
                   aria-selected="false">Registro</a>
               </div>
             </nav>
             <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-login" role="tabpanel"
+              <div class="tab-pane fade show" id="nav-login" role="tabpanel"
                 aria-labelledby="nav-login-tab">
                 <div class="col-md-12">
                   <div class="card card-container">
-                    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                      class="profile-img-card" />
-                    <form *ngIf="!isLoggedIn" name="loginForm"
-                      (ngSubmit)="f.form.valid && onSubmitLoginForm()" #f="ngForm" novalidate>
+
+                    <form name="loginForm" (ngSubmit)="f.form.valid && login()" #f="ngForm"
+                      novalidate>
                       <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Nombre de usuario</label>
                         <input type="text" class="form-control" name="username"
                           [(ngModel)]="loginForm.username" required #username="ngModel" />
                         <div class="alert alert-danger" role="alert"
                           *ngIf="f.submitted && username.invalid">
-                          Username is required!
+                          ¡El nombre de usuario es necesario!
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Contraseña</label>
                         <input type="password" class="form-control" name="password"
                           [(ngModel)]="loginForm.password" required minlength="6"
                           #password="ngModel" />
                         <div class="alert alert-danger" role="alert"
                           *ngIf="f.submitted && password.invalid">
-                          <div *ngIf="password.errors.required">Password is required</div>
+                          <div *ngIf="password.errors.required">¡La contraseña es necesaria!</div>
                           <div *ngIf="password.errors.minlength">
-                            Password must be at least 6 characters
+                            La contraseña debe tener al menos 6 caracteres
                           </div>
                         </div>
                       </div>
@@ -98,15 +99,12 @@
                       </div>
                       <div class="form-group">
                         <div class="alert alert-danger" role="alert"
-                          *ngIf="f.submitted && isLoginFailed">
-                          Login failed: {{ loginErrorMessage }}
+                          *ngIf="f.submitted && loginErrorMessage">
+
+                          Error: {{ loginErrorMessage }}
                         </div>
                       </div>
                     </form>
-
-                    <div class="alert alert-success" *ngIf="isLoggedIn">
-                      Logged in as {{ roles }}.
-                    </div>
                   </div>
                 </div>
               </div>
@@ -116,22 +114,21 @@
                 aria-labelledby="nav-register-tab">
                 <div class="col-md-12">
                   <div class="card card-container">
-                    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                      class="profile-img-card" />
                     <form *ngIf="!isSuccessfulRegistered" name="registerForm"
-                      (ngSubmit)="f.form.valid && onSubmitRegisterForm()" #f="ngForm" novalidate>
+                      (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
                       <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Nombre de usuario</label>
                         <input type="text" class="form-control" name="username"
                           [(ngModel)]="registerForm.username" required minlength="3" maxlength="20"
                           #username="ngModel" />
                         <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-                          <div *ngIf="username.errors.required">Username is required</div>
+                          <div *ngIf="username.errors.required">El Nombre de usuario es necesario
+                          </div>
                           <div *ngIf="username.errors.minlength">
-                            Username must be at least 3 characters
+                            El nombre de usuario debe tener como poco 3 caracteres
                           </div>
                           <div *ngIf="username.errors.maxlength">
-                            Username must be at most 20 characters
+                            El nombre de usuario debe tener como mucho 20 caracteres
                           </div>
                         </div>
                       </div>
@@ -140,35 +137,35 @@
                         <input type="email" class="form-control" name="email"
                           [(ngModel)]="registerForm.email" required email #email="ngModel" />
                         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-                          <div *ngIf="email.errors.required">Email is required</div>
+                          <div *ngIf="email.errors.required">El Email is necesario</div>
                           <div *ngIf="email.errors.email">
-                            Email must be a valid email address
+                            El email debe ser válido
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Contraseña</label>
                         <input type="password" class="form-control" name="password"
                           [(ngModel)]="registerForm.password" required minlength="6"
                           #password="ngModel" />
                         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-                          <div *ngIf="password.errors.required">Password is required</div>
+                          <div *ngIf="password.errors.required">La contraseña es necesario</div>
                           <div *ngIf="password.errors.minlength">
-                            Password must be at least 6 characters
+                            La contraseña debe tener al menos 6 caracteres
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
-                        <button class="btn btn-primary btn-block">Sign Up</button>
+                        <button class="btn btn-primary btn-block">Registro</button>
                       </div>
 
                       <div class="alert alert-warning" *ngIf="f.submitted && isFailedRegistered">
-                        Signup failed!<br />{{ registerErrorMessage }}
+                        Error<br />{{ registerErrorMessage }}
                       </div>
                     </form>
 
                     <div class="alert alert-success" *ngIf="isSuccessfulRegistered">
-                      Your registration is successful!
+                      Te has registrado correctamente. Ahora ya puedes loguearte.
                     </div>
                   </div>
                 </div>
