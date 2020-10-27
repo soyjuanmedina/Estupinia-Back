@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -8,10 +9,11 @@ const USER_KEY = 'auth-user';
 })
 export class TokenStorageService {
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   signOut(): void {
     window.sessionStorage.clear();
+    delete this._userService.user;
   }
 
   public saveToken(token: string): void {
