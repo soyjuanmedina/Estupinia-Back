@@ -24,11 +24,23 @@ public class AccountingNote {
 	
 	private String commentary;
 
-	 
-	    @ManyToOne()
-	    @JoinColumn(name = "project_id")
-	    @JsonIgnore
-	    private Project project;
+    @ManyToOne()
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Project project;
+    
+    @ManyToOne()
+    @JoinColumn(name = "cost_id")
+    @JsonIgnore
+    private Costs costs;
+
+	public Costs getCosts() {
+		return costs;
+	}
+
+	public void setCosts(Costs costs) {
+		this.costs = costs;
+	}
 
 	public Project getProject() {
 			return project;

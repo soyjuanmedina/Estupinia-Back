@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "esteemedCustomers")
 public class EsteemedCustomers {
@@ -27,28 +29,10 @@ public class EsteemedCustomers {
 	
 	private boolean monthly;
 	
-	  @OneToOne
-	  @JoinColumn(name="project_id")
-	  private Project project;
-	
-//	@OneToOne(mappedBy = "esteemedCustomers", cascade = CascadeType.ALL)
-//    private Project project;
-
-	public Integer getEsteemed() {
-		return esteemed;
-	}
-
-	public void setEsteemed(Integer esteemed) {
-		this.esteemed = esteemed;
-	}
-
-//	public Project getProject() {
-//		return project;
-//	}
-//
-//	public void setProject(Project project) {
-//		this.project = project;
-//	}
+	@OneToOne
+	@JoinColumn(name="project_id")
+	@JsonIgnore
+	private Project project;
 
 	public Integer getId() {
 		return id;
@@ -56,6 +40,14 @@ public class EsteemedCustomers {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Integer getEsteemed() {
+		return esteemed;
+	}
+
+	public void setEsteemed(Integer esteemed) {
+		this.esteemed = esteemed;
 	}
 
 	public String getCommentary() {
@@ -81,19 +73,11 @@ public class EsteemedCustomers {
 	public void setMonthly(boolean monthly) {
 		this.monthly = monthly;
 	}
-//
-//	public Integer getEsteemed() {
-//		return esteemed;
-//	}
-//
-//	public void setEsteemed(Integer esteemed) {
-//		this.esteemed = esteemed;
-//	}
-//
+	
 //	public Project getProject() {
 //		return project;
 //	}
-//
+//	
 //	public void setProject(Project project) {
 //		this.project = project;
 //	}

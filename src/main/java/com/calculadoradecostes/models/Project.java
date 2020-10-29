@@ -26,24 +26,14 @@ public class Project {
 	@Size(max = 120)
 	private String name;
 	
-	@OneToOne(mappedBy="project")
+	@OneToOne(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private EsteemedCustomers esteemedCustomers;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccountingNote> incomes;
 	
-
-	    @OneToMany(mappedBy = "project", orphanRemoval = true)
-	    private Set<AccountingNote> accountingNotes;
-	
-//    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<AccountingNote> incomes;
-
-	public void setAccountingNotes(Set<AccountingNote> accountingNotes) {
-			this.accountingNotes = accountingNotes;
-		}
-
-	public Set<AccountingNote> getAccountingNotes() {
-		return accountingNotes;
-	}
-
+	@OneToOne(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Costs costs;
 
 	public Long getId() {
 		return id;
@@ -67,6 +57,14 @@ public class Project {
 
 	public void setEsteemedCustomers(EsteemedCustomers esteemedCustomers) {
 		this.esteemedCustomers = esteemedCustomers;
+	}
+	
+	public void setIncomes(Set<AccountingNote> incomes) {
+		this.incomes = incomes;
+	}
+
+	public Set<AccountingNote> getIncomes() {
+		return incomes;
 	}
 
 }
