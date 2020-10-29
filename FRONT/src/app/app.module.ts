@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HosteleriaBusiness } from './components/businessTypes/hosteleria/hosteleria.component';
 import { AppService } from './app.service';
 import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [AppService],
+  providers: [AppService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

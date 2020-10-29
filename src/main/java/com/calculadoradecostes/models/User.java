@@ -10,6 +10,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
@@ -22,8 +24,13 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 50)
+	@Email
 	private String username;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String name;
 
 	@NotBlank
 	@Size(max = 50)
@@ -32,6 +39,7 @@ public class User {
 
 	@NotBlank
 	@Size(max = 120)
+	@JsonIgnore
 	private String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -44,14 +52,15 @@ public class User {
 	@JoinTable(	name = "user_projects", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "project_id"))
-	private List<Project> projects = new ArrayList<Project>();
+	private Set<Project> projects = new HashSet<>();
 
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
-		this.username = username;
+	public User(String name, String email, String password) {
+		this.name = name;
 		this.email = email;
+		this.username = email;
 		this.password = password;
 	}
 
@@ -64,11 +73,19 @@ public class User {
 	}
 
 	public String getUsername() {
-		return username;
+		return email;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.email = username;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -95,11 +112,11 @@ public class User {
 		this.roles = roles;
 	}
 
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 }

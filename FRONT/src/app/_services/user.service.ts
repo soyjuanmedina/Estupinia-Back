@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const USER_CONTROLLER = '/user/';
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ const API_URL = 'http://localhost:8080/api/test/';
 export class UserService {
 
   user: User;
+  error: string;
 
   constructor(private http: HttpClient) {
     if (typeof sessionStorage.getItem('auth-user') !== 'undefined') {
@@ -19,19 +21,32 @@ export class UserService {
     }
   }
 
+  getUser() {
+    return this.http.post(USER_CONTROLLER, "").subscribe(
+      data => {
+        this.user = data as User;
+        window.sessionStorage.removeItem(USER_KEY);
+        window.sessionStorage.setItem(USER_KEY, JSON.stringify(this.user));
+      },
+      err => {
+        this.error = err.error.message;
+      }
+    );;
+  }
+
   getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' });
+    return this.http.get(USER_CONTROLLER + 'all', { responseType: 'text' });
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', { responseType: 'text' });
+    return this.http.get(USER_CONTROLLER + 'user', { responseType: 'text' });
   }
 
   getModeratorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'mod', { responseType: 'text' });
+    return this.http.get(USER_CONTROLLER + 'mod', { responseType: 'text' });
   }
 
   getAdminBoard(): Observable<any> {
-    return this.http.get(API_URL + 'admin', { responseType: 'text' });
+    return this.http.get(USER_CONTROLLER + 'admin', { responseType: 'text' });
   }
 }

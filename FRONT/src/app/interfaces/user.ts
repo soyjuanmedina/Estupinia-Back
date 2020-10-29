@@ -7,6 +7,7 @@ export interface User {
   projects: Array<Project>;
   roles: Array<string>;
   name: string;
+  surname: string;
   tokenType: string;
   username: string;
 }

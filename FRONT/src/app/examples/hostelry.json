@@ -1,9 +1,9 @@
 [
   {
-    "id": "lacueva",
+    "id": "example1",
     "type": "Hostelería",
     "name": "La Cueva",
-    "customers": {
+    "esteemedCustomers": {
       "esteemed": 20,
       "commentary": "Trabajaremos principalmente los fines de semana con 2 caterings previstos de 20 personas a 20€/persona",
       "averageTicket": 11,
@@ -54,10 +54,10 @@
     }
   },
   {
-    "id": "elveloz",
+    "id": "example2",
     "type": "Hostelería",
     "name": "El Veloz",
-    "customers": {
+    "esteemedCustomers": {
       "esteemed": 8,
       "commentary": "Trabajaremos principalmente los fines de semana con 2 caterings previstos de 20 personas a 20€/persona",
       "averageTicket": 400,

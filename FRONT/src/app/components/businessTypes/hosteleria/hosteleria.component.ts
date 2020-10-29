@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountingNote } from '../../../interfaces/accountingNote';
-import { Business } from '../../../interfaces/business';
 import examples from "../../../examples/hostelry.json";
+import { Project } from '../../../interfaces/project';
 declare var $: any;
 
 @Component({
@@ -10,10 +10,10 @@ declare var $: any;
   styleUrls: ['./hosteleria.component.scss']
 })
 export class HosteleriaBusiness implements OnInit {
-  business: Business = {
+  project: Project = {
     type: "Hostelería",
     name,
-    customers: {
+    esteemedCustomers: {
       esteemed: 0,
       commentary: '',
       averageTicket: 0,
@@ -83,11 +83,11 @@ export class HosteleriaBusiness implements OnInit {
 
   deleteAccountingNote(type, array, accountingNote) {
     if (type == 'incomes') {
-      this.business.incomes = array.filter(function (el) { return el !== accountingNote; });
+      this.project.incomes = array.filter(function (el) { return el !== accountingNote; });
     } else if (type == 'fixedCost') {
-      this.business.costs.fixed = array.filter(function (el) { return el !== accountingNote; });
+      this.project.costs.fixed = array.filter(function (el) { return el !== accountingNote; });
     } else if (type == 'variableCost') {
-      this.business.costs.variables = array.filter(function (el) { return el !== accountingNote; });
+      this.project.costs.variables = array.filter(function (el) { return el !== accountingNote; });
     }
   }
 
@@ -96,11 +96,11 @@ export class HosteleriaBusiness implements OnInit {
       name: this.incomeName,
       amount: this.incomeAmount
     }
-    this.business.incomes.unshift(newIncome);
+    this.project.incomes.unshift(newIncome);
   }
 
   deleteIncome(incomes, income) {
-    this.business.incomes = incomes.filter(function (el) { return el !== income; });
+    this.project.incomes = incomes.filter(function (el) { return el !== income; });
   }
 
   addFixedCost() {
@@ -108,11 +108,11 @@ export class HosteleriaBusiness implements OnInit {
       name: this.fixedCostName,
       amount: this.fixedCostAmount
     }
-    this.business.incomes.unshift(newFixedCost);
+    this.project.incomes.unshift(newFixedCost);
   }
 
   deleteFixedCost(fixedCosts, fixedCost) {
-    this.business.costs.fixed = fixedCosts.filter(function (el) { return el !== fixedCost; });
+    this.project.costs.fixed = fixedCosts.filter(function (el) { return el !== fixedCost; });
   }
 
   addVariableExpend() {
@@ -120,11 +120,11 @@ export class HosteleriaBusiness implements OnInit {
       name: this.variableExpendName,
       amount: this.variableExpendAmount
     }
-    this.business.incomes.unshift(newVariableExpend);
+    this.project.incomes.unshift(newVariableExpend);
   }
 
   deleteVariableExpend(variableExpends, variableExpend) {
-    this.business.costs.variables = variableExpends.filter(function (el) { return el !== variableExpend; });
+    this.project.costs.variables = variableExpends.filter(function (el) { return el !== variableExpend; });
   }
 
   next() {
@@ -135,20 +135,20 @@ export class HosteleriaBusiness implements OnInit {
   calculate() {
     this.calculated = true;
     location.href = '#result'
-    this.totalRevenue = this.business.customers.esteemed * this.business.customers.averageTicket;
-    if (!this.business.customers.monthly) {
+    this.totalRevenue = this.project.esteemedCustomers.esteemed * this.project.esteemedCustomers.averageTicket;
+    if (!this.project.esteemedCustomers.monthly) {
       this.totalRevenue = this.totalRevenue * 30;
     }
-    for (const income in this.business.incomes) {
-      let amount = this.business.incomes[income].amount;
+    for (const income in this.project.incomes) {
+      let amount = this.project.incomes[income].amount;
       this.totalRevenue = this.totalRevenue + amount
     }
-    for (const fixedCost in this.business.costs.fixed) {
-      let amount = this.business.costs.fixed[fixedCost].amount;
+    for (const fixedCost in this.project.costs.fixed) {
+      let amount = this.project.costs.fixed[fixedCost].amount;
       this.totalFixedCosts = this.totalFixedCosts + amount
     }
-    for (const variableExpend in this.business.costs.variables) {
-      let amount = this.business.costs.variables[variableExpend].amount;
+    for (const variableExpend in this.project.costs.variables) {
+      let amount = this.project.costs.variables[variableExpend].amount;
       this.totalVariableExpends = this.totalVariableExpends + amount
     }
     this.result = this.totalRevenue - this.totalFixedCosts - this.totalVariableExpends;
@@ -170,7 +170,7 @@ export class HosteleriaBusiness implements OnInit {
   loadExample(example) {
     console.log(examples);
     this.step = 3;
-    this.business = examples.filter(function (el) { return el.id == example; })[0];
+    this.project = examples.filter(function (el) { return el.id == example; })[0];
     setTimeout(() => {
       location.href = '#nombre'
     }, 500);

@@ -11,16 +11,14 @@ public class JwtResponse {
 	private String username;
 	private String email;
 	private List<String> roles;
-	private List<Project> projects;
 
 	public JwtResponse(String accessToken, Long id, String username, 
-			String email, List<String> roles, List<Project> projects) {
+			String email, List<String> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
-		this.projects = projects;
 	}
 
 	public String getAccessToken() {
@@ -67,7 +65,4 @@ public class JwtResponse {
 		return roles;
 	}
 	
-	public List<Project> getProjects() {
-		return projects;
-	}
 }

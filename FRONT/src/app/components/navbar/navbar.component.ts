@@ -41,12 +41,15 @@ export class NavbarComponent implements OnInit {
       data => {
         $('#LoginModal').modal('hide');
         this.tokenStorage.saveToken(data.accessToken);
+        console.log('userantes')
+        this._userService.getUser();
         this.tokenStorage.saveUser(data);
         this._userService.user = data;
         this.roles = this.tokenStorage.getUser().roles;
       },
       err => {
-        this.loginErrorMessage = err.error.message;
+        console.log('rere', err);
+        this.loginErrorMessage = "El usuario no existe";
       }
     );
   }
