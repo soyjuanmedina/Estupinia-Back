@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "costs")
 public class Costs {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,19 +27,14 @@ public class Costs {
 	@JsonIgnore
 	private Project project;
 	
-    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccountingNote> fixed;
-    
-    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccountingNote> variables;
+	private String commentary;
 	
-//	
-//	@OneToMany(mappedBy="cost")
+//    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<AccountingNote> fixed;
-//	
-//	@OneToMany(mappedBy="cost")
+//    
+//    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<AccountingNote> variables;
-//
+	
 	public Integer getId() {
 		return id;
 	}
@@ -47,21 +42,14 @@ public class Costs {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-//
-//	public Set<AccountingNote> getFixed() {
-//		return fixed;
-//	}
-//
-//	public void setFixed(Set<AccountingNote> fixed) {
-//		this.fixed = fixed;
-//	}
-//
-//	public Set<AccountingNote> getVariables() {
-//		return variables;
-//	}
-//
-//	public void setVariables(Set<AccountingNote> variables) {
-//		this.variables = variables;
-//	}
+	
+	public String getCommentary() {
+		return commentary;
+	}
+
+	public void setCommentary(String commentary) {
+		this.commentary = commentary;
+	}
+
 
 }

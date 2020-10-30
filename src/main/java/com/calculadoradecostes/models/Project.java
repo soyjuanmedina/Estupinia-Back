@@ -28,12 +28,13 @@ public class Project {
 	
 	@OneToOne(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private EsteemedCustomers esteemedCustomers;
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccountingNote> incomes;
 	
 	@OneToOne(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Costs costs;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccountingNote> incomes;
+
 
 	public Long getId() {
 		return id;
@@ -59,6 +60,14 @@ public class Project {
 		this.esteemedCustomers = esteemedCustomers;
 	}
 	
+	public Costs getCosts() {
+		return costs;
+	}
+
+	public void setCosts(Costs costs) {
+		this.costs = costs;
+	}
+
 	public void setIncomes(Set<AccountingNote> incomes) {
 		this.incomes = incomes;
 	}
