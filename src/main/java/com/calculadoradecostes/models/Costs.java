@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,13 +29,38 @@ public class Costs {
 	private Project project;
 	
 	private String commentary;
+    
+    @OneToMany(mappedBy = "fixedcosts", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccountingNote> fixedcosts;
+    
+    @OneToMany(mappedBy = "variablescosts", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AccountingNote> variablescosts;
 	
-//    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<AccountingNote> fixed;
-//    
-//    @OneToMany(mappedBy = "costs", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<AccountingNote> variables;
-	
+	public Set<AccountingNote> getFixedcosts() {
+		return fixedcosts;
+	}
+
+	public void setFixedcosts(Set<AccountingNote> fixedcosts) {
+		this.fixedcosts = fixedcosts;
+	}
+
+	public Set<AccountingNote> getVariablecosts() {
+		return variablescosts;
+	}
+
+	public void setVariablescosts(Set<AccountingNote> variablescosts) {
+		this.variablescosts = variablescosts;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

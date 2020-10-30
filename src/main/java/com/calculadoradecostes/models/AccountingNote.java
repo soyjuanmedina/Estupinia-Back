@@ -30,16 +30,31 @@ public class AccountingNote {
     private Project project;
     
     @ManyToOne()
-    @JoinColumn(name = "cost_id")
+    @JoinColumn(name = "fixedcosts_id")
     @JsonIgnore
-    private Costs costs;
+    private Costs fixedcosts;
+    
+    @ManyToOne()
+    @JoinColumn(name = "variablescosts_id")
+    @JsonIgnore
+    private Costs variablescosts;
 
-	public Costs getCosts() {
-		return costs;
+	
+
+	public Costs getFixedcosts() {
+		return fixedcosts;
 	}
 
-	public void setCosts(Costs costs) {
-		this.costs = costs;
+	public void setFixedcosts(Costs fixedcosts) {
+		this.fixedcosts = fixedcosts;
+	}
+
+	public Costs getVariablescosts() {
+		return variablescosts;
+	}
+
+	public void setVariablescosts(Costs variablescosts) {
+		this.variablescosts = variablescosts;
 	}
 
 	public Project getProject() {
