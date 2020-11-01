@@ -8,7 +8,7 @@ export interface Project {
   esteemedCustomers: EsteemedCustomers;
   incomes: Array<AccountingNote>;
   costs: {
-    fixed: Array<AccountingNote>;
-    variables: Array<AccountingNote>;
+    fixedcosts: Array<AccountingNote>;
+    variablescosts: Array<AccountingNote>;
   };
 }

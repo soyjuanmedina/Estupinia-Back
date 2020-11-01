@@ -17,7 +17,7 @@
       }
     ],
     "costs": {
-      "fixed": [
+      "fixedcosts": [
         {
           "name": "Alquiler",
           "amount": 500,
@@ -34,7 +34,7 @@
           "commentary": "La gestoria incluye el manejo de las nóminas"
         }
       ],
-      "variables": [
+      "variablecosts": [
         {
           "name": "Luz y agua",
           "amount": 100,
@@ -71,7 +71,7 @@
       }
     ],
     "costs": {
-      "fixed": [
+      "fixedcosts": [
         {
           "name": "Personal",
           "amount": 2400,
@@ -83,7 +83,7 @@
           "commentary": "La gestoria incluye el manejo de las nóminas"
         }
       ],
-      "variables": [
+      "variablecosts": [
         {
           "name": "Teléfono",
           "amount": 100,

@@ -1,39 +1,51 @@
 <div>
-  <div class="col-lg-12 ml-auto top-30" id="section0">
-    <p class="lead">Un restaurante, ¡¡estupendo!!. Bueno, lo primero de todo vamos a ponerle nombre.
-      También, si lo deseas, puedes cargar algunos de nuestros ejemplos para inspirarte.
+
+  <div class="col-lg-12 ml-auto top-30" id="startSection">
+    <p class="lead">Un restaurante, ¡¡estupendo!!. Vamos a empezar creando el proyecto, aunque,
+      si lo deseas, puedes cargar algunos de nuestros ejemplos para inspirarte.
     </p>
   </div>
 
   <div class="clearfix">
     <div class="float-right">
+      <button type="button" class="btn btn-primary btn-sm bottom-30" (click)="reset()">
+        Crear nuevo
+      </button>
+      &nbsp;
       <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
         data-target="#loadExampleModal">
-        Cargar ejemplo <i class="fas fa-question-circle"></i>
+        Cargar ejemplo
       </button>
     </div>
   </div>
-
-  <div class="card" id="nombre">
-    <div class="card-header">
-      <h5>Nombre</h5>
+  <div [hidden]="_projectService.step < 0" id="section0">
+    <div class="col-lg-12 ml-auto top-30">
+      <p class="lead">Bueno, lo primero de todo vamos a ponerle nombre.
+      </p>
     </div>
-    <div class="card-body">
 
-      <div class="form-row">
-        <div class="form-group col-md-12">
-          <label for="project.name">Nombre</label>
-          <input type="text" class="form-control" id="project.name" placeholder="Nombre"
-            [(ngModel)]="project.name" [name]="project.name">
+    <div class="card" id="nombre">
+      <div class="card-header">
+        <h5>Nombre</h5>
+      </div>
+      <div class="card-body">
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="_projectService.project.name">Nombre</label>
+            <input type="text" class="form-control" id="project.name" placeholder="Nombre"
+              [(ngModel)]="_projectService.project.name" [name]="_projectService.project.name">
+          </div>
+
         </div>
-
       </div>
     </div>
   </div>
 </div>
-<div [hidden]="step < 1" id="section1">
+<div [hidden]="_projectService.step < 1" id="section1">
   <div class="col-lg-12 ml-auto top-30">
-    <p class="lead">Fenomeno, seguro que {{project.name}} será todo un éxito, pero para
+    <p class="lead">Fenomeno, seguro que {{_projectService.project.name}} será todo un éxito, pero
+      para
       lograrlo vamos a hacer algunos cálculos. De momento vamos a calcular los ingresos
       previstos.
     </p>
@@ -50,38 +62,41 @@
       </p>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="project.esteemedCustomers.esteemed">
+          <label for="_projectService.project.esteemedCustomers.esteemed">
             Clientes
-            <span *ngIf="!project.esteemedCustomers.monthly">diarios</span>
-            <span *ngIf="project.esteemedCustomers.monthly">mensuales</span>
+            <span *ngIf="!_projectService.project.esteemedCustomers.monthly">diarios</span>
+            <span *ngIf="_projectService.project.esteemedCustomers.monthly">mensuales</span>
             estimados
           </label>
-          <input type="number" class="form-control" id="project.esteemedCustomers.esteemed"
-            placeholder="Clientes" [(ngModel)]="project.esteemedCustomers.esteemed"
-            [name]="project.esteemedCustomers.esteemed">
+          <input type="number" class="form-control"
+            id="_projectService.project.esteemedCustomers.esteemed" placeholder="Clientes"
+            [(ngModel)]="_projectService.project.esteemedCustomers.esteemed"
+            [name]="_projectService.project.esteemedCustomers.esteemed">
         </div>
         <div class="form-group col-md-6">
-          <label for="project.esteemedCustomers.averageTicket">Ticket medio</label>
-          <input type="number" class="form-control" id="project.esteemedCustomers.averageTicket"
-            placeholder="Ticket medio" [(ngModel)]="project.esteemedCustomers.averageTicket"
-            [name]="project.esteemedCustomers.averageTicket">
+          <label for="_projectService.project.esteemedCustomers.averageTicket">Ticket medio</label>
+          <input type="number" class="form-control"
+            id="_projectService.project.esteemedCustomers.averageTicket" placeholder="Ticket medio"
+            [(ngModel)]="_projectService.project.esteemedCustomers.averageTicket"
+            [name]="_projectService.project.esteemedCustomers.averageTicket">
         </div>
       </div>
       <div class="form-group">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="project.esteemedCustomers.monthly"
-            [(ngModel)]="project.esteemedCustomers.monthly"
-            [name]="project.esteemedCustomers.monthly">
-          <label class="form-check-label" for="project.esteemedCustomers.monthly">
+          <input class="form-check-input" type="checkbox"
+            id="_projectService.project.esteemedCustomers.monthly"
+            [(ngModel)]="_projectService.project.esteemedCustomers.monthly"
+            [name]="_projectService.project.esteemedCustomers.monthly">
+          <label class="form-check-label" for="_projectService.project.esteemedCustomers.monthly">
             Mensuales
           </label>
         </div>
       </div>
       <div class="form-group">
-        <label for="project.esteemedCustomers.commentary">Comentarios</label>
-        <textarea class="form-control" id="project.esteemedCustomers.commentary" rows="3"
-          [(ngModel)]="project.esteemedCustomers.commentary"
-          [name]="project.esteemedCustomers.commentary"></textarea>
+        <label for="_projectService.project.esteemedCustomers.commentary">Comentarios</label>
+        <textarea class="form-control" id="_projectService.project.esteemedCustomers.commentary"
+          rows="3" [(ngModel)]="_projectService.project.esteemedCustomers.commentary"
+          [name]="_projectService.project.esteemedCustomers.commentary"></textarea>
       </div>
 
       <h6 class="card-title">Otros ingresos</h6>
@@ -94,13 +109,14 @@
       <div class="col-lg-12 mx-auto top-30 clearfix">
         <div class="float-right">
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-            data-target="#addAccountingNoteModal" (click)="selectedArray = project.incomes">
+            data-target="#addAccountingNoteModal"
+            (click)="selectedArray = _projectService.project.incomes">
             Añadir Ingreso
           </button>
         </div>
       </div>
 
-      <div class="form-row top-30" *ngFor="let income of project.incomes">
+      <div class="form-row top-30" *ngFor="let income of _projectService.project.incomes">
         <h6>{{income.name}}</h6>
         <div class="col-md-12" *ngIf="income.commentary">
           <textarea class="form-control" id="income.commentary" rows="2"
@@ -112,7 +128,7 @@
               [(ngModel)]="income.amount" [name]="income.name">
             <div class="input-group-prepend">
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
-                (click)="deleteAccountingNote('incomes', project.incomes, income)"><i
+                (click)="deleteAccountingNote('incomes', _projectService.project.incomes, income)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
             </div>
           </div>
@@ -123,7 +139,7 @@
   </div>
 </div>
 
-<div [hidden]="step < 2" id="section2">
+<div [hidden]="_projectService.step < 2" id="section2">
   <div class="col-lg-12 ml-auto top-30">
     <p class="lead">Ahora tenemos que tener en cuenta los gastos. Estos los vamos a dividir
       entre los fijos y los variables.
@@ -144,13 +160,15 @@
       <div class="col-lg-12 mx-auto top-30 clearfix">
         <div class="float-right">
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-            data-target="#addAccountingNoteModal" (click)="selectedArray = project.costs.fixed">
+            data-target="#addAccountingNoteModal"
+            (click)="selectedArray = _projectService.project.costs.fixedcosts">
             Añadir Gasto Fijo
           </button>
         </div>
       </div>
 
-      <div class="form-row top-30" *ngFor="let fixedCost of project.costs.fixed">
+      <div class="form-row top-30"
+        *ngFor="let fixedCost of _projectService.project.costs.fixedcosts">
         <h6>{{fixedCost.name}}</h6>
         <div class="col-md-12" *ngIf="fixedCost.commentary">
           <textarea class="form-control" id="fixedCost.commentary" rows="2"
@@ -162,7 +180,7 @@
               [value]="fixedCost.amount" [(ngModel)]="fixedCost.amount" [name]="fixedCost.name">
             <div class="input-group-prepend">
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
-                (click)="deleteAccountingNote('fixedCost', project.costs.fixed, fixedCost)"><i
+                (click)="deleteAccountingNote('fixedCost', _projectService.project.costs.fixedcosts, fixedCost)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
             </div>
           </div>
@@ -173,7 +191,7 @@
   </div>
 </div>
 
-<div [hidden]="step < 3" id="section3" class="top-30">
+<div [hidden]="_projectService.step < 3" id="section3" class="top-30">
   <div class="card">
     <div class="card-header">
       <h5>Gastos variables</h5>
@@ -190,13 +208,15 @@
       <div class="col-lg-12 mx-auto top-30 clearfix">
         <div class="float-right">
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-            data-target="#addAccountingNoteModal" (click)="selectedArray = project.costs.variables">
+            data-target="#addAccountingNoteModal"
+            (click)="selectedArray = _projectService.project.costs.variablescosts">
             Añadir Gasto Variable
           </button>
         </div>
       </div>
 
-      <div class="form-row top-30" *ngFor="let variableCost of project.costs.variables">
+      <div class="form-row top-30"
+        *ngFor="let variableCost of _projectService.project.costs.variablescosts">
         <h6>{{variableCost.name}}</h6>
         <div class="col-md-12" *ngIf="variableCost.commentary">
           <textarea class="form-control" id="variableCost.commentary" rows="2"
@@ -209,7 +229,7 @@
               [name]="variableCost.name">
             <div class="input-group-prepend">
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
-                (click)="deleteAccountingNote('variableCost', project.costs.variables, variableCost)"><i
+                (click)="deleteAccountingNote('variableCost', _projectService.project.costs.variablescosts, variableCost)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
             </div>
           </div>
@@ -220,12 +240,13 @@
   </div>
 </div>
 
-<div class="col-lg-12 mx-auto top-30 bottom-30" *ngIf="step < 3">
+<div class="col-lg-12 mx-auto top-30 bottom-30"
+  *ngIf="_projectService.step < 3 && _projectService.step >= 0">
   <button type="button" class="btn btn-primary btn-lg btn-block" (click)="next()">Continuar
   </button>
 </div>
 
-<div class="col-lg-12 mx-auto top-100 bottom-30" *ngIf="step >= 3">
+<div class="col-lg-12 mx-auto top-100 bottom-30" *ngIf="_projectService.step >= 3">
   <button type="button" class="btn btn-primary btn-lg btn-block" (click)="calculate()">Calcular
   </button>
 </div>
@@ -242,9 +263,11 @@
     </div>
     <div class="row">
       <div class="col-lg-12 ml-auto text-center">
-        <p class="lead" *ngIf="result >= 0">¡¡Enhorabuena!! {{project.name}} Parece que es viable
+        <p class="lead" *ngIf="result >= 0">¡¡Enhorabuena!! {{_projectService.project.name}} Parece
+          que es viable
         </p>
-        <p class="lead" *ngIf="result < 0">!!Ups!! {{project.name}} no alcanza el punto de
+        <p class="lead" *ngIf="result < 0">!!Ups!! {{_projectService.project.name}} no alcanza el
+          punto de
           equilibrio, quizá valga la pena revisar esos números.
         </p>
         <p class="lead">Los ingresos previstos son: {{totalRevenue}}</p>
@@ -256,13 +279,26 @@
       </div>
 
     </div>
-    <div class="text-center mt-4">
-      <div class="btn btn-xl btn-outline-light" (click)="calcAgain()">
-        Volver a calcular
-      </div>
-    </div>
   </div>
 </section>
+
+<div class="form-row top-30 bottom-30">
+  <div class="col-md-6">
+    <button type="submit" class="btn btn-secondary btn-block" (click)="reset()">
+      Vaciar proyecto
+    </button>
+  </div>
+  <div class="col-md-6">
+    <button *ngIf="!_userService.user" class="btn btn-primary btn-block"
+      (click)="_utilitiesService.openLoginModal()">
+      Login para guardar
+    </button>
+    <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
+      (click)="saveProject()">
+      Guardar proyecto
+    </button>
+  </div>
+</div>
 
 <!-- Modal addAccountingNoteModal -->
 <div class="modal fade" id="addAccountingNoteModal" tabindex="-1" role="dialog"
@@ -276,7 +312,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <h6>asdfsafds</h6>
         <label for="accountingNoteName">Nombre</label>
         <input type="text" class="form-control" [(ngModel)]="accountingNoteName"
           id="accountingNoteName">

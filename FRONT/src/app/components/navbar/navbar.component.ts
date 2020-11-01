@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
 import { UserService } from '../../_services/user.service';
+import { UtilitiesService } from '../../_services/utilities.service';
 declare var $: any;
 
 @Component({
@@ -19,18 +20,8 @@ export class NavbarComponent implements OnInit {
   isSuccessfulRegistered = false;
   isFailedRegistered = false;
 
-  constructor(private authService: AuthService,
+  constructor(private authService: AuthService, public _utilitiesService: UtilitiesService,
     private tokenStorage: TokenStorageService, public _userService: UserService) { }
-
-  openLoginModal() {
-    $('#LoginModal').modal('show');
-    $('.nav-tabs a[href="#nav-login"]').tab('show');
-  }
-
-  openRegisterModal() {
-    $('#LoginModal').modal('show');
-    $('.nav-tabs a[href="#nav-register"]').tab('show');
-  }
 
   logout() {
     this.authService.logout();
@@ -41,14 +32,12 @@ export class NavbarComponent implements OnInit {
       data => {
         $('#LoginModal').modal('hide');
         this.tokenStorage.saveToken(data.accessToken);
-        console.log('userantes')
         this._userService.getUser();
         this.tokenStorage.saveUser(data);
         this._userService.user = data;
         this.roles = this.tokenStorage.getUser().roles;
       },
       err => {
-        console.log('rere', err);
         this.loginErrorMessage = "El usuario no existe";
       }
     );

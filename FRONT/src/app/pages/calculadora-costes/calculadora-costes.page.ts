@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
+import { ProjectService } from '../../_services/project.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'calculadora-costes-page',
@@ -9,22 +11,32 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class CalculadoraDeCostesPage implements OnInit {
 
-  businessTypes = ['Hostelería'];
-  business;
+  projectTypes = ['Hostelería'];
+  projectType;
 
   form: any = {};
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, public _userService: UserService,
+    public _projectService: ProjectService) {
   }
 
 
-  navigateToBusiness() {
-    location.href = '#business';
+  navigateToProjectType() {
+    location.href = '#projectType';
   }
 
+  loadProject(project) {
+    console.log(this._userService.user.projects, project);
+    this._projectService.step = 3;
+    this._projectService.project = this._userService.user.projects.filter(function (el) { return el.id == project.id; })[0];
+    console.log(this._projectService.project);
+    setTimeout(() => {
+      location.href = '#nombre'
+    }, 500);
+  }
 
   ngOnInit(): void {
   }

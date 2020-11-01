@@ -27,8 +27,6 @@ public class Costs {
 	@JoinColumn(name="project_id")
 	@JsonIgnore
 	private Project project;
-	
-	private String commentary;
     
     @OneToMany(mappedBy = "fixedcosts", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccountingNote> fixedcosts;
@@ -44,7 +42,7 @@ public class Costs {
 		this.fixedcosts = fixedcosts;
 	}
 
-	public Set<AccountingNote> getVariablecosts() {
+	public Set<AccountingNote> getVariablescosts() {
 		return variablescosts;
 	}
 
@@ -68,14 +66,5 @@ public class Costs {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getCommentary() {
-		return commentary;
-	}
-
-	public void setCommentary(String commentary) {
-		this.commentary = commentary;
-	}
-
 
 }

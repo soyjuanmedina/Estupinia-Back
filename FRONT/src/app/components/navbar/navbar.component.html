@@ -1,15 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="navbar-nav mr-auto">
   </ul>
-  <button type="button" class="btn btn-primary btn-sm" (click)="openLoginModal()"
-    *ngIf="!_userService.user">
-    Login</button>&nbsp;
-  <button type="button" class="btn btn-primary btn-sm" id="registerButton"
-    *ngIf="!_userService.user" (click)="openRegisterModal()">Registro</button>
-  <div *ngIf="_userService.user">Hola {{_userService.user.name}} {{_userService.user.surname}}</div>
-  &nbsp;
-  <button type="button" class="btn btn-primary btn-sm" id="registerButton" *ngIf="_userService.user"
-    (click)="logout()">Logout</button>
+  <div *ngIf="!_userService.user">
+    <button type="button" class="btn btn-primary btn-sm"
+      (click)="_utilitiesService.openLoginModal()">
+      Login
+    </button>
+    &nbsp;
+    <button type="button" class="btn btn-primary btn-sm"
+      (click)="_utilitiesService.openRegisterModal()">
+      Registro
+    </button>
+  </div>
+  <div *ngIf="_userService.user">
+    <button type="button" class="btn btn-primary btn-sm fade-in" [routerLink]="['/profile']">
+      Profile
+    </button>
+    &nbsp;
+    <button type="button" class="btn btn-primary btn-sm fade-in" (click)="logout()">
+      Logout
+    </button>
+  </div>
 </nav>
 
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
@@ -122,7 +133,7 @@
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" name="name"
                           [(ngModel)]="registerForm.name" maxlength="50" #name="ngModel" />
-                        <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+                        <div class="alert alert-danger" *ngIf="f.submitted && name.invalid">
                           <div *ngIf="name.errors.maxlength">
                             El nombre de usuario debe tener como mucho 50 caracteres
                           </div>
@@ -132,7 +143,7 @@
                         <label for="email">Nombre de usuario / Email</label>
                         <input type="email" class="form-control" name="email"
                           [(ngModel)]="registerForm.email" required email #email="ngModel" />
-                        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                        <div class="alert alert-danger" *ngIf="f.submitted && email.invalid">
                           <div *ngIf="email.errors.required">El Nombre de usuario / Email es
                             necesario</div>
                           <div *ngIf="email.errors.email">
@@ -145,10 +156,10 @@
                         <input type="password" class="form-control" name="password"
                           [(ngModel)]="registerForm.password" required minlength="5"
                           #password="ngModel" />
-                        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                        <div class="alert alert-danger" *ngIf="f.submitted && password.invalid">
                           <div *ngIf="password.errors.required">La contraseña es necesario</div>
                           <div *ngIf="password.errors.minlength">
-                            La contraseña debe tener al menos 6 caracteres
+                            La contraseña debe tener al menos 5 caracteres
                           </div>
                         </div>
                       </div>

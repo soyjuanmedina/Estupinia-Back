@@ -1,4 +1,23 @@
-<div class="row">
+<div *ngIf="_userService.user">
+  <div class="col-lg-12 ml-auto top-30" id="section0">
+    <p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes cargar tus proyectos o
+      crear nuevos para guardarlos y compartirlos con socios e inversores.
+    </p>
+  </div>
+
+  <div class="clearfix">
+    <div class="float-right">
+      <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
+        data-target="#loadMyProjectModal">
+        Cargar projecto propio
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row" *ngIf="!_userService.user">
   <div class="col-lg-12 ml-auto top-30">
     <p class="lead">La calculadora de costes para Stratups te permite calcular de modo fácil la
       viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender
@@ -7,14 +26,39 @@
 
 </div>
 
-<select name="business" class="form-control" [(ngModel)]="business"
-  (ngModelChange)="navigateToBusiness()">
+<select name="projectType" class="form-control" [(ngModel)]="_projectService.project.type"
+  (ngModelChange)="navigateToProjectType()">
 
-  <option *ngFor="let business of businessTypes" [value]="business">
-    {{ business }}
+  <option *ngFor="let projectType of projectTypes" [value]="projectType">
+    {{ projectType }}
   </option>
 </select>
 
-<div class="top-30" id="business">
-  <business-hosteleria *ngIf="business == 'Hostelería'"></business-hosteleria>
+<div class="top-30" id="projectType">
+  <hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'">
+  </hosteleria-project>
+</div>
+
+
+<!-- Modal loadMyProjectModal -->
+<div class="modal fade" id="loadMyProjectModal" tabindex="-1" role="dialog"
+  aria-labelledby="loadMyProjectModal" aria-hidden="true" *ngIf="_userService.user">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loadMyProjectModal">Cargar Projecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-primary" *ngFor="let project of _userService.user.projects"
+          data-dismiss="modal" (click)="loadProject(project)">
+          {{project.name}}
+        </button>
+
+
+      </div>
+    </div>
+  </div>
 </div>
