@@ -2,6 +2,7 @@ package com.calculadoradecostes.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +30,8 @@ public class EsteemedCustomers {
 	
 	private boolean monthly;
 	
-	@OneToOne
-	@JoinColumn(name="project_id")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="project_id", referencedColumnName="id")
 	@JsonIgnore
 	private Project project;
 
@@ -74,12 +75,12 @@ public class EsteemedCustomers {
 		this.monthly = monthly;
 	}
 	
-//	public Project getProject() {
-//		return project;
-//	}
-//	
-//	public void setProject(Project project) {
-//		this.project = project;
-//	}
+	public Project getProject() {
+		return project;
+	}
+	
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 }

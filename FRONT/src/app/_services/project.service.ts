@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Project } from '../interfaces/project';
 
@@ -22,6 +23,18 @@ export class ProjectService {
     }
   };
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
+
+  saveProject(project: Project) {
+    return this.http.post('/project/save', project).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err.error.message);
+      }
+    );
+  }
+
 }

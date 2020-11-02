@@ -52,7 +52,7 @@ public class User {
 	@JoinTable(	name = "user_projects", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "project_id"))
-	private Set<Project> projects = new HashSet<>();
+	private List<Project> projects = new ArrayList<>();
 
 	public User() {
 	}
@@ -112,11 +112,11 @@ public class User {
 		this.roles = roles;
 	}
 
-	public Set<Project> getProjects() {
+	public List<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(Set<Project> projects) {
+	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
 }

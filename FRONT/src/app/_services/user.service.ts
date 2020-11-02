@@ -16,7 +16,7 @@ export class UserService {
   user: User;
   error: string;
 
-  constructor(private http: HttpClient, private projectService: ProjectService) {
+  constructor(private http: HttpClient) {
     if (typeof sessionStorage.getItem('auth-user') !== 'undefined') {
       this.user = JSON.parse(sessionStorage.getItem('auth-user'));
     }
@@ -28,17 +28,6 @@ export class UserService {
         this.user = data as User;
         window.sessionStorage.removeItem(USER_KEY);
         window.sessionStorage.setItem(USER_KEY, JSON.stringify(this.user));
-      },
-      err => {
-        this.error = err.error.message;
-      }
-    );;
-  }
-
-  saveUser(user: User) {
-    return this.http.post(USER_CONTROLLER + 'save', user).subscribe(
-      data => {
-        console.log(data);
       },
       err => {
         this.error = err.error.message;

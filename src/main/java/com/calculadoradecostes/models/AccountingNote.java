@@ -25,17 +25,17 @@ public class AccountingNote {
 	private String commentary;
 
     @ManyToOne()
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", referencedColumnName="id")
     @JsonIgnore
     private Project project;
     
     @ManyToOne()
-    @JoinColumn(name = "fixedcosts_id")
+    @JoinColumn(name = "fixedcosts_id", referencedColumnName="id")
     @JsonIgnore
     private Costs fixedcosts;
     
     @ManyToOne()
-    @JoinColumn(name = "variablescosts_id")
+    @JoinColumn(name = "variablescosts_id", referencedColumnName="id")
     @JsonIgnore
     private Costs variablescosts;
 

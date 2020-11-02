@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountingNote } from '../../../../interfaces/accountingNote';
-import examples from "../../../../examples/hostelry.json";
 import { Project } from '../../../../interfaces/project';
 import { ProjectService } from '../../../../_services/project.service';
 import { UserService } from '../../../../_services/user.service';
 import { UtilitiesService } from '../../../../_services/utilities.service';
+import { HttpClient } from '@angular/common/http';
+import examples from "../../../../examples/hostelry.json";
 declare var $: any;
 
 @Component({
@@ -13,6 +14,7 @@ declare var $: any;
 })
 export class HosteleriaProject implements OnInit {
 
+  examples: Array<Project>;
   emptyProject: Project = {
     type: 'Hostelería',
     name: '',
@@ -72,11 +74,12 @@ export class HosteleriaProject implements OnInit {
   result = null;
   calculated = false;
   constructor(public _projectService: ProjectService, public _userService: UserService,
-    public _utilitiesService: UtilitiesService) {
+    private http: HttpClient, public _utilitiesService: UtilitiesService) {
     if (!this._projectService.project.id) {
       this._projectService.step = -1;
       this._projectService.project = this.emptyProject;
     }
+    this.getExamples();
   }
 
 
@@ -183,21 +186,34 @@ export class HosteleriaProject implements OnInit {
 
   loadExample(example) {
     this._projectService.step = 3;
-    this._projectService.project = examples.filter(function (el) { return el.id == example; })[0];
+    this._projectService.project = this.examples.filter(function (el) { return el.id == example; })[0];
+    console.log(this._projectService.project);
     setTimeout(() => {
       location.href = '#nombre'
     }, 500);
   }
 
   saveProject() {
+    console.log('jo', this._userService.user.projects, this._projectService.project)
     if (!(this._userService.user.projects.some(e => e.id === this._projectService.project.id))) {
-
-      this._userService.user.projects.push(this._projectService.project)
-      this._userService.user.name = 'Juan Medina';
-      this._userService.saveUser(this._userService.user);
+      delete this._projectService.project.id;
+      this._projectService.saveProject(this._projectService.project);
     } else {
       console.log('es viejo')
     }
+  }
+
+  getExamples() {
+
+    this.examples = examples;
+    /* return this.http.post('/project/hosteleryexamples', "").subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        this._userService.error = err.error.message;
+      }
+    ); */
   }
 
 

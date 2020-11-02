@@ -86,14 +86,6 @@ public class Project {
 		this.type = type;
 	}
 
-	public EsteemedCustomers getEsteemedCustomers() {
-		return esteemedCustomers;
-	}
-
-	public void setEsteemedCustomers(EsteemedCustomers esteemedCustomers) {
-		this.esteemedCustomers = esteemedCustomers;
-	}
-	
 	public Costs getCosts() {
 		return costs;
 	}
@@ -108,6 +100,14 @@ public class Project {
 
 	public Set<AccountingNote> getIncomes() {
 		return incomes;
+	}
+	
+	public EsteemedCustomers getEsteemedCustomers() {
+		return esteemedCustomers;
+	}
+
+	public void setEsteemedCustomers(EsteemedCustomers esteemedCustomers) {
+		this.esteemedCustomers = esteemedCustomers;
 	}
 
 }

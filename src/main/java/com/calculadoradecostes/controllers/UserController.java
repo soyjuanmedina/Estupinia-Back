@@ -2,6 +2,7 @@ package com.calculadoradecostes.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -29,13 +30,9 @@ import com.calculadoradecostes.repository.UserRepository;
 import com.calculadoradecostes.security.services.UserDetailsImpl;
 
 @RestController
-@Transactional
 @RequestMapping("/user")
 @PreAuthorize("isAuthenticated()")  
 public class UserController {
-	
-	@PersistenceContext
-	private EntityManager entityManager;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -54,7 +51,17 @@ public class UserController {
 	@PostMapping("/save")
 	public  ResponseEntity<Boolean> saveUser(@Valid @RequestBody User user) {
 			
-		entityManager.merge(user);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		
+		Optional<User> currentUser = 
+				userRepository.findByUsername(currentPrincipalName);
+		
+		List<Project> currentUserProjects = currentUser.get().getProjects();
+		List<Project> userProjects = user.getProjects();
+		
+		currentUser.get().setProjects(user.getProjects());
+		userRepository.save(currentUser.get());
 
 		return ResponseEntity.ok(true);
 	}
