@@ -53,14 +53,29 @@ public class UserController {
 			
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
+		Optional<User> currentUser = 
+				userRepository.findByUsername(currentPrincipalName);
+		
+		if(user.getUsername() == currentUser.get().getUsername()) {
+			userRepository.save(user);
+			return ResponseEntity.ok(true);
+		} else {
+			return ResponseEntity.ok(false);
+		}
+
+		
+	}
+	
+	@PostMapping("/save/project")
+	public  ResponseEntity<Boolean> saveProjectToUser(@Valid @RequestBody Project project) {
+			
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
 		
 		Optional<User> currentUser = 
 				userRepository.findByUsername(currentPrincipalName);
 		
-		List<Project> currentUserProjects = currentUser.get().getProjects();
-		List<Project> userProjects = user.getProjects();
-		
-		currentUser.get().setProjects(user.getProjects());
+		currentUser.get().getProjects().add(project);
 		userRepository.save(currentUser.get());
 
 		return ResponseEntity.ok(true);

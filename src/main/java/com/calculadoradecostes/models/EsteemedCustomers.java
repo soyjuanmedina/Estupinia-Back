@@ -30,8 +30,7 @@ public class EsteemedCustomers {
 	
 	private boolean monthly;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="project_id", referencedColumnName="id")
+	@OneToOne(mappedBy = "esteemedCustomers", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Project project;
 

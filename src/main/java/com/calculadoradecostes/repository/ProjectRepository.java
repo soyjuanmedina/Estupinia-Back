@@ -1,5 +1,6 @@
 package com.calculadoradecostes.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,6 @@ import com.calculadoradecostes.models.User;
 public interface ProjectRepository extends CrudRepository<Project, Long>{
 	Optional<Project> findById(Long id);
 	
-	Project save(Project project);
+	List<Project> findByType(String type);
 	
 }
