@@ -27,7 +27,7 @@ export class ProjectService {
   }
 
   saveProject(project: Project) {
-    return this.http.post('/project/save', project).subscribe(
+    return this.http.post('/user/save', project).subscribe(
       data => {
         console.log(data);
       },

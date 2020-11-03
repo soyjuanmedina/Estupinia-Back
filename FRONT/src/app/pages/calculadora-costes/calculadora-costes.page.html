@@ -1,11 +1,12 @@
 <div *ngIf="_userService.user">
   <div class="col-lg-12 ml-auto top-30" id="section0">
-    <p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes cargar tus proyectos o
+    <p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes
+      <span *ngIf="_userService.user.projects.length">cargar tus proyectos o</span>
       crear nuevos para guardarlos y compartirlos con socios e inversores.
     </p>
   </div>
 
-  <div class="clearfix">
+  <div class="clearfix" *ngIf="_userService.user.projects.length">
     <div class="float-right">
       <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
         data-target="#loadMyProjectModal">

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { ProjectService } from './project.service';
+import { Project } from '../interfaces/project';
 
 const USER_CONTROLLER = '/user/';
 const USER_KEY = 'auth-user';
@@ -33,6 +34,28 @@ export class UserService {
         this.error = err.error.message;
       }
     );;
+  }
+
+  saveUser(user: User) {
+    return this.http.post('/user/save', user).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err.error.message);
+      }
+    );
+  }
+
+  saveProjectToUser(project: Project) {
+    return this.http.post('/user/save/project', project).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err.error.message);
+      }
+    );
   }
 
   getPublicContent(): Observable<any> {

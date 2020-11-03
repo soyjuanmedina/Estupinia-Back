@@ -294,7 +294,7 @@
       Login para guardar
     </button>
     <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
-      (click)="saveProject()">
+      (click)="saveProjectToUser()">
       Guardar proyecto
     </button>
   </div>
@@ -346,12 +346,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <button class="btn btn-primary" data-dismiss="modal" (click)="loadExample('example1')">
-          La Cueva
-        </button>
-
-        <button class="btn btn-primary ml-1" data-dismiss="modal" (click)="loadExample('example2')">
-          Catering El Veloz
+        <button *ngFor="let example of examples" class="btn btn-primary ml-1" data-dismiss="modal"
+          (click)="loadExample(example)">
+          {{example.name}}
         </button>
 
       </div>

@@ -5,7 +5,7 @@ import { ProjectService } from '../../../../_services/project.service';
 import { UserService } from '../../../../_services/user.service';
 import { UtilitiesService } from '../../../../_services/utilities.service';
 import { HttpClient } from '@angular/common/http';
-import examples from "../../../../examples/hostelry.json";
+import examples_old from "../../../../examples_old/hostelry.json";
 declare var $: any;
 
 @Component({
@@ -185,35 +185,37 @@ export class HosteleriaProject implements OnInit {
   }
 
   loadExample(example) {
+    delete example.id;
+    example.type = "Hostelería"
     this._projectService.step = 3;
-    this._projectService.project = this.examples.filter(function (el) { return el.id == example; })[0];
+    this._projectService.project = example;
     console.log(this._projectService.project);
     setTimeout(() => {
       location.href = '#nombre'
     }, 500);
   }
 
-  saveProject() {
-    console.log('jo', this._userService.user.projects, this._projectService.project)
-    if (!(this._userService.user.projects.some(e => e.id === this._projectService.project.id))) {
-      delete this._projectService.project.id;
-      this._projectService.saveProject(this._projectService.project);
-    } else {
-      console.log('es viejo')
+  saveProjectToUser() {
+    console.log("saveProjectToUser")
+    if (this._projectService.project.id) { delete this._projectService.project.id };
+    if (this._projectService.project.esteemedCustomers.id) { delete this._projectService.project.esteemedCustomers.id };
+    if (this._projectService.project.costs.id) { delete this._projectService.project.costs.id };
+    if (this._projectService.project.type == "HosteleríaExample") {
+      this._projectService.project.type = "Hostelería"
     }
+    this._userService.saveProjectToUser(this._projectService.project);
   }
 
   getExamples() {
-
-    this.examples = examples;
-    /* return this.http.post('/project/hosteleryexamples', "").subscribe(
+    // this.examples = examples_old;
+    return this.http.post('/project/get/hostelery/examples', "").subscribe(
       data => {
-        console.log(data);
+        this.examples = data as Array<Project>;
       },
       err => {
         this._userService.error = err.error.message;
       }
-    ); */
+    );
   }
 
 
