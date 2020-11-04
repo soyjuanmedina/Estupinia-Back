@@ -19,7 +19,7 @@ export class CalculadoraDeCostesPage implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, public _userService: UserService,
+  constructor(public _userService: UserService,
     public _projectService: ProjectService) {
   }
 

@@ -197,25 +197,23 @@ export class HosteleriaProject implements OnInit {
 
   saveProjectToUser() {
     console.log("saveProjectToUser")
-    if (this._projectService.project.id) { delete this._projectService.project.id };
-    if (this._projectService.project.esteemedCustomers.id) { delete this._projectService.project.esteemedCustomers.id };
-    if (this._projectService.project.costs.id) { delete this._projectService.project.costs.id };
     if (this._projectService.project.type == "HosteleríaExample") {
       this._projectService.project.type = "Hostelería"
+      delete this._projectService.project.costs.id
     }
     this._userService.saveProjectToUser(this._projectService.project);
   }
 
   getExamples() {
-    // this.examples = examples_old;
-    return this.http.post('/project/get/hostelery/examples', "").subscribe(
-      data => {
-        this.examples = data as Array<Project>;
-      },
-      err => {
-        this._userService.error = err.error.message;
-      }
-    );
+    this.examples = examples_old;
+    /*     return this.http.post('/project/get/hostelery/examples', "").subscribe(
+          data => {
+            this.examples = data as Array<Project>;
+          },
+          err => {
+            this._userService.error = err.error.message;
+          }
+        ); */
   }
 
 
