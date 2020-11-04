@@ -1,5 +1,6 @@
 package com.calculadoradecostes.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,17 +25,17 @@ public class AccountingNote {
 	
 	private String commentary;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName="id")
     @JsonIgnore
     private Project project;
     
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fixedcosts_id", referencedColumnName="id")
     @JsonIgnore
     private Costs fixedcosts;
     
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "variablescosts_id", referencedColumnName="id")
     @JsonIgnore
     private Costs variablescosts;

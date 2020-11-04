@@ -26,6 +26,7 @@ import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.payload.request.LoginRequest;
 import com.calculadoradecostes.payload.request.SignupRequest;
 import com.calculadoradecostes.payload.response.JwtResponse;
+import com.calculadoradecostes.repository.ProjectRepository;
 import com.calculadoradecostes.repository.UserRepository;
 import com.calculadoradecostes.security.services.UserDetailsImpl;
 
@@ -36,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ProjectRepository projectRepository;
 	
 	@PostMapping("/")
 	public ResponseEntity<Optional<User>> getUser() {
@@ -75,6 +79,16 @@ public class UserController {
 		Optional<User> currentUser = 
 				userRepository.findByUsername(currentPrincipalName);
 		
+		if(project.getId() == null) {
+			project.getEsteemedCustomers().setId(null);
+			project.getCosts().setId(null);
+		}
+		
+		project = projectRepository.save(project);
+		
+		if (currentUser.get().getProjects().contains(project)) {
+			currentUser.get().getProjects().remove(project);
+		}
 		currentUser.get().getProjects().add(project);
 		userRepository.save(currentUser.get());
 

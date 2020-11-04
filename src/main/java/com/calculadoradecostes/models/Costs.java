@@ -24,14 +24,15 @@ public class Costs {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(mappedBy = "costs", fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
 	@JsonIgnore
 	private Project project;
     
-    @OneToMany(mappedBy = "fixedcosts", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "fixedcosts")
     private Set<AccountingNote> fixedcosts;
     
-    @OneToMany(mappedBy = "variablescosts", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "variablescosts")
     private Set<AccountingNote> variablescosts;
 	
 	public Set<AccountingNote> getFixedcosts() {

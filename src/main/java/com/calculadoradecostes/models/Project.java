@@ -38,12 +38,10 @@ public class Project {
 	@Size(max = 120)
 	private String type;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "esteemedCustomers_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private EsteemedCustomers esteemedCustomers;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "costs_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Costs costs;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
