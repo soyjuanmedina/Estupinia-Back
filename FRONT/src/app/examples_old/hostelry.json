@@ -34,7 +34,7 @@
           "commentary": "La gestoria incluye el manejo de las nóminas"
         }
       ],
-      "variablecosts": [
+      "variablescosts": [
         {
           "name": "Luz y agua",
           "amount": 100,
@@ -83,7 +83,7 @@
           "commentary": "La gestoria incluye el manejo de las nóminas"
         }
       ],
-      "variablecosts": [
+      "variablescosts": [
         {
           "name": "Teléfono",
           "amount": 100,

@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.calculadoradecostes.models.AccountingNote;
 import com.calculadoradecostes.models.Project;
 import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.payload.request.LoginRequest;
 import com.calculadoradecostes.payload.request.SignupRequest;
 import com.calculadoradecostes.payload.response.JwtResponse;
+import com.calculadoradecostes.repository.AccountingNoteRepository;
 import com.calculadoradecostes.repository.ProjectRepository;
 import com.calculadoradecostes.repository.UserRepository;
 import com.calculadoradecostes.security.services.UserDetailsImpl;
@@ -40,6 +42,9 @@ public class UserController {
 	
 	@Autowired
 	ProjectRepository projectRepository;
+	
+	@Autowired
+	AccountingNoteRepository accountingNoteRepository;
 	
 	@PostMapping("/")
 	public ResponseEntity<Optional<User>> getUser() {
@@ -79,9 +84,16 @@ public class UserController {
 		Optional<User> currentUser = 
 				userRepository.findByUsername(currentPrincipalName);
 		
-		if(project.getId() == null) {
-			project.getEsteemedCustomers().setId(null);
-			project.getCosts().setId(null);
+		project.getEsteemedCustomers().setProject(project);
+		project.getCosts().setProject(project);
+		
+		for (AccountingNote fixedcost :project.getCosts().getFixedcosts()) {
+			fixedcost.setFixedcosts(project.getCosts());
+			accountingNoteRepository.save(fixedcost);
+		}
+		for (AccountingNote variablecost :project.getCosts().getVariablescosts()) {
+			variablecost.setVariablescosts(project.getCosts());
+			accountingNoteRepository.save(variablecost);
 		}
 		
 		project = projectRepository.save(project);
