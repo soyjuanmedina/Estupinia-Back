@@ -1,5 +1,7 @@
 package com.calculadoradecostes.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +47,7 @@ public class Project {
     private Costs costs;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AccountingNote> incomes;
+    private Collection<AccountingNote> incomes;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JsonIgnore
@@ -93,14 +95,6 @@ public class Project {
 	public void setCosts(Costs costs) {
 		this.costs = costs;
 	}
-
-	public void setIncomes(Set<AccountingNote> incomes) {
-		this.incomes = incomes;
-	}
-
-	public Set<AccountingNote> getIncomes() {
-		return incomes;
-	}
 	
 	public EsteemedCustomers getEsteemedCustomers() {
 		return esteemedCustomers;
@@ -109,5 +103,30 @@ public class Project {
 	public void setEsteemedCustomers(EsteemedCustomers esteemedCustomers) {
 		this.esteemedCustomers = esteemedCustomers;
 	}
+	
+	public void setIncomes(Collection<AccountingNote> incomes) {
+		this.incomes = new ArrayList<AccountingNote>();
+		for (AccountingNote income : incomes) {
+			addIncome(income);
+		}
+	}
+
+	public Collection<AccountingNote> getIncomes() {
+	    return new ArrayList<AccountingNote>(incomes);
+	  }
+
+	public void addIncome(AccountingNote income) {
+		if (incomes.contains(income))
+			return ;
+		incomes.add(income);
+		income.setProject(this);
+	  }
+
+	  public void removeIncome(AccountingNote income) {
+	    if (!incomes.contains(income))
+	      return ;
+	    incomes.remove(income);
+	    income.setProject(null);
+	  }
 
 }

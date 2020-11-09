@@ -50,6 +50,31 @@ public class Costs {
 	public void setVariablescosts(Set<AccountingNote> variablescosts) {
 		this.variablescosts = variablescosts;
 	}
+	
+	public void addVariablecost(AccountingNote variablecost) {
+	    //prevent endless loop
+	    if (variablescosts.contains(variablecost))
+	      return ;
+	    //add new account
+	    variablescosts.add(variablecost);
+	    //set myself into the twitter account
+	    variablecost.setVariablescosts(this);
+	  }
+	  
+	  /**
+	   * Removes the account from the person. The method keeps 
+	   * relationships consistency:
+	   * * the account will no longer reference this person as its owner
+	   */
+	  public void removeVariablecost(AccountingNote variablecost) {
+	    //prevent endless loop
+	    if (!variablescosts.contains(variablecost))
+	      return ;
+	    //remove the account
+	    variablescosts.remove(variablecost);
+	    //remove myself from the twitter account
+	    variablecost.setVariablescosts(null);
+	  }
 
 	public Project getProject() {
 		return project;

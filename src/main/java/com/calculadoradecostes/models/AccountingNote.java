@@ -54,9 +54,26 @@ public class AccountingNote {
 		return variablescosts;
 	}
 
+
+	
 	public void setVariablescosts(Costs variablescosts) {
-		this.variablescosts = variablescosts;
-	}
+	    //prevent endless loop
+	    if (sameAsNow(variablescosts))
+	      return ;
+	    //set new owner
+	    Costs oldOwner = this.variablescosts;
+	    this.variablescosts = variablescosts;
+	    //remove from the old owner
+	    if (oldOwner!=null)
+	      oldOwner.removeVariablecost(this);
+	    //set myself into new owner
+	    if (variablescosts!=null)
+	    	variablescosts.addVariablecost(this);
+	  }
+	
+	  private boolean sameAsNow(Costs newOwner) {
+		    return variablescosts==null? newOwner == null : variablescosts.equals(newOwner);
+		  }
 
 	public Project getProject() {
 			return project;

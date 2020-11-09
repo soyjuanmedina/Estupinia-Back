@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.calculadoradecostes.models.AccountingNote;
+import com.calculadoradecostes.models.Costs;
 import com.calculadoradecostes.models.Project;
 import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.payload.request.LoginRequest;
@@ -84,6 +85,20 @@ public class UserController {
 		Optional<User> currentUser = 
 				userRepository.findByUsername(currentPrincipalName);
 		
+		
+		for (AccountingNote variablescost :project.getCosts().getVariablescosts()) { 
+			if(variablescost.getId() == null){
+				Costs cost = project.getCosts();
+				variablescost.setVariablescosts(cost);
+				accountingNoteRepository.save(variablescost);
+			}
+		}
+		
+		
+		
+		
+		projectRepository.save(project);
+		
 		project.getEsteemedCustomers().setProject(project);
 		project.getCosts().setProject(project);
 		
@@ -93,7 +108,8 @@ public class UserController {
 		}
 		for (AccountingNote fixedcost :project.getCosts().getFixedcosts()) {
 			fixedcost.setFixedcosts(project.getCosts());
-			accountingNoteRepository.save(fixedcost);
+			AccountingNote accountingNote2 = accountingNoteRepository.save(fixedcost);
+			System.out.println(accountingNote2);
 		}
 		for (AccountingNote variablecost :project.getCosts().getVariablescosts()) {
 			variablecost.setVariablescosts(project.getCosts());
@@ -120,8 +136,6 @@ public class UserController {
 				userRepository.findByUsername(currentPrincipalName);
 		
 		for (Project myproject :currentUser.get().getProjects()) {
-			System.out.println(myproject.getId());
-			System.out.println(project.getId());
 			if(myproject.getId().equals(project.getId())) {
 				userRepository.deleteProjectFromUser(project.getId(), currentUser.get().getId());
 				return ResponseEntity.ok(true);
