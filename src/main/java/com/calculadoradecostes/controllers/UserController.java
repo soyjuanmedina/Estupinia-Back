@@ -87,6 +87,10 @@ public class UserController {
 		project.getEsteemedCustomers().setProject(project);
 		project.getCosts().setProject(project);
 		
+		for (AccountingNote income :project.getIncomes()) {
+			income.setProject(project);
+			accountingNoteRepository.save(income);
+		}
 		for (AccountingNote fixedcost :project.getCosts().getFixedcosts()) {
 			fixedcost.setFixedcosts(project.getCosts());
 			accountingNoteRepository.save(fixedcost);

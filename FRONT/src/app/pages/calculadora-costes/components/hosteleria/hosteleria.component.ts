@@ -185,35 +185,43 @@ export class HosteleriaProject implements OnInit {
   }
 
   loadExample(example) {
-    delete example.id;
-    example.type = "Hostelería"
+
     this._projectService.step = 3;
     this._projectService.project = example;
-    console.log(this._projectService.project);
     setTimeout(() => {
       location.href = '#nombre'
     }, 500);
   }
 
   saveProjectToUser() {
-    console.log("saveProjectToUser")
-    if (this._projectService.project.type == "HosteleríaExample") {
+    if (this._projectService.project.type == "HosteleryExample") {
       this._projectService.project.type = "Hostelería"
-      delete this._projectService.project.costs.id
+      delete this._projectService.project.id;
+      if (this._projectService.project.costs) {
+        delete this._projectService.project.costs.id;
+        this._projectService.project.costs.fixedcosts.forEach(fixedcost => delete fixedcost.id);
+        this._projectService.project.costs.variablescosts.forEach(variablecost => delete variablecost.id);
+      }
+      if (this._projectService.project.esteemedCustomers) {
+        delete this._projectService.project.esteemedCustomers.id;
+      }
+      if (this._projectService.project.incomes) {
+        this._projectService.project.incomes.forEach(income => delete income.id);
+      }
     }
     this._userService.saveProjectToUser(this._projectService.project);
   }
 
   getExamples() {
-    this.examples = examples_old;
-    /*     return this.http.post('/project/get/hostelery/examples', "").subscribe(
-          data => {
-            this.examples = data as Array<Project>;
-          },
-          err => {
-            this._userService.error = err.error.message;
-          }
-        ); */
+    // this.examples = examples_old;
+    return this.http.post('/project/get/hostelery/examples', "").subscribe(
+      data => {
+        this.examples = data as Array<Project>;
+      },
+      err => {
+        this._userService.error = err.error.message;
+      }
+    );
   }
 
 

@@ -23,8 +23,9 @@ export class AuthService {
 
   logout(): void {
     this.token.signOut();
-    this._projectService.step = 3;
+    this._projectService.step = -1;
     delete this._projectService.project.type;
+    delete this._projectService.project.name;
   }
 
   register(user): Observable<any> {

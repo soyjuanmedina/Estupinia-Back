@@ -1,7 +1,7 @@
 [
   {
     "id": "example1",
-    "type": "HosteleríaExample",
+    "type": "HosteleryExample",
     "name": "La Cueva",
     "esteemedCustomers": {
       "esteemed": 20,
@@ -55,7 +55,7 @@
   },
   {
     "id": "example2",
-    "type": "HosteleríaExample",
+    "type": "HosteleryExample",
     "name": "El Veloz",
     "esteemedCustomers": {
       "esteemed": 8,

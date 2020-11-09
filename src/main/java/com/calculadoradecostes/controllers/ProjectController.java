@@ -30,7 +30,7 @@ public class ProjectController {
 	@PostMapping("/get/hostelery/examples")
 	public  ResponseEntity<List<Project>> getHosteleryProjectsExamples() {
 		
-		List<Project> examples = projectRepository.findByType("HosteleríaExample");
+		List<Project> examples = projectRepository.findByType("HosteleryExample");
 		return ResponseEntity.ok(examples);
 	}
 

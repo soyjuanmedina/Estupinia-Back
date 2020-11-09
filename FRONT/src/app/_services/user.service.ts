@@ -50,7 +50,7 @@ export class UserService {
   saveProjectToUser(project: Project) {
     return this.http.post('/user/save/project', project).subscribe(
       data => {
-        console.log(data);
+        this.getUser();
       },
       err => {
         console.log(err.error.message);

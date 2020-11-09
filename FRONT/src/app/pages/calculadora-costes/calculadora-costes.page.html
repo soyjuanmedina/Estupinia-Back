@@ -41,7 +41,8 @@
 </select>
 
 <div class="top-30" id="projectType">
-  <hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'">
+  <hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'
+  || _projectService.project.type == 'HosteleryExample'">
   </hosteleria-project>
 </div>
 
