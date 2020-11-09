@@ -111,6 +111,26 @@ public class UserController {
 		return ResponseEntity.ok(true);
 	}
 	
+	@PostMapping("/delete/project")
+	public  ResponseEntity<Boolean> deleteProjectFromUser(@Valid @RequestBody Project project) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		Optional<User> currentUser = 
+				userRepository.findByUsername(currentPrincipalName);
+		
+		for (Project myproject :currentUser.get().getProjects()) {
+			System.out.println(myproject.getId());
+			System.out.println(project.getId());
+			if(myproject.getId().equals(project.getId())) {
+				userRepository.deleteProjectFromUser(project.getId(), currentUser.get().getId());
+				return ResponseEntity.ok(true);
+			}
+		}
+		
+		return ResponseEntity.ok(false);
+				
+	}
 	
 
 }

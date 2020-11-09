@@ -59,7 +59,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <button class="btn btn-primary ml-1" *ngFor="let project of _userService.user.projects"
+        <button class="btn btn-primary m-1" *ngFor="let project of _userService.user.projects"
           data-dismiss="modal" (click)="loadProject(project)">
           {{project.name}}
         </button>

@@ -17,7 +17,7 @@ export class UserService {
   user: User;
   error: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _projectService: ProjectService) {
     if (typeof sessionStorage.getItem('auth-user') !== 'undefined') {
       this.user = JSON.parse(sessionStorage.getItem('auth-user'));
     }
@@ -49,6 +49,17 @@ export class UserService {
 
   saveProjectToUser(project: Project) {
     return this.http.post('/user/save/project', project).subscribe(
+      data => {
+        this.getUser();
+      },
+      err => {
+        console.log(err.error.message);
+      }
+    );
+  }
+
+  deleteProjectFromUser(project: Project) {
+    return this.http.post('/user/delete/project', project).subscribe(
       data => {
         this.getUser();
       },

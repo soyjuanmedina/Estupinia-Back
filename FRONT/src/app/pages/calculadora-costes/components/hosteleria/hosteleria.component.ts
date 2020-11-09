@@ -177,8 +177,8 @@ export class HosteleriaProject implements OnInit {
   }
 
   reset() {
-    location.href = '#section0';
-    this._projectService.step = 0;
+    location.href = '#startSection';
+    this._projectService.step = -1;
     this._projectService.project = this.emptyProject;
     this.clearResults();
     this.calculated = false;
@@ -195,29 +195,35 @@ export class HosteleriaProject implements OnInit {
 
   saveProjectToUser() {
     if (this._projectService.project.type == "HosteleryExample") {
-      this._projectService.project.type = "Hostelería"
-      delete this._projectService.project.id;
-      if (this._projectService.project.costs) {
-        delete this._projectService.project.costs.id;
-        this._projectService.project.costs.fixedcosts.forEach(fixedcost => delete fixedcost.id);
-        this._projectService.project.costs.variablescosts.forEach(variablecost => delete variablecost.id);
-      }
-      if (this._projectService.project.esteemedCustomers) {
-        delete this._projectService.project.esteemedCustomers.id;
-      }
-      if (this._projectService.project.incomes) {
-        this._projectService.project.incomes.forEach(income => delete income.id);
-      }
+      this.deleteProjectId();
     }
     this._userService.saveProjectToUser(this._projectService.project);
   }
 
-  deleteProjectFromUser() {
-    console.log('deleteProjectFromUser');
+  saveAsNewProjectToUser() {
+    this.deleteProjectId();
+    this._userService.saveProjectToUser(this._projectService.project);
   }
 
-  saveEsNewProjectToUser() {
-    console.log('saveEsNewProjectToUser');
+  deleteProjectFromUser() {
+    this._userService.deleteProjectFromUser(this._projectService.project);
+    this.reset();
+  }
+
+  deleteProjectId() {
+    this._projectService.project.type = "Hostelería"
+    delete this._projectService.project.id;
+    if (this._projectService.project.costs) {
+      delete this._projectService.project.costs.id;
+      this._projectService.project.costs.fixedcosts.forEach(fixedcost => delete fixedcost.id);
+      this._projectService.project.costs.variablescosts.forEach(variablecost => delete variablecost.id);
+    }
+    if (this._projectService.project.esteemedCustomers) {
+      delete this._projectService.project.esteemedCustomers.id;
+    }
+    if (this._projectService.project.incomes) {
+      this._projectService.project.incomes.forEach(income => delete income.id);
+    }
   }
 
   getExamples() {

@@ -8,7 +8,8 @@
 
   <div class="clearfix">
     <div class="float-right">
-      <button type="button" class="btn btn-primary btn-sm bottom-30" (click)="reset()">
+      <button type="button" class="btn btn-primary btn-sm bottom-30" (click)="next()"
+        *ngIf="_projectService.step == -1">
         Crear nuevo
       </button>
       &nbsp;
@@ -308,7 +309,7 @@
     </div>
     <div class="col-md-6">
       <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
-        (click)="saveEsNewProjectToUser()">
+        (click)="saveAsNewProjectToUser()">
         Guardar como nuevo proyecto
       </button>
     </div>
