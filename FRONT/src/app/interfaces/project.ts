@@ -3,6 +3,7 @@ import { EsteemedCustomers } from './esteemedCustomers';
 
 export interface Project {
   id?: string;
+  isMine?: boolean;
   type: string;
   name: string;
   esteemedCustomers: EsteemedCustomers;

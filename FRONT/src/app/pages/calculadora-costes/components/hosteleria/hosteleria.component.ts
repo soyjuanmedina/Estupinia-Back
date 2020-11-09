@@ -212,6 +212,14 @@ export class HosteleriaProject implements OnInit {
     this._userService.saveProjectToUser(this._projectService.project);
   }
 
+  deleteProjectFromUser() {
+    console.log('deleteProjectFromUser');
+  }
+
+  saveEsNewProjectToUser() {
+    console.log('saveEsNewProjectToUser');
+  }
+
   getExamples() {
     // this.examples = examples_old;
     return this.http.post('/project/get/hostelery/examples', "").subscribe(

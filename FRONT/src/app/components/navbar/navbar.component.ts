@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
     this.authService.login(this.loginForm).subscribe(
       data => {
         $('#LoginModal').modal('hide');
+        delete this.loginErrorMessage;
         this.tokenStorage.saveToken(data.accessToken);
         this._userService.getUser();
         this.tokenStorage.saveUser(data);

@@ -281,22 +281,37 @@
     </div>
   </div>
 </section>
-
-<div class="form-row top-30 bottom-30">
-  <div class="col-md-6">
-    <button type="submit" class="btn btn-secondary btn-block" (click)="reset()">
-      Vaciar proyecto
-    </button>
+<div class="bottom-30">
+  <div class="form-row top-30" [hidden]="_projectService.step < 0">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-secondary btn-block" (click)="reset()">
+        Vaciar proyecto
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button *ngIf="!_userService.user" class="btn btn-primary btn-block"
+        (click)="_utilitiesService.openLoginModal()">
+        Login para guardar
+      </button>
+      <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
+        (click)="saveProjectToUser()">
+        Guardar proyecto
+      </button>
+    </div>
   </div>
-  <div class="col-md-6">
-    <button *ngIf="!_userService.user" class="btn btn-primary btn-block"
-      (click)="_utilitiesService.openLoginModal()">
-      Login para guardar
-    </button>
-    <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
-      (click)="saveProjectToUser()">
-      Guardar proyecto
-    </button>
+
+  <div *ngIf="_projectService.project.isMine" class="form-row top-15">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-danger btn-block" (click)="deleteProjectFromUser()">
+        Eliminar proyecto
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
+        (click)="saveEsNewProjectToUser()">
+        Guardar como nuevo proyecto
+      </button>
+    </div>
   </div>
 </div>
 
