@@ -86,17 +86,6 @@ public class UserController {
 				userRepository.findByUsername(currentPrincipalName);
 		
 		
-		for (AccountingNote variablescost :project.getCosts().getVariablescosts()) { 
-			if(variablescost.getId() == null){
-				Costs cost = project.getCosts();
-				variablescost.setVariablescosts(cost);
-				accountingNoteRepository.save(variablescost);
-			}
-		}
-		
-		
-		
-		
 		projectRepository.save(project);
 		
 		project.getEsteemedCustomers().setProject(project);
