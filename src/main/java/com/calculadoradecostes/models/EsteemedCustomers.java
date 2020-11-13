@@ -31,7 +31,7 @@ public class EsteemedCustomers {
 	private boolean monthly;
 	
 
-	@OneToOne(mappedBy = "esteemedCustomers", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "esteemedCustomers", cascade = CascadeType.ALL)
     @JoinColumn(name = "esteemedCustomers_id", referencedColumnName = "id")
 	@JsonIgnore
 	private Project project;

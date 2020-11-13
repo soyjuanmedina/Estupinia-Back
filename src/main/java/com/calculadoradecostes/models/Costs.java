@@ -26,8 +26,8 @@ public class Costs {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "costs", cascade = CascadeType.ALL)
+    @JoinColumn(name = "costs_id", referencedColumnName = "id")
 	@JsonIgnore
 	private Project project;
     

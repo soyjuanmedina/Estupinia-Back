@@ -40,13 +40,13 @@ public class Project {
 	@Size(max = 120)
 	private String type;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL)
 	private EsteemedCustomers esteemedCustomers;
 	
-	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL)
     private Costs costs;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Collection<AccountingNote> incomes;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
@@ -112,7 +112,7 @@ public class Project {
 	}
 
 	public Collection<AccountingNote> getIncomes() {
-	    return new ArrayList<AccountingNote>(incomes);
+	    return incomes;
 	  }
 
 	public void addIncome(AccountingNote income) {
