@@ -73,11 +73,11 @@ public class User {
 	}
 
 	public String getUsername() {
-		return email;
+		return username;
 	}
 
 	public void setUsername(String username) {
-		this.email = username;
+		this.username = username;
 	}
 
 	public String getName() {

@@ -26,62 +26,44 @@ public class AccountingNote {
 	private String commentary;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id", referencedColumnName="id")
+    @JoinColumn(name = "project_en_acnote_id", referencedColumnName="id")
     @JsonIgnore
     private Project project;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fixedcosts_id", referencedColumnName="id")
+    @JoinColumn(name = "fixedcost_id", referencedColumnName="id")
     @JsonIgnore
-    private Costs fixedcosts;
+    private Costs fixedcost;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "variablescosts_id", referencedColumnName="id")
+    @JoinColumn(name = "variablecost_id", referencedColumnName="id")
     @JsonIgnore
-    private Costs variablescosts;
+    private Costs variablecost;
 
-	
-
-	public Costs getFixedcosts() {
-		return fixedcosts;
+    
+    public Costs getFixedcost() {
+		return fixedcost;
 	}
 
-	public void setFixedcosts(Costs fixedcosts) {
-		this.fixedcosts = fixedcosts;
+	public void setFixedcost(Costs fixedcost) {
+		this.fixedcost = fixedcost;
 	}
 
-	public Costs getVariablescosts() {
-		return variablescosts;
+	public Costs getVariablecost() {
+		return variablecost;
 	}
 
-
-	
-	public void setVariablescosts(Costs variablescosts) {
-	    //prevent endless loop
-	    if (sameAsNow(variablescosts))
-	      return ;
-	    //set new owner
-	    Costs oldOwner = this.variablescosts;
-	    this.variablescosts = variablescosts;
-	    //remove from the old owner
-	    if (oldOwner!=null)
-	      oldOwner.removeVariablecost(this);
-	    //set myself into new owner
-	    if (variablescosts!=null)
-	    	variablescosts.addVariablecost(this);
-	  }
-	
-	  private boolean sameAsNow(Costs newOwner) {
-		    return variablescosts==null? newOwner == null : variablescosts.equals(newOwner);
-		  }
+	public void setVariablecost(Costs variablecost) {
+		this.variablecost = variablecost;
+	}
 
 	public Project getProject() {
 			return project;
 		}
 
-		public void setProject(Project project) {
-			this.project = project;
-		}
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	public Long getId() {
 		return id;

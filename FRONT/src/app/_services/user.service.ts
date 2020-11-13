@@ -24,7 +24,7 @@ export class UserService {
   }
 
   getUser() {
-    return this.http.post(USER_CONTROLLER, "").subscribe(
+    return this.http.post('/user/get', "").subscribe(
       data => {
         this.user = data as User;
         window.sessionStorage.removeItem(USER_KEY);
@@ -37,9 +37,11 @@ export class UserService {
   }
 
   saveUser(user: User) {
+    console.log('dentro', user);
     return this.http.post('/user/save', user).subscribe(
       data => {
         console.log(data);
+        this.user = data as User;
       },
       err => {
         console.log(err.error.message);

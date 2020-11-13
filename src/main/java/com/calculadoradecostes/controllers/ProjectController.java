@@ -1,6 +1,7 @@
 package com.calculadoradecostes.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.calculadoradecostes.models.Project;
+import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.repository.ProjectRepository;
 
 @RestController
@@ -23,7 +25,20 @@ public class ProjectController {
 	ProjectRepository projectRepository;
 	
 	@PostMapping("/get")
-	public  ResponseEntity<Boolean> getProject() {
+	public  ResponseEntity<Optional<Project>> getProject(@RequestBody Long id) {
+		Optional<Project> project = projectRepository.findById(id);
+		return ResponseEntity.ok(project);
+	}
+
+	@PostMapping("/save")
+	public  ResponseEntity<Project> saveProject(@Valid @RequestBody Project project) {	
+		project = projectRepository.save(project);
+		return ResponseEntity.ok(project);
+	}
+	
+	@PostMapping("/delete")
+	public  ResponseEntity<Boolean> deleteProject (@Valid @RequestBody Project project) {	
+		projectRepository.delete(project);
 		return ResponseEntity.ok(true);
 	}
 	
@@ -32,13 +47,6 @@ public class ProjectController {
 		
 		List<Project> examples = projectRepository.findByType("HosteleryExample");
 		return ResponseEntity.ok(examples);
-	}
-
-	@PostMapping("/save")
-	public  ResponseEntity<Boolean> saveFoo(@Valid @RequestBody Project project) {
-		
-		projectRepository.save(project);
-		return ResponseEntity.ok(true);
 	}
 
 }

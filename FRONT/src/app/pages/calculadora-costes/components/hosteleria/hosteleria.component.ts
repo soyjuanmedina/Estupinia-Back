@@ -185,7 +185,6 @@ export class HosteleriaProject implements OnInit {
   }
 
   loadExample(example) {
-
     this._projectService.step = 3;
     this._projectService.project = example;
     setTimeout(() => {
@@ -197,7 +196,13 @@ export class HosteleriaProject implements OnInit {
     if (this._projectService.project.type == "HosteleryExample") {
       this.deleteProjectId();
     }
-    this._userService.saveProjectToUser(this._projectService.project);
+    if (this._projectService.project.id) {
+      console.log(this._userService.user.projects);
+      this._userService.user.projects = this._userService.user.projects.filter(obj => obj.id != this._projectService.project.id);
+      console.log(this._userService.user.projects);
+    }
+    this._userService.user.projects.push(this._projectService.project);
+    this._userService.saveUser(this._userService.user);
   }
 
   saveAsNewProjectToUser() {
@@ -206,9 +211,9 @@ export class HosteleriaProject implements OnInit {
   }
 
   deleteProjectFromUser() {
-    this._userService.deleteProjectFromUser(this._projectService.project);
-    this.reset();
+    console.log('deleteProjectFromUser');
   }
+
 
   deleteProjectId() {
     this._projectService.project.type = "Hostelería"

@@ -1,5 +1,7 @@
 package com.calculadoradecostes.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,53 +31,64 @@ public class Costs {
 	@JsonIgnore
 	private Project project;
     
-    @OneToMany(mappedBy = "fixedcosts")
-    private Set<AccountingNote> fixedcosts;
+    @OneToMany(mappedBy = "fixedcost", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<AccountingNote> fixedcosts;
     
-    @OneToMany(mappedBy = "variablescosts")
-    private Set<AccountingNote> variablescosts;
+    @OneToMany(mappedBy = "variablecost", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<AccountingNote> variablescosts;
 	
-	public Set<AccountingNote> getFixedcosts() {
-		return fixedcosts;
+
+    public void setFixedcosts(Collection<AccountingNote> fixedcosts) {
+		this.fixedcosts = new ArrayList<AccountingNote>();
+		for (AccountingNote fixedcost : fixedcosts) {
+			addFixedcost(fixedcost);
+		}
 	}
 
-	public void setFixedcosts(Set<AccountingNote> fixedcosts) {
-		this.fixedcosts = fixedcosts;
-	}
+	public Collection<AccountingNote> getFixedcosts() {
+	    return new ArrayList<AccountingNote>(fixedcosts);
+	  }
 
-	public Set<AccountingNote> getVariablescosts() {
-		return variablescosts;
-	}
+	public void addFixedcost(AccountingNote fixedcost) {
+		if (fixedcosts.contains(fixedcost))
+			return ;
+		fixedcosts.add(fixedcost);
+		fixedcost.setFixedcost(this);
+	  }
 
-	public void setVariablescosts(Set<AccountingNote> variablescosts) {
-		this.variablescosts = variablescosts;
-	}
-	
-	public void addVariablecost(AccountingNote variablecost) {
-	    //prevent endless loop
-	    if (variablescosts.contains(variablecost))
+	  public void removeFixedcost(AccountingNote fixedcost) {
+	    if (!fixedcosts.contains(fixedcost))
 	      return ;
-	    //add new account
-	    variablescosts.add(variablecost);
-	    //set myself into the twitter account
-	    variablecost.setVariablescosts(this);
+	    fixedcosts.remove(fixedcost);
+	    fixedcost.setFixedcost(null);
 	  }
 	  
-	  /**
-	   * Removes the account from the person. The method keeps 
-	   * relationships consistency:
-	   * * the account will no longer reference this person as its owner
-	   */
-	  public void removeVariablecost(AccountingNote variablecost) {
-	    //prevent endless loop
-	    if (!variablescosts.contains(variablecost))
-	      return ;
-	    //remove the account
-	    variablescosts.remove(variablecost);
-	    //remove myself from the twitter account
-	    variablecost.setVariablescosts(null);
-	  }
+	   public void setVariablescosts(Collection<AccountingNote> variablescosts) {
+			this.variablescosts = new ArrayList<AccountingNote>();
+			for (AccountingNote variablecost : variablescosts) {
+				addVariablecost(variablecost);
+			}
+		}
 
+		public Collection<AccountingNote> getVariablescosts() {
+		    return new ArrayList<AccountingNote>(variablescosts);
+		  }
+
+		public void addVariablecost(AccountingNote variablecost) {
+			if (variablescosts.contains(variablecost))
+				return ;
+			variablescosts.add(variablecost);
+			variablecost.setVariablecost(this);
+		  }
+
+		  public void removeVariablecost(AccountingNote variablecost) {
+		    if (!variablescosts.contains(variablecost))
+		      return ;
+		    variablescosts.remove(variablecost);
+		    variablecost.setVariablecost(null);
+		  }
+	  
+	  
 	public Project getProject() {
 		return project;
 	}

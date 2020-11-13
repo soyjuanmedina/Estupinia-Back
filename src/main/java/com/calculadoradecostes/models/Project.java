@@ -40,7 +40,7 @@ public class Project {
 	@Size(max = 120)
 	private String type;
 	
-	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private EsteemedCustomers esteemedCustomers;
 	
 	@OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)

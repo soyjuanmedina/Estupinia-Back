@@ -47,93 +47,44 @@ public class UserController {
 	@Autowired
 	AccountingNoteRepository accountingNoteRepository;
 	
-	@PostMapping("/")
+	@PostMapping("/get")
 	public ResponseEntity<Optional<User>> getUser() {
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-		
 		Optional<User> user = userRepository.findByUsername(currentPrincipalName);
-
 		return ResponseEntity.ok(user);
 	}
 	
 	@PostMapping("/save")
-	public  ResponseEntity<Boolean> saveUser(@Valid @RequestBody User user) {
-			
+	public  ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		Optional<User> currentUser = 
 				userRepository.findByUsername(currentPrincipalName);
-		
-		if(user.getUsername() == currentUser.get().getUsername()) {
-			userRepository.save(user);
+		if(user.getPassword() == null || user.getPassword().isEmpty()) {
+			String currentPassword = currentUser.get().getPassword();
+			user.setPassword(currentPassword);
+		}
+		if(user.getUsername().equals(currentUser.get().getUsername())) {
+			user = userRepository.save(user);
+			return ResponseEntity.ok(user);
+		} else {
+			return ResponseEntity.ok(null);
+		}	
+	}
+	
+	@PostMapping("/delete")
+	public  ResponseEntity<Boolean> saveProjectToUser(@Valid @RequestBody User user) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		Optional<User> currentUser = 
+				userRepository.findByUsername(currentPrincipalName);
+		if(user.getUsername().equals(currentUser.get().getUsername())) {
+			userRepository.delete(user);
 			return ResponseEntity.ok(true);
 		} else {
 			return ResponseEntity.ok(false);
-		}
-
-		
-	}
-	
-	@PostMapping("/save/project")
-	public  ResponseEntity<Boolean> saveProjectToUser(@Valid @RequestBody Project project) {
-			
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		
-		Optional<User> currentUser = 
-				userRepository.findByUsername(currentPrincipalName);
-		
-		
-		projectRepository.save(project);
-		
-		project.getEsteemedCustomers().setProject(project);
-		project.getCosts().setProject(project);
-		
-		for (AccountingNote income :project.getIncomes()) {
-			income.setProject(project);
-			accountingNoteRepository.save(income);
-		}
-		for (AccountingNote fixedcost :project.getCosts().getFixedcosts()) {
-			fixedcost.setFixedcosts(project.getCosts());
-			AccountingNote accountingNote2 = accountingNoteRepository.save(fixedcost);
-			System.out.println(accountingNote2);
-		}
-		for (AccountingNote variablecost :project.getCosts().getVariablescosts()) {
-			variablecost.setVariablescosts(project.getCosts());
-			accountingNoteRepository.save(variablecost);
-		}
-		
-		project = projectRepository.save(project);
-		
-		if (currentUser.get().getProjects().contains(project)) {
-			currentUser.get().getProjects().remove(project);
-		}
-		currentUser.get().getProjects().add(project);
-		userRepository.save(currentUser.get());
-
-		return ResponseEntity.ok(true);
-	}
-	
-	@PostMapping("/delete/project")
-	public  ResponseEntity<Boolean> deleteProjectFromUser(@Valid @RequestBody Project project) {
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		Optional<User> currentUser = 
-				userRepository.findByUsername(currentPrincipalName);
-		
-		for (Project myproject :currentUser.get().getProjects()) {
-			if(myproject.getId().equals(project.getId())) {
-				userRepository.deleteProjectFromUser(project.getId(), currentUser.get().getId());
-				return ResponseEntity.ok(true);
-			}
-		}
-		
-		return ResponseEntity.ok(false);
-				
-	}
-	
+		}			
+	}	
 
 }
