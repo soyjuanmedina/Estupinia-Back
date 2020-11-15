@@ -58,7 +58,8 @@
     <div class="card-body">
       <h6 class="card-title">Clientes</h6>
       <p class="lead">Supone la principal fuente de ingresos de un negocio de hosteleria,
-        vamos a estimar la cantidad de clientes por mes y su ticket medio. Puedes añadir comentarios
+        vamos a estimar la cantidad de clientes (por día o mes, como prefieras) y su ticket medio.
+        Puedes añadir comentarios
         para justificar tus cálculos.
       </p>
       <div class="form-row">
@@ -119,15 +120,19 @@
 
       <div class="form-row top-30" *ngFor="let income of _projectService.project.incomes">
         <h6>{{income.name}}</h6>
-        <div class="col-md-12" *ngIf="income.commentary">
+        <div class="col-md-12" *ngIf="income.commentary || income.showcommentary">
           <textarea class="form-control" id="income.commentary" rows="2"
             [(ngModel)]="income.commentary" [name]="income.commentary"></textarea>
         </div>
-        <div class="col-md-12" [ngClass]="{'top-30': income.commentary }">
+        <div class="col-md-12" [ngClass]="{'top-30': income.commentary || income.showcommentary }">
           <div class="input-group">
             <input type="number" class="form-control" [id]="income.name" [value]="income.amount"
               [(ngModel)]="income.amount" [name]="income.name">
             <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                *ngIf="!income.commentary"
+                (click)="income.showcommentary = !income.showcommentary"><i
+                  class="fas fa-comments float-right"></i></span>
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
                 (click)="deleteAccountingNote('incomes', _projectService.project.incomes, income)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
@@ -171,15 +176,20 @@
       <div class="form-row top-30"
         *ngFor="let fixedCost of _projectService.project.costs.fixedcosts">
         <h6>{{fixedCost.name}}</h6>
-        <div class="col-md-12" *ngIf="fixedCost.commentary">
+        <div class="col-md-12" *ngIf="fixedCost.commentary || fixedCost.showcommentary">
           <textarea class="form-control" id="fixedCost.commentary" rows="2"
             [(ngModel)]="fixedCost.commentary" [name]="fixedCost.commentary"></textarea>
         </div>
-        <div class="col-md-12" [ngClass]="{'top-30': fixedCost.commentary }">
+        <div class="col-md-12"
+          [ngClass]="{'top-30': fixedCost.commentary || fixedCost.showcommentary }">
           <div class="input-group">
             <input type="number" class="form-control" [id]="fixedCost.name"
               [value]="fixedCost.amount" [(ngModel)]="fixedCost.amount" [name]="fixedCost.name">
             <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                *ngIf="!fixedCost.commentary"
+                (click)="fixedCost.showcommentary = !fixedCost.showcommentary"><i
+                  class="fas fa-comments float-right"></i></span>
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
                 (click)="deleteAccountingNote('fixedCost', _projectService.project.costs.fixedcosts, fixedCost)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
@@ -219,16 +229,21 @@
       <div class="form-row top-30"
         *ngFor="let variableCost of _projectService.project.costs.variablescosts">
         <h6>{{variableCost.name}}</h6>
-        <div class="col-md-12" *ngIf="variableCost.commentary">
+        <div class="col-md-12" *ngIf="variableCost.commentary || variableCost.showcommentary">
           <textarea class="form-control" id="variableCost.commentary" rows="2"
             [(ngModel)]="variableCost.commentary" [name]="variableCost.commentary"></textarea>
         </div>
-        <div class="col-md-12" [ngClass]="{'top-30': variableCost.commentary }">
+        <div class="col-md-12"
+          [ngClass]="{'top-30': variableCost.commentary || variableCost.showcommentary}">
           <div class="input-group">
             <input type="number" class="form-control" [id]="variableCost.name"
               [value]="variableCost.amount" [(ngModel)]="variableCost.amount"
               [name]="variableCost.name">
             <div class="input-group-prepend">
+              <span class="input-group-text" id="validationTooltipUsernamePrepend"
+                *ngIf="!variableCost.commentary"
+                (click)="variableCost.showcommentary = !variableCost.showcommentary"><i
+                  class="fas fa-comments float-right"></i></span>
               <span class="input-group-text" id="validationTooltipUsernamePrepend"
                 (click)="deleteAccountingNote('variableCost', _projectService.project.costs.variablescosts, variableCost)"><i
                   class="fas fa-trash-alt float-right text-danger"></i></span>
@@ -366,6 +381,27 @@
           (click)="loadExample(example)">
           {{example.name}}
         </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal save -->
+<div class="modal fade" id="SaveModal" tabindex="-1" role="dialog" aria-labelledby="SaveModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          {{alert}}
+        </div>
 
       </div>
     </div>

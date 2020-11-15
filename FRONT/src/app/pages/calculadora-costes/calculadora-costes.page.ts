@@ -29,9 +29,9 @@ export class CalculadoraDeCostesPage implements OnInit {
   }
 
   loadProject(project) {
-    console.log(project);
     this._projectService.step = 3;
-    this._projectService.project = this._userService.user.projects.filter(function (el) { return el.id == project.id; })[0];
+    this._projectService.originalProject = this._userService.user.projects.filter(function (el) { return el.id == project.id; })[0];
+    this._projectService.project = { ...this._projectService.originalProject };
     this._projectService.project.isMine = true;
     setTimeout(() => {
       location.href = '#nombre'
