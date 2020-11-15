@@ -55,21 +55,7 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Collection<AccountingNote> incomes;
-
-	@ManyToMany(cascade = {CascadeType.ALL})
-	@JsonIgnore
-	@JoinTable(	name = "user_projects", 
-				joinColumns = @JoinColumn(name = "project_id"), 
-				inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private Set<User> users = new HashSet<>();
     
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
 
 	public Long getId() {
 		return id;

@@ -16,6 +16,7 @@ import { AppService } from './app.service';
 import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { SharedComponent } from '@pages/shared/shared.component';
+import { OtherTypeComponent } from './pages/calculadora-costes/components/othertype/othertype.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SharedComponent } from '@pages/shared/shared.component';
     ContactPage,
     HosteleriaProject,
     ProfilePage,
-    SharedComponent
+    SharedComponent,
+    OtherTypeComponent
   ],
   imports: [
     BrowserModule,

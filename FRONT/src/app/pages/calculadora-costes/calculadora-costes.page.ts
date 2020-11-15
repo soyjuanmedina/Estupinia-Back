@@ -11,7 +11,7 @@ import { UserService } from '../../_services/user.service';
 })
 export class CalculadoraDeCostesPage implements OnInit {
 
-  projectTypes = ['Hostelería'];
+  projectTypes = ['Hostelería', 'Otro tipo...'];
   projectType;
 
   form: any = {};
