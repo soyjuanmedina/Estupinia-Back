@@ -16,4 +16,6 @@ public interface ProjectRepository extends CrudRepository<Project, Long>{
 	
 	List<Project> findByType(String type);
 	
+	Project findByUuid(String uuid);
+	
 }

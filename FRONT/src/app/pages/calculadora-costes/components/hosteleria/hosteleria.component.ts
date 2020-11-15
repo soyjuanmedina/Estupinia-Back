@@ -6,6 +6,7 @@ import { UserService } from '../../../../_services/user.service';
 import { UtilitiesService } from '../../../../_services/utilities.service';
 import { HttpClient } from '@angular/common/http';
 import examples_old from "../../../../examples_old/hostelry.json";
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -75,8 +76,9 @@ export class HosteleriaProject implements OnInit {
   totalVariableExpends = 0;
   result = null;
   calculated = false;
+  window = window;
   constructor(public _projectService: ProjectService, public _userService: UserService,
-    private http: HttpClient, public _utilitiesService: UtilitiesService) {
+    private http: HttpClient, public _utilitiesService: UtilitiesService, public router: Router) {
     if (!this._projectService.project.id) {
       this._projectService.step = -1;
       this._projectService.project = this.emptyProject;
@@ -260,8 +262,16 @@ export class HosteleriaProject implements OnInit {
     return this._userService.user.projects.some(elem => elem.name === name);
   }
 
+  shareProject() {
+    $('#SaveModal').modal('show');
+  }
+
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    $('.modal').modal('hide');
   }
 
 }

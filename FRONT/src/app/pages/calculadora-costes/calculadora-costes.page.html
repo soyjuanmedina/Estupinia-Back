@@ -1,3 +1,10 @@
+<div class="col-lg-12 ml-auto top-30" id="section0">
+  <p class=" lead" *ngIf="_projectService.project && _projectService.project.isShared">
+    Han compartido este proyecto contigo, ahora puedes revisarlo y si lo desaeas guardar tu propia
+    versión.
+  </p>
+</div>
+
 <div *ngIf="_userService.user">
   <div class="col-lg-12 ml-auto top-30" id="section0">
     <p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes

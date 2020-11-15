@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,9 +20,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +40,8 @@ public class Project {
 	@NotBlank
 	@Size(max = 120)
 	private String name;
+	
+	private String uuid;
 
 	@NotBlank
 	@Size(max = 120)
@@ -70,6 +77,14 @@ public class Project {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getName() {
@@ -129,4 +144,8 @@ public class Project {
 	    income.setProject(null);
 	  }
 
+	  @PrePersist
+	  public void autofill() {
+	      this.setUuid(UUID.randomUUID().toString());
+	  }
 }

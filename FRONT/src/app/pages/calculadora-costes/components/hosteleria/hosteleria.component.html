@@ -311,18 +311,25 @@
       </button>
       <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
         (click)="saveProjectToUser()">
-        Guardar proyecto
+        <span *ngIf="!_projectService.project.isMine">Guardar proyecto</span>
+        <span *ngIf="_projectService.project.isMine">Actualizar proyecto</span>
       </button>
     </div>
   </div>
 
   <div *ngIf="_projectService.project.isMine" class="form-row top-15">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <button type="submit" class="btn btn-danger btn-block" (click)="deleteProjectFromUser()">
         Eliminar proyecto
       </button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
+        (click)="shareProject()">
+        Compartir proyecto
+      </button>
+    </div>
+    <div class="col-md-4">
       <button *ngIf="_userService.user" class="btn btn-primary btn-block fade-in"
         (click)="saveAsNewProjectToUser()">
         Guardar como nuevo proyecto
@@ -394,13 +401,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="addAccountingNoteModal">Gurdado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger" *ngIf="alert" role="alert">
           {{alert}}
+        </div>
+
+        <div class="btn btn-primary" *ngIf="_projectService.project.uuid">
+          Recuerda que puedes compartir tu projecto mandando a tus socios o inversores esta URL:
+          <p><a [href]="window.location.origin + '/#/shared?uuid=' + _projectService.project.uuid"
+              style="color: #2c3e50">
+              {{window.location.origin + '/#/shared?uuid=' + _projectService.project.uuid}}</a></p>
         </div>
 
       </div>
