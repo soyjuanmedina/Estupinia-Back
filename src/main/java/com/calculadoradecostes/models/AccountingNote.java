@@ -26,7 +26,7 @@ public class AccountingNote {
 	private String commentary;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_en_acnote_id", referencedColumnName="id")
+    @JoinColumn(name = "project_id", referencedColumnName="id")
     @JsonIgnore
     private Project project;
     

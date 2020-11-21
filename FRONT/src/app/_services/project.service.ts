@@ -7,6 +7,7 @@ import { Project } from '../interfaces/project';
 })
 export class ProjectService {
   step;
+  originalProject: Project;
   project: Project = {
     type: '',
     name,

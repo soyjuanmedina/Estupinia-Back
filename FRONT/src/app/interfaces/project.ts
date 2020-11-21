@@ -4,6 +4,8 @@ import { EsteemedCustomers } from './esteemedCustomers';
 export interface Project {
   id?: string;
   isMine?: boolean;
+  isShared?: boolean;
+  uuid?: string;
   type: string;
   name: string;
   esteemedCustomers: EsteemedCustomers;
