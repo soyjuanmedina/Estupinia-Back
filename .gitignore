@@ -31,6 +31,7 @@ build/
 
 ### Angular ###
 /FRONT/dist
+/FRONT/node
 /FRONT/tmp
 /FRONT/out-tsc
 /FRONT/documentation
