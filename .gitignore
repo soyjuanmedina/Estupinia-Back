@@ -41,11 +41,6 @@ build/
 
 ### Eclipse ###
 # Java related
-target/**
-*.jar
-*.war
-*.ear
-*.class
 
 # eclipse specific
 *.pydevproject
