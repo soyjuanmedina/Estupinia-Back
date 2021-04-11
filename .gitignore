@@ -1,3 +1,5 @@
+target/
+
 # HELP.md
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -5,7 +7,9 @@
 
 ### STS ###
 .apt_generated
-.factorypath
+target/.factorypath
+
+
 .settings
 .springBeans
 .sts4-cache
