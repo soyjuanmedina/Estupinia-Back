@@ -1102,7 +1102,7 @@ function CalculadoraDeCostesPage_div_3_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "La calculadora de costes para Stratups te permite calcular de modo f\u00E1cil la viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender y luego ya veremos. ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "La calculadora de costes para Stratups te permite calcular de modo f\u00E1cil la viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender. ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1642,7 +1642,8 @@ class HosteleriaProject {
         this.result = null;
         this.calculated = false;
         this.window = window;
-        if (!this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
+        console.log('hola');
+        if (this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
             elem.type === this._projectService.project.type)) {
             this._projectService.step = -1;
             this._projectService.project = this.emptyProject;

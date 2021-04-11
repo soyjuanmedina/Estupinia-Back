@@ -2234,7 +2234,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p", 8);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "La calculadora de costes para Stratups te permite calcular de modo f\xE1cil la viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender y luego ya veremos. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "La calculadora de costes para Stratups te permite calcular de modo f\xE1cil la viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender. ");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -3419,8 +3419,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.result = null;
         this.calculated = false;
         this.window = window;
+        console.log('hola');
 
-        if (!this._userService.user.projects.some(function (elem) {
+        if (this._userService.user && !this._userService.user.projects.some(function (elem) {
           return elem.id === _this7._projectService.project.id && elem.type === _this7._projectService.project.type;
         })) {
           this._projectService.step = -1;
