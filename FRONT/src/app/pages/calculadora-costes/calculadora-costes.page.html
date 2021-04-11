@@ -1,81 +1,86 @@
 <div class="col-lg-12 ml-auto top-30" id="section0">
-  <p class=" lead" *ngIf="_projectService.project && _projectService.project.isShared">
-    Han compartido este proyecto contigo, ahora puedes revisarlo y si lo desaeas guardar tu propia
-    versión.
-  </p>
+	<p class=" lead" *ngIf="_projectService.project && _projectService.project.isShared">
+		Han compartido este proyecto contigo, ahora puedes revisarlo y si lo desaeas guardar tu
+		propia
+		versión.
+	</p>
 </div>
 
 <div *ngIf="_userService.user">
-  <div class="col-lg-12 ml-auto top-30" id="section0">
-    <p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes
-      <span *ngIf="_userService.user.projects && _userService.user.projects.length">cargar
-        tus proyectos o
-      </span>
-      crear nuevos <span *ngIf="!_userService.user.projects || !_userService.user.projects.length">
-        proyectos
-      </span> para
-      guardarlos y compartirlos con socios e inversores. Para empezar un proyecto nuevo elige el
-      tipo de proyecto que quiere emprender.
-    </p>
-  </div>
+	<div class="col-lg-12 ml-auto top-30" id="section0">
+		<p class=" lead">Bienvenido {{_userService.user.name}}, ahora puedes
+			<span *ngIf="_userService.user.projects && _userService.user.projects.length">cargar
+				tus proyectos o
+			</span>
+			crear nuevos <span
+				*ngIf="!_userService.user.projects || !_userService.user.projects.length">
+				proyectos
+			</span> para
+			guardarlos y compartirlos con socios e inversores. Para empezar un proyecto nuevo elige
+			el
+			tipo de proyecto que quiere emprender.
+		</p>
+	</div>
 
-  <div class="clearfix" *ngIf="_userService.user.projects && _userService.user.projects.length">
-    <div class="float-right">
-      <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
-        data-target="#loadMyProjectModal">
-        Cargar projecto propio
-      </button>
-    </div>
-  </div>
+	<div class="clearfix" *ngIf="_userService.user.projects && _userService.user.projects.length">
+		<div class="float-right">
+			<button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
+				data-target="#loadMyProjectModal">
+				Cargar projecto propio
+			</button>
+		</div>
+	</div>
 </div>
 
 
 
 <div class="row" *ngIf="!_userService.user">
-  <div class="col-lg-12 ml-auto top-30">
-    <p class="lead">La calculadora de costes para Stratups te permite calcular de modo fácil la
-      viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere emprender
-    </p>
-  </div>
+	<div class="col-lg-12 ml-auto top-30">
+		<p class="lead">La calculadora de costes para Stratups te permite calcular de modo fácil la
+			viabilidad de tu proyecto. Primero de todo elige el tipo de proyecto que quiere
+			emprender y luego ya veremos.
+		</p>
+	</div>
 
 </div>
 
 <select name="projectType" class="form-control" [(ngModel)]="_projectService.project.type"
-  (ngModelChange)="navigateToProjectType()">
+	(ngModelChange)="navigateToProjectType()">
 
-  <option *ngFor="let projectType of projectTypes" [value]="projectType">
-    {{ projectType }}
-  </option>
+	<option *ngFor="let projectType of projectTypes" [value]="projectType">
+		{{ projectType }}
+	</option>
 </select>
 
 <div class="top-30" id="projectType">
-  <hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'
+	<hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'
   || _projectService.project.type == 'HosteleryExample'">
-  </hosteleria-project>
-  <othertype-project *ngIf="_projectService.project.type == 'Otro tipo...'">
-  </othertype-project>
+	</hosteleria-project>
+	<othertype-project *ngIf="_projectService.project.type == 'Otro tipo...'">
+	</othertype-project>
 </div>
 
 
 <!-- Modal loadMyProjectModal -->
 <div class="modal fade" id="loadMyProjectModal" tabindex="-1" role="dialog"
-  aria-labelledby="loadMyProjectModal" aria-hidden="true" *ngIf="_userService.user">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loadMyProjectModal">Cargar Projecto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <button class="btn btn-primary m-1" *ngFor="let project of _userService.user.projects"
-          data-dismiss="modal" (click)="loadProject(project)">
-          {{project.name}}
-        </button>
+	aria-labelledby="loadMyProjectModal" aria-hidden="true" *ngIf="_userService.user">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="loadMyProjectModal">Cargar Projecto</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<button class="btn btn-primary m-1"
+					*ngFor="let project of _userService.user.projects" data-dismiss="modal"
+					(click)="loadProject(project)">
+					{{project.name}}
+				</button>
 
 
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 </div>
