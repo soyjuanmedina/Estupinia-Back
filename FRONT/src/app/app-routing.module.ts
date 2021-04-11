@@ -7,6 +7,7 @@ import {
   CalculadoraDeCostesPage,
   ContactPage
 } from "@pages/index.pages";
+import { SharedComponent } from '@pages/shared/shared.component';
 import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 
 
@@ -15,6 +16,10 @@ const appRoutes: Routes = [
   { path: 'c', component: CalculadoraDeCostesPage },
   { path: 'profile', component: ProfilePage },
   { path: 'contacto', component: ContactPage },
+  {
+    path: 'shared',
+    component: SharedComponent,
+  },
   { path: '**', redirectTo: 'c', pathMatch: 'full' },
 ];
 

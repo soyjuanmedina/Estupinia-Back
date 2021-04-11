@@ -6,14 +6,17 @@ import { UserService } from '../../../../_services/user.service';
 import { UtilitiesService } from '../../../../_services/utilities.service';
 import { HttpClient } from '@angular/common/http';
 import examples_old from "../../../../examples_old/hostelry.json";
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
   selector: 'hosteleria-project',
-  templateUrl: './hosteleria.component.html'
+  templateUrl: './hosteleria.component.html',
+  styleUrls: ['./hosteleria.component.scss']
 })
 export class HosteleriaProject implements OnInit {
 
+  alert;
   examples: Array<Project>;
   emptyProject: Project = {
     type: 'Hostelería',
@@ -73,9 +76,11 @@ export class HosteleriaProject implements OnInit {
   totalVariableExpends = 0;
   result = null;
   calculated = false;
+  window = window;
   constructor(public _projectService: ProjectService, public _userService: UserService,
-    private http: HttpClient, public _utilitiesService: UtilitiesService) {
-    if (!this._projectService.project.id) {
+    private http: HttpClient, public _utilitiesService: UtilitiesService, public router: Router) {
+    if (!this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
+      elem.type === this._projectService.project.type)) {
       this._projectService.step = -1;
       this._projectService.project = this.emptyProject;
     }
@@ -90,6 +95,9 @@ export class HosteleriaProject implements OnInit {
       commentary: this.accountingNoteCommentary
     }
     this.selectedArray.unshift(newAccountingNote);
+    delete this.accountingNoteName;
+    delete this.accountingNoteAmount;
+    delete this.accountingNoteCommentary;
   }
 
   deleteAccountingNote(type, array, accountingNote) {
@@ -186,37 +194,49 @@ export class HosteleriaProject implements OnInit {
 
   loadExample(example) {
     this._projectService.step = 3;
-    this._projectService.project = example;
+    this._projectService.project = { ...example };
+    this.deleteProjectId();
+    this._projectService.project.type = "Hostelería";
     setTimeout(() => {
       location.href = '#nombre'
     }, 500);
   }
 
   saveProjectToUser() {
-    if (this._projectService.project.type == "HosteleryExample") {
-      this.deleteProjectId();
+    console.log('this._projectService.project')
+    if (!this._projectService.project.id && this.projectNameExistsInUserProjects(this._projectService.project.name)) {
+      this.alert = "Ya tienes un proyecto con este nombre"
+      $('#SaveModal').modal('show');
+    } else {
+      location.href = '#nombre'
+      if (this._projectService.project.isMine) {
+        this._userService.user.projects = this._userService.user.projects.filter(obj => obj.id != this._projectService.project.id);
+      }
+      this._userService.user.projects.push(this._projectService.project);
+      this._userService.saveUser(this._userService.user);
+      this._projectService.project = this._userService.user.projects.filter(obj => obj.name === this._projectService.project.name)[0];
+      this._projectService.project.isMine = true;
+      setTimeout(() => {
+        this.alert = "Proyecto guardado correctamente"
+        $('#SaveModal').modal('show');
+      }, 750);
+
     }
-    if (this._projectService.project.id) {
-      console.log(this._userService.user.projects);
-      this._userService.user.projects = this._userService.user.projects.filter(obj => obj.id != this._projectService.project.id);
-      console.log(this._userService.user.projects);
-    }
-    this._userService.user.projects.push(this._projectService.project);
-    this._userService.saveUser(this._userService.user);
   }
 
   saveAsNewProjectToUser() {
     this.deleteProjectId();
-    this._userService.saveProjectToUser(this._projectService.project);
+    this.saveProjectToUser();
   }
 
   deleteProjectFromUser() {
-    console.log('deleteProjectFromUser');
+    this._userService.user.projects = this._userService.user.projects.filter(obj => obj.id != this._projectService.project.id);
+    this._userService.saveUser(this._userService.user);
+    this.reset();
   }
 
 
   deleteProjectId() {
-    this._projectService.project.type = "Hostelería"
     delete this._projectService.project.id;
     if (this._projectService.project.costs) {
       delete this._projectService.project.costs.id;
@@ -232,19 +252,31 @@ export class HosteleriaProject implements OnInit {
   }
 
   getExamples() {
-    this.examples = examples_old;
-    /* return this.http.post('/project/get/hostelery/examples', "").subscribe(
+    // this.examples = examples_old;
+    return this.http.post('/project/get/hostelery/examples', "").subscribe(
       data => {
         this.examples = data as Array<Project>;
       },
       err => {
         this._userService.error = err.error.message;
       }
-    ); */
+    );
+  }
+
+  projectNameExistsInUserProjects(name) {
+    return this._userService.user.projects.some(elem => elem.name === name);
+  }
+
+  shareProject() {
+    $('#SaveModal').modal('show');
   }
 
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    $('.modal').modal('hide');
   }
 
 }
