@@ -37,10 +37,8 @@ export class UserService {
   }
 
   saveUser(user: User) {
-    console.log('dentro', user);
     return this.http.post('/user/save', user).subscribe(
       data => {
-        console.log(data);
         this.user = data as User;
       },
       err => {

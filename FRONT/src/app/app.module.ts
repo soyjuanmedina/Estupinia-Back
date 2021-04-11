@@ -15,6 +15,8 @@ import { HosteleriaProject } from './pages/calculadora-costes/components/hostele
 import { AppService } from './app.service';
 import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { SharedComponent } from '@pages/shared/shared.component';
+import { OtherTypeComponent } from './pages/calculadora-costes/components/othertype/othertype.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     CalculadoraDeCostesPage,
     ContactPage,
     HosteleriaProject,
-    ProfilePage
+    ProfilePage,
+    SharedComponent,
+    OtherTypeComponent
   ],
   imports: [
     BrowserModule,

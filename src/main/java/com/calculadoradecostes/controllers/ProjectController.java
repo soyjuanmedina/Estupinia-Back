@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.calculadoradecostes.models.Params;
 import com.calculadoradecostes.models.Project;
 import com.calculadoradecostes.models.User;
 import com.calculadoradecostes.repository.ProjectRepository;
@@ -27,6 +28,13 @@ public class ProjectController {
 	@PostMapping("/get")
 	public  ResponseEntity<Optional<Project>> getProject(@RequestBody Long id) {
 		Optional<Project> project = projectRepository.findById(id);
+		return ResponseEntity.ok(project);
+	}
+	
+	@PostMapping("/getsharedproject")
+	public  ResponseEntity<Project> getSharedProject(@RequestBody Params params) {
+		String uuid = params.getUuid();
+		Project project = projectRepository.findByUuid(uuid);
 		return ResponseEntity.ok(project);
 	}
 
