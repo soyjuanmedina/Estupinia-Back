@@ -1199,7 +1199,7 @@ CalculadoraDeCostesPage.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, CalculadoraDeCostesPage_hosteleria_project_7_Template, 1, 0, "hosteleria-project", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, CalculadoraDeCostesPage_othertype_project_8_Template, 1, 0, "othertype-project", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " \u00A0 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "hr");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, CalculadoraDeCostesPage_div_10_Template, 11, 1, "div", 7);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
@@ -1643,7 +1643,6 @@ class HosteleriaProject {
         this.result = null;
         this.calculated = false;
         this.window = window;
-        console.log('hola');
         if (this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
             elem.type === this._projectService.project.type)) {
             this._projectService.step = -1;
@@ -2594,7 +2593,7 @@ class OtherTypeComponent {
         this.result = null;
         this.calculated = false;
         this.window = window;
-        if (!this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
+        if (this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
             elem.type === this._projectService.project.type)) {
             this._projectService.step = -1;
             this._projectService.project = this.emptyProject;

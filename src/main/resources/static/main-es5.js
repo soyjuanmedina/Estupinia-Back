@@ -2437,7 +2437,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " \xA0 ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "hr");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, CalculadoraDeCostesPage_div_10_Template, 11, 1, "div", 7);
         }
@@ -3421,7 +3421,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.result = null;
         this.calculated = false;
         this.window = window;
-        console.log('hola');
 
         if (this._userService.user && !this._userService.user.projects.some(function (elem) {
           return elem.id === _this7._projectService.project.id && elem.type === _this7._projectService.project.type;
@@ -5420,7 +5419,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.calculated = false;
         this.window = window;
 
-        if (!this._userService.user.projects.some(function (elem) {
+        if (this._userService.user && !this._userService.user.projects.some(function (elem) {
           return elem.id === _this11._projectService.project.id && elem.type === _this11._projectService.project.type;
         })) {
           this._projectService.step = -1;
