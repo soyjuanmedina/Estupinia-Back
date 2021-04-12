@@ -1,4 +1,5 @@
-target/
+/target
+target/classes/application.properties
 
 # HELP.md
 !.mvn/wrapper/maven-wrapper.jar
@@ -72,3 +73,6 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+/target/classes/*
+target/classes/com/calculadoradecostes/security/jwt/JwtUtils.class
