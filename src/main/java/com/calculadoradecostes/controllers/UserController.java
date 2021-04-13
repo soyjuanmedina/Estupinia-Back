@@ -50,6 +50,7 @@ public class UserController {
 	@PostMapping("/get")
 	public ResponseEntity<Optional<User>> getUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.err.println("Hello, logs!");
 		String currentPrincipalName = authentication.getName();
 		Optional<User> user = userRepository.findByUsername(currentPrincipalName);
 		return ResponseEntity.ok(user);
