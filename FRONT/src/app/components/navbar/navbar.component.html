@@ -80,8 +80,16 @@
               <div class="tab-pane fade show" id="nav-login" role="tabpanel"
                 aria-labelledby="nav-login-tab">
                 <div class="col-md-12">
-                  <div class="card card-container">
 
+                  <div class="text-center" *ngIf="_utilitiesService.loading">
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span class="spinner-grow spinner-grow-sm" role="status"
+                        aria-hidden="true"></span>
+                      Un momento ...
+                    </button>
+                  </div>
+
+                  <div class="card card-container" *ngIf="!_utilitiesService.loading">
                     <form name="loginForm" (ngSubmit)="f.form.valid && login()" #f="ngForm"
                       novalidate>
                       <div class="form-group">
@@ -127,7 +135,16 @@
               <div class="tab-pane fade" id="nav-register" role="tabpanel"
                 aria-labelledby="nav-register-tab">
                 <div class="col-md-12">
-                  <div class="card card-container">
+
+                  <div class="text-center" *ngIf="_utilitiesService.loading">
+                    <button class="btn btn-primary" type="button" disabled>
+                      <span class="spinner-grow spinner-grow-sm" role="status"
+                        aria-hidden="true"></span>
+                      Un momento ...
+                    </button>
+                  </div>
+
+                  <div class="card card-container" *ngIf="!_utilitiesService.loading">
                     <form *ngIf="!isSuccessfulRegistered" name="registerForm"
                       (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
                       <div class="form-group">

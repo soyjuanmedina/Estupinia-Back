@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
+    this._utilitiesService.loading = true;
     this.authService.login(this.loginForm).subscribe(
       data => {
         $('#LoginModal').modal('hide');
@@ -37,22 +38,27 @@ export class NavbarComponent implements OnInit {
         this.tokenStorage.saveUser(data);
         this._userService.user = data;
         this.roles = this.tokenStorage.getUser().roles;
+        this._utilitiesService.loading = false;
       },
       err => {
         this.loginErrorMessage = "El usuario no existe";
+        this._utilitiesService.loading = false;
       }
     );
   }
 
   register() {
+    this._utilitiesService.loading = true;
     this.authService.register(this.registerForm).subscribe(
       data => {
         this.isSuccessfulRegistered = true;
         this.isFailedRegistered = false;
+        this._utilitiesService.loading = false;
       },
       err => {
         this.registerErrorMessage = err.error.message;
         this.isFailedRegistered = true;
+        this._utilitiesService.loading = false;
       }
     );
   }

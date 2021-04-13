@@ -6,6 +6,8 @@ declare var $: any;
 })
 export class UtilitiesService {
 
+  loading: boolean;
+
   constructor() { }
 
   openLoginModal() {
