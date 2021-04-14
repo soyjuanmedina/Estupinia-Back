@@ -3508,7 +3508,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.calculated = false;
         this.window = window;
 
-        if (this._userService.user && !this._userService.user.projects.some(function (elem) {
+        if (!this._userService.user || this._userService.user && !this._userService.user.projects.some(function (elem) {
           return elem.id === _this7._projectService.project.id && elem.type === _this7._projectService.project.type;
         })) {
           this._projectService.step = -1;
@@ -5505,7 +5505,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.calculated = false;
         this.window = window;
 
-        if (this._userService.user && !this._userService.user.projects.some(function (elem) {
+        if (!this._userService.user || this._userService.user && !this._userService.user.projects.some(function (elem) {
           return elem.id === _this11._projectService.project.id && elem.type === _this11._projectService.project.type;
         })) {
           this._projectService.step = -1;

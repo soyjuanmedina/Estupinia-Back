@@ -1684,7 +1684,7 @@ class HosteleriaProject {
         this.result = null;
         this.calculated = false;
         this.window = window;
-        if (this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
+        if (!this._userService.user || this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
             elem.type === this._projectService.project.type)) {
             this._projectService.step = -1;
             this._projectService.project = this.emptyProject;
@@ -2634,7 +2634,7 @@ class OtherTypeComponent {
         this.result = null;
         this.calculated = false;
         this.window = window;
-        if (this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
+        if (!this._userService.user || this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
             elem.type === this._projectService.project.type)) {
             this._projectService.step = -1;
             this._projectService.project = this.emptyProject;
