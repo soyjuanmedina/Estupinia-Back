@@ -17,6 +17,7 @@ import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { SharedComponent } from '@pages/shared/shared.component';
 import { OtherTypeComponent } from './pages/calculadora-costes/components/othertype/othertype.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { OtherTypeComponent } from './pages/calculadora-costes/components/othert
     HosteleriaProject,
     ProfilePage,
     SharedComponent,
-    OtherTypeComponent
+    OtherTypeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

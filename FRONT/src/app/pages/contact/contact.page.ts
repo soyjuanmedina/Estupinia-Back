@@ -16,6 +16,7 @@ export class ContactPage implements OnInit {
   constructor(public http: HttpClient) { }
 
   contactMe() {
+    console.log('this', this.email, this.name, this.message);
     let self = this;
     $.post('/assets/php/mail.php', {
       email: this.email,
