@@ -3296,11 +3296,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r76 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 95);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 96);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 95);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 97);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 96);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HosteleriaProject_div_130_Template_button_click_2_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r76);
@@ -3316,13 +3316,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 96);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 95);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, HosteleriaProject_div_130_button_5_Template, 2, 0, "button", 52);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 96);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 95);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, HosteleriaProject_div_130_button_7_Template, 2, 0, "button", 52);
 
@@ -3348,7 +3348,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r79 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 98);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 97);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HosteleriaProject_button_162_Template_button_click_0_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r79);
@@ -3376,7 +3376,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function HosteleriaProject_div_173_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 99);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 98);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -3394,13 +3394,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function HosteleriaProject_div_174_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 100);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 99);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Recuerda que puedes compartir tu projecto mandando a tus socios o inversores esta URL: ");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 101);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "a", 100);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
 
@@ -3765,7 +3765,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["hosteleria-project"]],
       decls: 175,
       vars: 47,
-      consts: [["id", "startSection", 1, "col-lg-12", "ml-auto", "top-30"], [1, "lead"], [1, "clearfix"], [1, "float-right"], ["type", "button", "class", "btn btn-primary btn-sm bottom-30", 3, "click", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#loadExampleModal", 1, "btn", "btn-primary", "btn-sm", "bottom-30"], ["id", "section0", 3, "hidden"], [1, "col-lg-12", "ml-auto", "top-30"], ["id", "nombre", 1, "card"], [1, "card-header"], [1, "card-body"], [1, "form-row"], [1, "form-group", "col-md-12"], ["for", "_projectService.project.name"], ["type", "text", "id", "project.name", "placeholder", "Nombre", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["id", "section1", 3, "hidden"], [1, "card"], [1, "card-title"], [1, "form-group", "col-md-6"], ["for", "_projectService.project.esteemedCustomers.esteemed"], [4, "ngIf"], ["type", "number", "id", "_projectService.project.esteemedCustomers.esteemed", "placeholder", "Clientes", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["for", "_projectService.project.esteemedCustomers.averageTicket"], ["type", "number", "id", "_projectService.project.esteemedCustomers.averageTicket", "placeholder", "Ticket medio", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "form-group"], [1, "form-check"], ["type", "checkbox", "id", "_projectService.project.esteemedCustomers.monthly", 1, "form-check-input", 3, "ngModel", "name", "ngModelChange"], ["for", "_projectService.project.esteemedCustomers.monthly", 1, "form-check-label"], ["for", "_projectService.project.esteemedCustomers.commentary"], ["id", "_projectService.project.esteemedCustomers.commentary", "rows", "3", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "col-lg-12", "mx-auto", "top-30", "clearfix"], ["type", "button", "data-toggle", "modal", "data-target", "#addAccountingNoteModal", 1, "btn", "btn-primary", "btn-sm", 3, "click"], ["class", "form-row top-30", 4, "ngFor", "ngForOf"], ["id", "section2", 3, "hidden"], ["id", "section3", 1, "top-30", 3, "hidden"], ["class", "col-lg-12 mx-auto top-30 bottom-30", 4, "ngIf"], ["class", "col-lg-12 mx-auto top-100 bottom-30", 4, "ngIf"], ["id", "result", 1, "page-section", "bg-primary", "text-white", "mb-0", 3, "hidden", "ngClass"], [1, "container"], [1, "page-section-heading", "text-center", "text-uppercase", "text-white"], [1, "divider-custom", "divider-light"], [1, "divider-custom-line"], [1, "divider-custom-icon"], [1, "fas", "fa-star"], [1, "row"], [1, "col-lg-12", "ml-auto", "text-center"], ["class", "lead", 4, "ngIf"], [1, "bottom-30"], [1, "form-row", "top-30", 3, "hidden"], [1, "col-md-6"], ["type", "submit", 1, "btn", "btn-secondary", "btn-block", 3, "click"], ["class", "btn btn-primary btn-block", 3, "click", 4, "ngIf"], ["class", "btn btn-primary btn-block fade-in", 3, "click", 4, "ngIf"], ["class", "form-row top-15", 4, "ngIf"], ["id", "addAccountingNoteModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "addAccountingNoteModal", "aria-hidden", "true", 1, "modal", "fade"], ["role", "document", 1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "addAccountingNoteModal", 1, "modal-title"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], ["for", "accountingNoteName"], ["type", "text", "id", "accountingNoteName", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "accountingNoteAmount"], ["type", "number", "id", "accountingNoteAmount", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "accountingNoteCommentary"], ["id", "accountingNoteCommentary", "rows", "3", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["data-dismiss", "modal", 1, "btn", "btn-primary", "top-30", 3, "click"], ["id", "loadExampleModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "loadExampleModal", "aria-hidden", "true", 1, "modal", "fade"], ["id", "loadExampleModal", 1, "modal-title"], ["class", "btn btn-primary ml-1", "data-dismiss", "modal", 3, "click", 4, "ngFor", "ngForOf"], ["id", "SaveModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "SaveModal", "aria-hidden", "true", 1, "modal", "fade"], ["class", "alert alert-danger", "role", "alert", 4, "ngIf"], ["class", "btn btn-primary", 4, "ngIf"], ["type", "button", 1, "btn", "btn-primary", "btn-sm", "bottom-30", 3, "click"], [1, "form-row", "top-30"], ["class", "col-md-12", 4, "ngIf"], [1, "col-md-12", 3, "ngClass"], [1, "input-group"], ["type", "number", 1, "form-control", 3, "id", "value", "ngModel", "name", "ngModelChange"], [1, "input-group-prepend"], ["class", "input-group-text", "id", "validationTooltipUsernamePrepend", 3, "click", 4, "ngIf"], ["id", "validationTooltipUsernamePrepend", 1, "input-group-text", 3, "click"], [1, "fas", "fa-trash-alt", "float-right", "text-danger"], [1, "col-md-12"], ["id", "income.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "fas", "fa-comments", "float-right"], ["id", "fixedCost.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["id", "variableCost.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "col-lg-12", "mx-auto", "top-30", "bottom-30"], ["type", "button", 1, "btn", "btn-primary", "btn-lg", "btn-block", 3, "click"], [1, "col-lg-12", "mx-auto", "top-100", "bottom-30"], [1, "btn", "btn-primary", "btn-block", 3, "click"], [1, "btn", "btn-primary", "btn-block", "fade-in", 3, "click"], [1, "form-row", "top-15"], [1, "col-md-4"], ["type", "submit", 1, "btn", "btn-danger", "btn-block", 3, "click"], ["data-dismiss", "modal", 1, "btn", "btn-primary", "ml-1", 3, "click"], ["role", "alert", 1, "alert", "alert-danger"], [1, "btn", "btn-primary"], [2, "color", "#2c3e50", 3, "href"]],
+      consts: [["id", "startSection", 1, "col-lg-12", "ml-auto", "top-30"], [1, "lead"], [1, "clearfix"], [1, "float-right"], ["type", "button", "class", "btn btn-primary btn-sm bottom-30", 3, "click", 4, "ngIf"], ["type", "button", "data-toggle", "modal", "data-target", "#loadExampleModal", 1, "btn", "btn-primary", "btn-sm", "bottom-30"], ["id", "section0", 3, "hidden"], [1, "col-lg-12", "ml-auto", "top-30"], ["id", "nombre", 1, "card"], [1, "card-header"], [1, "card-body"], [1, "form-row"], [1, "form-group", "col-md-12"], ["for", "_projectService.project.name"], ["type", "text", "id", "project.name", "placeholder", "Nombre", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["id", "section1", 3, "hidden"], [1, "card"], [1, "card-title"], [1, "form-group", "col-md-6"], ["for", "_projectService.project.esteemedCustomers.esteemed"], [4, "ngIf"], ["type", "number", "id", "_projectService.project.esteemedCustomers.esteemed", "placeholder", "Clientes", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["for", "_projectService.project.esteemedCustomers.averageTicket"], ["type", "number", "id", "_projectService.project.esteemedCustomers.averageTicket", "placeholder", "Ticket medio", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "form-group"], [1, "form-check"], ["type", "checkbox", "id", "_projectService.project.esteemedCustomers.monthly", 1, "form-check-input", 3, "ngModel", "name", "ngModelChange"], ["for", "_projectService.project.esteemedCustomers.monthly", 1, "form-check-label"], ["for", "_projectService.project.esteemedCustomers.commentary"], ["id", "_projectService.project.esteemedCustomers.commentary", "rows", "3", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "col-lg-12", "mx-auto", "top-30", "clearfix"], ["type", "button", "data-toggle", "modal", "data-target", "#addAccountingNoteModal", 1, "btn", "btn-primary", "btn-sm", 3, "click"], ["class", "form-row top-30", 4, "ngFor", "ngForOf"], ["id", "section2", 3, "hidden"], ["id", "section3", 1, "top-30", 3, "hidden"], ["class", "col-lg-12 mx-auto top-30 bottom-30", 4, "ngIf"], ["class", "col-lg-12 mx-auto m-2", 4, "ngIf"], ["id", "result", 1, "page-section", "bg-primary", "text-white", "mb-0", 3, "hidden", "ngClass"], [1, "container"], [1, "page-section-heading", "text-center", "text-uppercase", "text-white"], [1, "divider-custom", "divider-light"], [1, "divider-custom-line"], [1, "divider-custom-icon"], [1, "fas", "fa-star"], [1, "row"], [1, "col-lg-12", "ml-auto", "text-center"], ["class", "lead", 4, "ngIf"], [1, "bottom-30"], [1, "form-row", 3, "hidden"], [1, "col-md-6", "pt-2"], ["type", "submit", 1, "btn", "btn-secondary", "btn-block", 3, "click"], ["class", "btn btn-primary btn-block", 3, "click", 4, "ngIf"], ["class", "btn btn-primary btn-block fade-in", 3, "click", 4, "ngIf"], ["class", "form-row", 4, "ngIf"], ["id", "addAccountingNoteModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "addAccountingNoteModal", "aria-hidden", "true", 1, "modal", "fade"], ["role", "document", 1, "modal-dialog"], [1, "modal-content"], [1, "modal-header"], ["id", "addAccountingNoteModal", 1, "modal-title"], ["type", "button", "data-dismiss", "modal", "aria-label", "Close", 1, "close"], ["aria-hidden", "true"], [1, "modal-body"], ["for", "accountingNoteName"], ["type", "text", "id", "accountingNoteName", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "accountingNoteAmount"], ["type", "number", "id", "accountingNoteAmount", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "accountingNoteCommentary"], ["id", "accountingNoteCommentary", "rows", "3", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["data-dismiss", "modal", 1, "btn", "btn-primary", "top-30", 3, "click"], ["id", "loadExampleModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "loadExampleModal", "aria-hidden", "true", 1, "modal", "fade"], ["id", "loadExampleModal", 1, "modal-title"], ["class", "btn btn-primary ml-1", "data-dismiss", "modal", 3, "click", 4, "ngFor", "ngForOf"], ["id", "SaveModal", "tabindex", "-1", "role", "dialog", "aria-labelledby", "SaveModal", "aria-hidden", "true", 1, "modal", "fade"], ["class", "alert alert-danger", "role", "alert", 4, "ngIf"], ["class", "btn btn-primary", 4, "ngIf"], ["type", "button", 1, "btn", "btn-primary", "btn-sm", "bottom-30", 3, "click"], [1, "form-row", "top-30"], ["class", "col-md-12", 4, "ngIf"], [1, "col-md-12", 3, "ngClass"], [1, "input-group"], ["type", "number", 1, "form-control", 3, "id", "value", "ngModel", "name", "ngModelChange"], [1, "input-group-prepend"], ["class", "input-group-text", "id", "validationTooltipUsernamePrepend", 3, "click", 4, "ngIf"], ["id", "validationTooltipUsernamePrepend", 1, "input-group-text", 3, "click"], [1, "fas", "fa-trash-alt", "float-right", "text-danger"], [1, "col-md-12"], ["id", "income.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "fas", "fa-comments", "float-right"], ["id", "fixedCost.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["id", "variableCost.commentary", "rows", "2", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], [1, "col-lg-12", "mx-auto", "top-30", "bottom-30"], ["type", "button", 1, "btn", "btn-primary", "btn-lg", "btn-block", 3, "click"], [1, "col-lg-12", "mx-auto", "m-2"], [1, "btn", "btn-primary", "btn-block", 3, "click"], [1, "btn", "btn-primary", "btn-block", "fade-in", 3, "click"], [1, "col-md-4", "pt-2"], ["type", "submit", 1, "btn", "btn-danger", "btn-block", 3, "click"], ["data-dismiss", "modal", 1, "btn", "btn-primary", "ml-1", 3, "click"], ["role", "alert", 1, "alert", "alert-danger"], [1, "btn", "btn-primary"], [2, "color", "#2c3e50", 3, "href"]],
       template: function HosteleriaProject_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
@@ -4502,7 +4502,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" mensuales de: ", ctx.result, "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" mensuales de: ", ctx.result, " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
