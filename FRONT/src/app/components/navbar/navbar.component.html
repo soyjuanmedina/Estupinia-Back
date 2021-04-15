@@ -17,14 +17,14 @@
   </div>
   <div *ngIf="_userService.user">
     <button type="button" class="btn btn-primary btn-sm fade-in" [routerLink]="['/profile']">
-      Profile
+      <i class="fas fa-id-card-alt"></i> {{ _userService.user.name }}
     </button>
     &nbsp;
     <button type="button" class="btn btn-primary btn-sm fade-in" (click)="logout()">
       Logout
     </button>
-    &nbsp; Conectado como {{ _userService.user.name }}
   </div>
+
 </nav>
 
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
