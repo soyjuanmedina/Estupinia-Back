@@ -10,7 +10,7 @@ export class ProjectService {
   originalProject: Project;
   project: Project = {
     type: '',
-    name,
+    name: '',
     esteemedCustomers: {
       esteemed: 0,
       commentary: '',

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 declare var $: any;
 
@@ -8,7 +9,7 @@ export class UtilitiesService {
 
   loading: boolean;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   openLoginModal() {
     $('#LoginModal').modal('show');
@@ -18,5 +19,10 @@ export class UtilitiesService {
   openRegisterModal() {
     $('#LoginModal').modal('show');
     $('.nav-tabs a[href="#nav-register"]').tab('show');
+  }
+
+  sendMail(params) {
+    let url = 'utilities/sendMail';
+    return this.http.post(url, params)
   }
 }
