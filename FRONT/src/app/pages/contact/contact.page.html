@@ -1,6 +1,21 @@
 <div class="top-30">
   <div class="row justify-content-center">
 
+    <div class="text-center mb-2" *ngIf="_utilitiesService.loading">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Un momento ...
+      </button>
+    </div>
+
+    <div class="alert alert-success" role="alert" *ngIf="thanks">
+      {{thanks}}
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="errorAlert">
+      {{errorAlert}}
+    </div>
+
 
     <!--Form with header-->
 
@@ -55,6 +70,5 @@
         </div>
       </div>
     </form>
-    <div *ngIf="thanks">Gracias por tu ayuda. Tendremos en cuenta tus comentarios</div>
   </div>
 </div>
