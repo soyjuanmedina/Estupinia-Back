@@ -1,16 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="menu-navbar navbar navbar-expand-lg navbar-light bg-light">
   <ul class="navbar-nav mr-auto">
-    <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/contact']"> Contacto
-      <i class="fas fa-envelope-open-text"></i>
-    </button>
+    <div>
+      <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/c']">
+        <i class="fas fa-home"></i>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm ml-1" [routerLink]="['/contact']">
+        <i class="fas fa-envelope-open-text"></i>
+      </button>
+    </div>
   </ul>
   <div *ngIf="!_userService.user">
     <button type="button" class="btn btn-primary btn-sm"
       (click)="_utilitiesService.openLoginModal()">
       Login
     </button>
-    &nbsp;
-    <button type="button" class="btn btn-primary btn-sm"
+    <button type="button" class="btn btn-primary btn-sm ml-1"
       (click)="_utilitiesService.openRegisterModal()">
       Registro
     </button>
@@ -19,8 +23,7 @@
     <button type="button" class="btn btn-primary btn-sm fade-in" [routerLink]="['/profile']">
       <i class="fas fa-id-card-alt"></i> {{ _userService.user.name }}
     </button>
-    &nbsp;
-    <button type="button" class="btn btn-primary btn-sm fade-in" (click)="logout()">
+    <button type="button" class="btn btn-primary btn-sm fade-in ml-1" (click)="logout()">
       Logout
     </button>
   </div>

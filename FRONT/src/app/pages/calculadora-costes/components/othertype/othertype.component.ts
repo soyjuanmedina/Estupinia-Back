@@ -57,7 +57,7 @@ export class OtherTypeComponent implements OnInit {
       this._projectService.step = -1;
       this._projectService.project = this.emptyProject;
     }
-    // this.getExamples();
+    this.getExamples();
   }
 
 
@@ -169,9 +169,9 @@ export class OtherTypeComponent implements OnInit {
     this._projectService.step = 3;
     this._projectService.project = { ...example };
     this.deleteProjectId();
-    this._projectService.project.type = "Hostelería";
+    this._projectService.project.type = "Otro tipo...";
     setTimeout(() => {
-      location.href = '#nombre'
+      location.href = '#nombre';
     }, 500);
   }
 
@@ -224,8 +224,7 @@ export class OtherTypeComponent implements OnInit {
   }
 
   getExamples() {
-    // this.examples = examples_old;
-    return this.http.post('/project/get/hostelery/examples', "").subscribe(
+    return this.http.post('/project/get/other/examples', "").subscribe(
       data => {
         this.examples = data as Array<Project>;
       },

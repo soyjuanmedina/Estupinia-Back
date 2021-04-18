@@ -56,5 +56,12 @@ public class ProjectController {
 		List<Project> examples = projectRepository.findByType("HosteleryExample");
 		return ResponseEntity.ok(examples);
 	}
+	
+	@PostMapping("/get/other/examples")
+	public  ResponseEntity<List<Project>> getOtherProjectsExamples() {
+		
+		List<Project> examples = projectRepository.findByType("OtherExample");
+		return ResponseEntity.ok(examples);
+	}
 
 }

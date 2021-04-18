@@ -55,7 +55,8 @@
   <hosteleria-project *ngIf="_projectService.project.type == 'Hostelería'
   || _projectService.project.type == 'HosteleryExample'">
   </hosteleria-project>
-  <othertype-project *ngIf="_projectService.project.type == 'Otro tipo...'">
+  <othertype-project
+    *ngIf="_projectService.project.type == 'Otro tipo...' || _projectService.project.type == 'OtherExample'">
   </othertype-project>
 </div>
 

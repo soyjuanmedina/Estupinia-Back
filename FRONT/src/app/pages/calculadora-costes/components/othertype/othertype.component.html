@@ -12,6 +12,11 @@
         *ngIf="_projectService.step == -1">
         Crear nuevo
       </button>
+      &nbsp;
+      <button type="button" class="btn btn-primary btn-sm bottom-30" data-toggle="modal"
+        data-target="#loadExampleModal">
+        Cargar ejemplo
+      </button>
     </div>
   </div>
   <div [hidden]="_projectService.step < 0" id="section0">
@@ -288,7 +293,8 @@
         <p class="lead">Los gastos varriables son: {{totalVariableExpends}}</p>
         <p class="lead">Lo que te llevaría a unos
           <span *ngIf="result < 0">gastos</span><span *ngIf="result >= 0">beneficios</span>
-          mensuales de: {{result}}</p>
+          mensuales de: {{result}}
+        </p>
       </div>
 
     </div>
