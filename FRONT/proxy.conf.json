@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "http://calmacalcula.herokuapp.com/",
+    "target": "https://calmacalcula.herokuapp.com/",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {

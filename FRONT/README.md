@@ -4,7 +4,7 @@ La calculadora de costes es un proyecto abierto que permite calcular la rentabil
 
 El front esta desarrollado con Angular y el back con Spring
 
-Puedes visitarla en http://calmacalcula.herokuapp.com/
+Puedes visitarla en https://calmacalcula.herokuapp.com/
 
 Ten en cuenta que al ser un servidor gratuito de Heroku puede tardar en arrancar la primera vez que la visites.
 
