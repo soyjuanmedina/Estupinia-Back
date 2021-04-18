@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { ProjectService } from './project.service';
 import { Project } from '../interfaces/project';
+import { environment } from '../../environments/environment';
 
-const USER_CONTROLLER = '/user/';
+const USER_CONTROLLER = environment.baseUrl + '/user/';
 const USER_KEY = 'auth-user';
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UserService {
   }
 
   getUser() {
-    return this.http.post('/user/get', "").subscribe(
+    return this.http.post(USER_CONTROLLER + 'get', "").subscribe(
       data => {
         this.user = data as User;
         window.sessionStorage.removeItem(USER_KEY);
@@ -37,7 +38,7 @@ export class UserService {
   }
 
   saveUser(user: User) {
-    return this.http.post('/user/save', user).subscribe(
+    return this.http.post(USER_CONTROLLER + 'save', user).subscribe(
       data => {
         this.user = data as User;
       },
@@ -48,7 +49,7 @@ export class UserService {
   }
 
   saveProjectToUser(project: Project) {
-    return this.http.post('/user/save/project', project).subscribe(
+    return this.http.post(USER_CONTROLLER + 'save/project', project).subscribe(
       data => {
         this.getUser();
       },
@@ -59,7 +60,7 @@ export class UserService {
   }
 
   deleteProjectFromUser(project: Project) {
-    return this.http.post('/user/delete/project', project).subscribe(
+    return this.http.post(USER_CONTROLLER + 'delete/project', project).subscribe(
       data => {
         this.getUser();
       },

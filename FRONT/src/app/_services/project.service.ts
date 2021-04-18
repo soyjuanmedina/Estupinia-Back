@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Project } from '../interfaces/project';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class ProjectService {
   }
 
   saveProject(project: Project) {
-    return this.http.post('/user/save', project).subscribe(
+    return this.http.post(environment.baseUrl + '/user/save', project).subscribe(
       data => {
         console.log(data);
       },

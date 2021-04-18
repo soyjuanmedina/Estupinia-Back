@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 declare var $: any;
+import { environment } from '../../environments/environment';
+
+const UTILITIES_CONTROLLER = environment.baseUrl + 'utilities/';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +25,7 @@ export class UtilitiesService {
   }
 
   sendMail(params) {
-    let url = 'utilities/sendMail';
+    let url = UTILITIES_CONTROLLER + 'sendMail';
     return this.http.post(url, params)
   }
 }
