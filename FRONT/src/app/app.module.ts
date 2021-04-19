@@ -2,10 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// Interceptor http
-import { AllHttpRequestsInterceptor } from "./interceptors/allhttprequests.interceptor";
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -41,10 +37,7 @@ import { OtherTypeComponent } from './pages/calculadora-costes/components/othert
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [
-    AppService, authInterceptorProviders,
-    AllHttpRequestsInterceptor
-  ],
+  providers: [AppService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
