@@ -29,7 +29,7 @@ export class ProjectService {
   }
 
   saveProject(project: Project) {
-    return this.http.post(environment.baseUrl + '/user/save', project).subscribe(
+    return this.http.post(environment.baseUrl + 'user/save', project).subscribe(
       data => {
         console.log(data);
       },

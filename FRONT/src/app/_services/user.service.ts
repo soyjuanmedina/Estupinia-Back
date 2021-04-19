@@ -6,7 +6,7 @@ import { ProjectService } from './project.service';
 import { Project } from '../interfaces/project';
 import { environment } from '../../environments/environment';
 
-const USER_CONTROLLER = environment.baseUrl + '/user/';
+const USER_CONTROLLER = environment.baseUrl + 'user/';
 const USER_KEY = 'auth-user';
 
 @Injectable({

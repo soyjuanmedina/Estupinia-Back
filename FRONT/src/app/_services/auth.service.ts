@@ -5,7 +5,7 @@ import { TokenStorageService } from './token-storage.service';
 import { ProjectService } from './project.service';
 import { environment } from "../../environments/environment";
 
-const AUTH_CONTROLLER = environment.baseUrl + '/auth/';
+const AUTH_CONTROLLER = environment.baseUrl + 'auth/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient, private token: TokenStorageService, private _projectService: ProjectService) { }
 
   login(credentials): Observable<any> {
+    console.log('AUTH_CONTROLLER', AUTH_CONTROLLER);
     return this.http.post(AUTH_CONTROLLER + 'login', credentials, httpOptions);
   }
 
