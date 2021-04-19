@@ -224,14 +224,12 @@ export class OtherTypeComponent implements OnInit {
   }
 
   getExamples() {
-    return this.http.post('/project/get/other/examples', "").subscribe(
-      data => {
-        this.examples = data as Array<Project>;
-      },
-      err => {
-        this._userService.error = err.error.message;
-      }
-    );
+    let params = {
+      type: "OtherExample"
+    }
+    this._projectService.getExamples(params).subscribe(data => {
+      this.examples = data as Array<Project>;
+    })
   }
 
   projectNameExistsInUserProjects(name) {

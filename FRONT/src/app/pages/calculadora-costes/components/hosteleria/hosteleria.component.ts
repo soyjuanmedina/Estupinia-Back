@@ -254,15 +254,12 @@ export class HosteleriaProject implements OnInit {
   }
 
   getExamples() {
-    // this.examples = examples_old;
-    return this.http.post('/project/get/hostelery/examples', "").subscribe(
-      data => {
-        this.examples = data as Array<Project>;
-      },
-      err => {
-        this._userService.error = err.error.message;
-      }
-    );
+    let params = {
+      type: "HosteleryExample"
+    }
+    this._projectService.getExamples(params).subscribe(data => {
+      this.examples = data as Array<Project>;
+    })
   }
 
   projectNameExistsInUserProjects(name) {

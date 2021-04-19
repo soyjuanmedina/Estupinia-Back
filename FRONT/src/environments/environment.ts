@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: "/"
+  // baseUrl: "https://calmacalcula.herokuapp.com/"
 };
 
 /*

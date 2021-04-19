@@ -52,19 +52,10 @@ public class ProjectController {
 		return ResponseEntity.ok(true);
 	}
 	
-	@PostMapping("/get/hostelery/examples")
-	@CrossOrigin(origins = "*")
-	public  ResponseEntity<List<Project>> getHosteleryProjectsExamples() {
-		
-		List<Project> examples = projectRepository.findByType("HosteleryExample");
-		return ResponseEntity.ok(examples);
-	}
-	
-	@PostMapping("/get/other/examples")
-	@CrossOrigin(origins = "*")
-	public  ResponseEntity<List<Project>> getOtherProjectsExamples() {
-		
-		List<Project> examples = projectRepository.findByType("OtherExample");
+	@PostMapping("/get/examples")
+	public  ResponseEntity<List<Project>> getProjectsExamples(@RequestBody Params params) {
+		String type = params.getType();
+		List<Project> examples = projectRepository.findByType(type);
 		return ResponseEntity.ok(examples);
 	}
 

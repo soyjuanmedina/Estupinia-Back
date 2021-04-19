@@ -39,4 +39,9 @@ export class ProjectService {
     );
   }
 
+  getExamples(params) {
+    let url = environment.baseUrl + 'project/get/examples';
+    return this.http.post(url, params);
+  }
+
 }
