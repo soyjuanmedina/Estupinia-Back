@@ -53,6 +53,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/get/hostelery/examples")
+	@CrossOrigin(origins = "*")
 	public  ResponseEntity<List<Project>> getHosteleryProjectsExamples() {
 		
 		List<Project> examples = projectRepository.findByType("HosteleryExample");
@@ -60,6 +61,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/get/other/examples")
+	@CrossOrigin(origins = "*")
 	public  ResponseEntity<List<Project>> getOtherProjectsExamples() {
 		
 		List<Project> examples = projectRepository.findByType("OtherExample");
