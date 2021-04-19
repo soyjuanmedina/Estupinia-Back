@@ -11,7 +11,7 @@ export class AllHttpRequestsInterceptor implements HttpInterceptor {
     req = req.clone({
       headers: new HttpHeaders({
         // 'X-Frame-Options': 'DENY',
-        'Access - Control - Allow - Origin': '*'
+        'Access-Control-Allow-Origin': '*'
       })
     });
     return next.handle(req);
