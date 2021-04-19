@@ -35,6 +35,7 @@ import com.calculadoradecostes.repository.UserRepository;
 import com.calculadoradecostes.security.services.UserDetailsImpl;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 @PreAuthorize("isAuthenticated()")  
 public class UserController {
@@ -48,7 +49,6 @@ public class UserController {
 	@Autowired
 	AccountingNoteRepository accountingNoteRepository;
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/get")
 	public ResponseEntity<Optional<User>> getUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
