@@ -37,7 +37,6 @@ import com.calculadoradecostes.security.services.UserDetailsImpl;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/user")
-@PreAuthorize("isAuthenticated()")  
 public class UserController {
 	
 	@Autowired
