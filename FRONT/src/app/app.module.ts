@@ -21,6 +21,7 @@ import { ProfilePage } from './pages/profile/profile.page.ts/profile.page';
 import { SharedComponent } from '@pages/shared/shared.component';
 import { OtherTypeComponent } from './pages/calculadora-costes/components/othertype/othertype.component';
 import { AuthGuardService } from './_services/auth-guard/auth-guard.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthGuardService } from './_services/auth-guard/auth-guard.service';
     HosteleriaProject,
     ProfilePage,
     SharedComponent,
-    OtherTypeComponent
+    OtherTypeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

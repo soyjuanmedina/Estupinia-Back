@@ -10,5 +10,9 @@ Ten en cuenta que al ser un servidor gratuito de Heroku puede tardar en arrancar
 
 ## Historial
 
+#### 1.20210423
+Add footer
+Logout to home
+
 #### 1.20210418
 Primera versión operativa

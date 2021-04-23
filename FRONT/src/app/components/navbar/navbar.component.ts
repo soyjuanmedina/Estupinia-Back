@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../_services/auth.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
 import { UserService } from '../../_services/user.service';
@@ -21,10 +22,11 @@ export class NavbarComponent implements OnInit {
   isFailedRegistered = false;
 
   constructor(private authService: AuthService, public _utilitiesService: UtilitiesService,
-    private tokenStorage: TokenStorageService, public _userService: UserService) { }
+    private tokenStorage: TokenStorageService, public _userService: UserService, public router: Router) { }
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   login() {

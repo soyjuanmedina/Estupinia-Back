@@ -1,12 +1,16 @@
-<div id="container">
+<div id="container" class="content">
 
   <div id="header">
     <navbar-component></navbar-component>
   </div>
 
-  <div id="body">
+  <div id="body" class="content">
     <div class="container main-container">
-      <router-outlet></router-outlet>
+      <router-outlet class="demo"></router-outlet>
     </div>
+  </div>
+
+  <div id="footer">
+    <footer-component></footer-component>
   </div>
 </div>
