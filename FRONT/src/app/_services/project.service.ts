@@ -28,6 +28,7 @@ export class ProjectService {
   otherExamples;
 
   constructor(private http: HttpClient) {
+    console.log('Wake up',);
     this.getExamples("HosteleryExample").subscribe(data => {
       this.hosteleryExamples = data;
     });
