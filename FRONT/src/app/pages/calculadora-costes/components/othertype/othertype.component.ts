@@ -51,7 +51,7 @@ export class OtherTypeComponent implements OnInit {
   calculated = false;
   window = window;
   constructor(public _projectService: ProjectService, public _userService: UserService,
-    private http: HttpClient, public _utilitiesService: UtilitiesService, public router: Router) {
+    public _utilitiesService: UtilitiesService, public router: Router) {
     if (!this._userService.user || this._userService.user && !this._userService.user.projects.some(elem => elem.id === this._projectService.project.id &&
       elem.type === this._projectService.project.type)) {
       this._projectService.step = -1;
