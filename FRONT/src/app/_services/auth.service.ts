@@ -19,7 +19,6 @@ export class AuthService {
   constructor(private http: HttpClient, private token: TokenStorageService, private _projectService: ProjectService) { }
 
   login(credentials): Observable<any> {
-    console.log('AUTH_CONTROLLER', AUTH_CONTROLLER);
     return this.http.post(AUTH_CONTROLLER + 'login', credentials, httpOptions);
   }
 

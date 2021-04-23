@@ -24,8 +24,16 @@ export class ProjectService {
       variablescosts: []
     }
   };
+  hosteleryExamples;
+  otherExamples;
 
   constructor(private http: HttpClient) {
+    this.getExamples("HosteleryExample").subscribe(data => {
+      this.hosteleryExamples = data;
+    });
+    this.getExamples("OtherExample").subscribe(data => {
+      this.otherExamples = data as Array<Project>;
+    })
   }
 
   saveProject(project: Project) {
@@ -39,7 +47,10 @@ export class ProjectService {
     );
   }
 
-  getExamples(params) {
+  getExamples(type) {
+    let params = {
+      type: type
+    }
     let url = environment.baseUrl + 'project/get/examples';
     return this.http.post(url, params);
   }

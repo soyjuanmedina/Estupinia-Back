@@ -84,9 +84,7 @@ export class HosteleriaProject implements OnInit {
       this._projectService.step = -1;
       this._projectService.project = this.emptyProject;
     }
-    this.getExamples();
-
-
+    this.examples = this._projectService.hosteleryExamples;
   }
 
 
@@ -253,15 +251,6 @@ export class HosteleriaProject implements OnInit {
     }
   }
 
-  getExamples() {
-    let params = {
-      type: "HosteleryExample"
-    }
-    this._projectService.getExamples(params).subscribe(data => {
-      this.examples = data as Array<Project>;
-    })
-  }
-
   projectNameExistsInUserProjects(name) {
     return this._userService.user.projects.some(elem => elem.name === name);
   }
@@ -269,7 +258,6 @@ export class HosteleriaProject implements OnInit {
   shareProject() {
     $('#SaveModal').modal('show');
   }
-
 
   ngOnInit(): void {
   }
