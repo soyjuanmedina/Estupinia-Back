@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -41,6 +42,12 @@ public class User {
 	@Size(max = 120)
 	@JsonIgnore
 	private String password;
+	
+	private String uuid;
+	
+	private Boolean active  = true;;
+	
+	private int premium_remain = 0;
 
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(	name = "user_roles", 
@@ -48,11 +55,6 @@ public class User {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
-	@JoinTable(	name = "user_projects", 
-				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "project_id"))
-	private List<Project> projects = new ArrayList<>();
 
 	public User() {
 	}
@@ -111,12 +113,34 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
-	public List<Project> getProjects() {
-		return projects;
+	
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public int getPremium_remain() {
+		return premium_remain;
+	}
+
+	public void setPremium_remain(int premium_remain) {
+		this.premium_remain = premium_remain;
+	}
+
+	@PrePersist
+	  public void autofill() {
+	      this.setUuid(UUID.randomUUID().toString());
+	  }
+
 }
