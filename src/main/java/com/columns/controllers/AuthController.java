@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.columns.models.ERole;
-import com.columns.models.Project;
 import com.columns.models.Role;
 import com.columns.models.User;
 import com.columns.payload.request.LoginRequest;

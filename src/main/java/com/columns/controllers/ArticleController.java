@@ -17,17 +17,17 @@ import com.columns.models.User;
 import com.columns.services.EmailService;
 
 @RestController
-@RequestMapping("/utilities")
+@RequestMapping("/article")
 @CrossOrigin(origins = "*")
-public class UtilitiesController {
+public class ArticleController {
 	
 
 	@Autowired
 	EmailService emailService;
 	
-	@PostMapping("/sendMail")
-	public  ResponseEntity<Boolean> sendMail(@RequestBody Params params) {
-		emailService.sendEmail(params);
+	@PostMapping("/recomended")
+	public  ResponseEntity<Boolean> getRecomendedArticles() {
+		/// emailService.sendEmail(params);
 		return ResponseEntity.ok(true);
 	}
 

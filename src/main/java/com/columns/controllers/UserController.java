@@ -22,15 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.columns.models.AccountingNote;
-import com.columns.models.Costs;
-import com.columns.models.Project;
 import com.columns.models.User;
 import com.columns.payload.request.LoginRequest;
 import com.columns.payload.request.SignupRequest;
 import com.columns.payload.response.JwtResponse;
-import com.columns.repository.AccountingNoteRepository;
-import com.columns.repository.ProjectRepository;
 import com.columns.repository.UserRepository;
 import com.columns.security.services.UserDetailsImpl;
 
@@ -41,12 +36,6 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
-	
-	@Autowired
-	ProjectRepository projectRepository;
-	
-	@Autowired
-	AccountingNoteRepository accountingNoteRepository;
 	
 	@PostMapping("/get")
 	public ResponseEntity<Optional<User>> getUser() {

@@ -2,8 +2,6 @@ package com.columns.payload.response;
 
 import java.util.List;
 
-import com.columns.models.Project;
-
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
