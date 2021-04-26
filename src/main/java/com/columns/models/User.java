@@ -32,6 +32,10 @@ public class User {
 	@NotBlank
 	@Size(max = 50)
 	private String name;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String surname;
 
 	@NotBlank
 	@Size(max = 50)
@@ -59,8 +63,9 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String email, String password) {
+	public User(String name, String surname, String email, String password) {
 		this.name = name;
+		this.surname = surname;
 		this.email = email;
 		this.username = email;
 		this.password = password;
@@ -88,6 +93,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getEmail() {

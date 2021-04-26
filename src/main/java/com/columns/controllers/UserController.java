@@ -62,19 +62,5 @@ public class UserController {
 			return ResponseEntity.ok(null);
 		}	
 	}
-	
-	@PostMapping("/delete")
-	public  ResponseEntity<Boolean> saveProjectToUser(@Valid @RequestBody User user) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		Optional<User> currentUser = 
-				userRepository.findByUsername(currentPrincipalName);
-		if(user.getUsername().equals(currentUser.get().getUsername())) {
-			userRepository.delete(user);
-			return ResponseEntity.ok(true);
-		} else {
-			return ResponseEntity.ok(false);
-		}			
-	}	
 
 }
