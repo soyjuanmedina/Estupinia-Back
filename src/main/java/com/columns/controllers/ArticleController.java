@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.columns.models.Article;
 import com.columns.models.Params;
 import com.columns.models.User;
+import com.columns.security.services.ArticleService;
 import com.columns.services.EmailService;
 
 @RestController
@@ -23,12 +26,12 @@ public class ArticleController {
 	
 
 	@Autowired
-	EmailService emailService;
+	ArticleService articleService;
 	
 	@PostMapping("/recomended")
-	public  ResponseEntity<Boolean> getRecomendedArticles() {
-		/// emailService.sendEmail(params);
-		return ResponseEntity.ok(true);
+	public  ResponseEntity<List<Article>> getRecomendedArticles() {
+		List<Article> recomendedArticles = articleService.getRecomendedArticles();
+		return ResponseEntity.ok(recomendedArticles);
 	}
 
 }
