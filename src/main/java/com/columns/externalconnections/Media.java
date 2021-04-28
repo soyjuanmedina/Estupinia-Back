@@ -30,6 +30,8 @@ public class Media {
 	public static List<Article> getRecomendedArticles() {
 		List<Article> recomendedArticles = new ArrayList<Article>();
 		RSSFeedParser parser = new RSSFeedParser("https://www.vozpopuli.com/opinion/feed");
+		// RSSFeedParser parser = new
+		// RSSFeedParser("https://rss.blogs.elconfidencial.com/");
 		Feed feed = parser.readFeed();
 		// System.out.println(feed);
 		recomendedArticles = feed.getArticles();

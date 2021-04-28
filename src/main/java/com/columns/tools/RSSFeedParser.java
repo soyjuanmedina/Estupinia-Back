@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.xml.stream.XMLEventReader;
@@ -86,7 +89,11 @@ public class RSSFeedParser {
 						author = getCharacterData(event, eventReader);
 						break;
 					case PUB_DATE:
-						pubdate = getCharacterData(event, eventReader);
+						DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss Z",
+								Locale.ENGLISH);
+						OffsetDateTime odt = OffsetDateTime.parse(getCharacterData(event, eventReader), inputFormat);
+						DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d-MM-YYYY", Locale.ENGLISH);
+						pubdate = outputFormat.format(odt);
 						break;
 					case COPYRIGHT:
 						copyright = getCharacterData(event, eventReader);
