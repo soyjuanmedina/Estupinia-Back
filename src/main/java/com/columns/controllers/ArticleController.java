@@ -2,12 +2,15 @@ package com.columns.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +42,17 @@ public class ArticleController {
 		String currentPrincipalName = authentication.getName();
 		User user = userRepository.findByUsername(currentPrincipalName).get();
 		user.setPremium_remain(user.getPremium_remain() - 1);
+		userRepository.save(user);
+		Boolean response = true;
+		return ResponseEntity.ok(response);
+	}
+
+	@PostMapping("/buypremiumaccess")
+	public ResponseEntity<Boolean> buyPremiumAccess(@Valid @RequestBody int amount) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User user = userRepository.findByUsername(currentPrincipalName).get();
+		user.setPremium_remain(user.getPremium_remain() + amount);
 		userRepository.save(user);
 		Boolean response = true;
 		return ResponseEntity.ok(response);
