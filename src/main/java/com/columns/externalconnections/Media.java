@@ -1,6 +1,7 @@
 package com.columns.externalconnections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.columns.models.Article;
@@ -8,6 +9,9 @@ import com.columns.models.Feed;
 import com.columns.tools.RSSFeedParser;
 
 public class Media {
+
+	private List<String> medias = Arrays.asList("https://www.vozpopuli.com/opinion/feed",
+			"http://ep00.epimg.net/rss/elpais/opinion.xml");
 
 	public static List<Article> getAllArticles() {
 
