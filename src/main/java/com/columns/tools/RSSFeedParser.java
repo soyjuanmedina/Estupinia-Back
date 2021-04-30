@@ -66,6 +66,7 @@ public class RSSFeedParser {
 					String localPart = event.asStartElement().getName().getLocalPart();
 					switch (localPart) {
 					case ITEM:
+					case "entry":
 						if (isFeedHeader) {
 							isFeedHeader = false;
 							feed = new Feed(title, link, description, language, copyright, pubdate);
@@ -73,9 +74,12 @@ public class RSSFeedParser {
 						event = eventReader.nextEvent();
 						break;
 					case TITLE:
-						title = getCharacterData(event, eventReader);
+						if(!event.asStartElement().getName().getPrefix().equals("media")) {
+							title = getCharacterData(event, eventReader);
+						}
 						break;
 					case DESCRIPTION:
+					case "summary":
 						description = getCharacterData(event, eventReader);
 						break;
 					case LINK:
@@ -89,21 +93,27 @@ public class RSSFeedParser {
 						author = getCharacterData(event, eventReader);
 						break;
 					case PUB_DATE:
-						DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss Z",
-								Locale.ENGLISH);
-						OffsetDateTime odt = OffsetDateTime.parse(getCharacterData(event, eventReader), inputFormat);
-						DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d-MM-YYYY", Locale.ENGLISH);
-						pubdate = outputFormat.format(odt);
+					case "published":
+						String firstFourChars = getCharacterData(event, eventReader).substring(0, 10);
+//						DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm:ss Z",
+//								Locale.ENGLISH);
+//						OffsetDateTime odt = OffsetDateTime.parse(getCharacterData(event, eventReader), inputFormat);
+//						DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d-MM-YYYY", Locale.ENGLISH);
+						pubdate = firstFourChars;
 						break;
 					case COPYRIGHT:
 						copyright = getCharacterData(event, eventReader);
 						break;
 					case "encoded":
-						fullcontent = getCharacterData(event, eventReader);
+					case "content":
+						if(!event.asStartElement().getName().getPrefix().equals("media")) {
+							fullcontent = getCharacterData(event, eventReader);
+						}
 						break;
 					}
 				} else if (event.isEndElement()) {
-					if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
+					if (event.asEndElement().getName().getLocalPart() == (ITEM) ||
+							event.asEndElement().getName().getLocalPart() == ("entry")) {
 						Article article = new Article();
 						String uniqueID = UUID.randomUUID().toString();
 						article.setWriter(author);
@@ -113,7 +123,12 @@ public class RSSFeedParser {
 						article.setDate(pubdate);
 						article.setFullcontent(fullcontent);
 						article.setId(uniqueID);
-						article.setMedia(feed.getTitle());
+						if(feed.getTitle().equalsIgnoreCase("BLOGS")) {
+							article.setMedia("elconfidencial.com");
+						} else {
+							article.setMedia(feed.getTitle());
+						}
+						
 						feed.getArticles().add(article);
 						event = eventReader.nextEvent();
 						continue;

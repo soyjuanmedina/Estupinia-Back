@@ -11,45 +11,33 @@ import com.columns.tools.RSSFeedParser;
 public class Media {
 
 	private List<String> medias = Arrays.asList("https://www.vozpopuli.com/opinion/feed",
-			"http://ep00.epimg.net/rss/elpais/opinion.xml");
+			"https://rss.blogs.elconfidencial.com/",
+			"https://rss.blogs.elconfidencial.com/espana/al-grano/");
 
-	public static List<Article> getAllArticles() {
+	public List<Article> getAllArticles() {
+		
+		List<Article> allArticles = new ArrayList<Article>();
+        for (String media : this.medias) {
+            System.out.println(media);
 
-		RSSFeedParser parser = new RSSFeedParser("https://www.vozpopuli.com/opinion/feed");
-		Feed feed = parser.readFeed();
-		System.out.println(feed);
-//        for (Article message : article.getMessages()) {
-//            System.out.println("asdf");
-//
-//        }
-
-		List<Article> recomendedArticles = new ArrayList<Article>();
-		Article recomendedArticle = new Article();
-
-		recomendedArticle.setTitle("Grettings desde el back");
-		recomendedArticles.add(recomendedArticle);
-		return recomendedArticles;
+        }
+		return allArticles;
 	}
 
 	public static List<Article> getRecomendedArticles() {
 		List<Article> recomendedArticles = new ArrayList<Article>();
-		RSSFeedParser parser = new RSSFeedParser("https://www.vozpopuli.com/opinion/feed");
-		// RSSFeedParser parser = new
-		// RSSFeedParser("https://rss.blogs.elconfidencial.com/");
+		RSSFeedParser parser = new RSSFeedParser("https://rss.blogs.elconfidencial.com/");
 		Feed feed = parser.readFeed();
-		// System.out.println(feed);
 		recomendedArticles = feed.getArticles();
-//        for (Article message : article.getMessages()) {
-//            System.out.println("asdf");
-//
-//        }
-
-//		List<Article> recomendedArticles = new ArrayList<Article>();
-//		Article recomendedArticle = new Article();
-//
-//		recomendedArticle.setTitle("Grettings desde el back");
-//		recomendedArticles.add(recomendedArticle);
 		return recomendedArticles;
+	}
+	
+	public static List<Article> getArticlesFromMedia(String media) {
+		List<Article> articlesFromMedia = new ArrayList<Article>();
+		RSSFeedParser parser = new RSSFeedParser(media);
+		Feed feed = parser.readFeed();
+		articlesFromMedia = feed.getArticles();
+		return articlesFromMedia;
 	}
 
 }
