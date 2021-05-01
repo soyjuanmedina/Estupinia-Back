@@ -17,6 +17,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import com.columns.models.Article;
 import com.columns.models.Feed;
+import com.columns.models.Media;
 
 public class RSSFeedParser {
 	static final String TITLE = "title";
@@ -31,10 +32,12 @@ public class RSSFeedParser {
 	static final String GUID = "guid";
 
 	final URL url;
+	final String name;
 
-	public RSSFeedParser(String feedUrl) {
+	public RSSFeedParser(Media media) {
+		this.name = media.getName();
 		try {
-			this.url = new URL(feedUrl);
+			this.url = new URL(media.getUrl());
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -123,11 +126,7 @@ public class RSSFeedParser {
 						article.setDate(pubdate);
 						article.setFullcontent(fullcontent);
 						article.setId(uniqueID);
-						if(feed.getTitle().equalsIgnoreCase("BLOGS")) {
-							article.setMedia("elconfidencial.com");
-						} else {
-							article.setMedia(feed.getTitle());
-						}
+						article.setMedia(this.name);
 						
 						feed.getArticles().add(article);
 						event = eventReader.nextEvent();

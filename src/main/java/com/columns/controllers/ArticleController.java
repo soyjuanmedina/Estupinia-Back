@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.columns.models.Article;
+import com.columns.models.Media;
 import com.columns.models.User;
 import com.columns.repository.UserRepository;
 import com.columns.security.services.ArticleService;
+import com.columns.tools.SiteConstants;
 
 @RestController
 @RequestMapping("/article")
@@ -34,6 +36,18 @@ public class ArticleController {
 	public ResponseEntity<List<Article>> getRecomendedArticles() {
 		List<Article> recomendedArticles = articleService.getRecomendedArticles();
 		return ResponseEntity.ok(recomendedArticles);
+	}
+	
+	@PostMapping("/getArticlesByMedia")
+	public ResponseEntity<List<Article>> getRecomendedArticles(@Valid @RequestBody Media media) {
+		List<Article> articlesByMedia = articleService.getArticlesByMedia(media);
+		return ResponseEntity.ok(articlesByMedia);
+	}
+	
+	@PostMapping("/medias")
+	public ResponseEntity<List<Media>> getMedias() {
+		List<Media> medias = SiteConstants.MEDIAS;
+		return ResponseEntity.ok(medias);
 	}
 
 	@PostMapping("/confirmreadpremium")
