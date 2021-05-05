@@ -1,5 +1,9 @@
 package com.columns.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +35,7 @@ import com.columns.repository.RoleRepository;
 import com.columns.repository.UserRepository;
 import com.columns.security.jwt.JwtUtils;
 import com.columns.security.services.UserDetailsImpl;
+import com.columns.services.EmailService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -51,6 +56,9 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
+	@Autowired
+	EmailService emailService;
+
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -59,35 +67,28 @@ public class AuthController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
-		
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
-		List<String> roles = userDetails.getAuthorities().stream()
-				.map(item -> item.getAuthority())
+
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-		
+
 		// List<Project> projects = userDetails.getProjects();
 
-		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 userDetails.getId(), 
-												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
-												 roles));
+		return ResponseEntity.ok(
+				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest)
+			throws FileNotFoundException {
 
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: El mail ya existe"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: El mail ya existe"));
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getName(), 
-							 signUpRequest.getSurname(), 
-							 signUpRequest.getEmail(),
-							 encoder.encode(signUpRequest.getPassword()));
+		User user = new User(signUpRequest.getName(), signUpRequest.getSurname(), signUpRequest.getEmail(),
+				encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -120,7 +121,11 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
+		user.setActive(false);
 		userRepository.save(user);
+		File initialFile = new File("src/main/resources/static/html/registration.html");
+		InputStream input = new FileInputStream(initialFile);
+		emailService.sendActivation(input, user);
 
 		return ResponseEntity.ok(new MessageResponse("¡Usuario registrado!"));
 	}

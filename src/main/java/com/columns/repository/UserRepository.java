@@ -12,11 +12,15 @@ import org.springframework.stereotype.Repository;
 import com.columns.models.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>  {
+public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
+
+	Optional<User> findByUuid(String uuid);
+
 	Boolean existsByUsername(String username);
+
 	Boolean existsByEmail(String email);
-	
+
 	@Transactional
 	@Modifying
 	@Query(value = "DELETE FROM user_projects WHERE project_id = ?1 and user_id = ?2", nativeQuery = true)
