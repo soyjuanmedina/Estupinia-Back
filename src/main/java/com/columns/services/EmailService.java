@@ -34,7 +34,7 @@ public class EmailService {
 	public void sendActivation(InputStream input, User user) throws MailException {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("baseURL", SiteConstants.MAIL.BASE_URL);
-		map.put("registrationURL", SiteConstants.MAIL.REGISTRATION_URL);
+		map.put("registrationURL", SiteConstants.MAIL.REGISTRATION_URL + user.getUuid());
 		String content = fillMailContentData(input, map);
 		String subject = "Confirma tu mail para acceder a Coolumns";
 		sendEmailTool(content, user.getEmail(), subject);
