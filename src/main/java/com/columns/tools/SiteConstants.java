@@ -24,7 +24,7 @@ public class SiteConstants {
 
 	public class MAIL {
 		public static final String BASE_URL = "https://soyjuanmedina.github.io/Columns-Front/";
-		public static final String REGISTRATION_URL = "https://soyjuanmedina.github.io/Columns-Front/confirmemail/";
+		public static final String REGISTRATION_URL = "https://soyjuanmedina.github.io/Columns-Front/#/confirmemail/";
 	}
 
 }
