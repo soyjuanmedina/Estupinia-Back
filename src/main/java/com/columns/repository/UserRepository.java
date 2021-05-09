@@ -1,5 +1,6 @@
 package com.columns.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,6 @@ import com.columns.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
-	Optional<User> findBySubscription(String subcription);
 
 	Optional<User> findByUuid(String uuid);
 
@@ -26,4 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Modifying
 	@Query(value = "DELETE FROM user_projects WHERE project_id = ?1 and user_id = ?2", nativeQuery = true)
 	void deleteProjectFromUser(Long project_id, Long user_id);
+	
+	@Query(value = "SELECT * FROM users where subscription = ?1", nativeQuery = true)
+	List<User>  findBySubscription(String subscription);
 }

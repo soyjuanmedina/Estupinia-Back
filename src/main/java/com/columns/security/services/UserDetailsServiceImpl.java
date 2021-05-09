@@ -29,15 +29,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return UserDetailsImpl.build(user);
 	}
 	
-//	@Scheduled(cron = "*/5 * * * * *")
-//	public void resetUserArticles() {
-//		Optional<User> standarUsers = userRepository.findBySubscription("standar");
-////		for (user standaruser:standarusers) {
-////			system.out.println(
-////				      "resetuserarticles - " + system.currenttimemillis() / 1000);
-////			}
-//	    System.out.println(
-//	      "resetUserArticles - " + System.currentTimeMillis() / 1000);
-	//}
+	@Scheduled(cron = "0 0 0 * * *")
+	public void resetUserArticles() {
+		List<User> standarUsers = userRepository.findBySubscription("standar");
+		for (User standarUser:standarUsers) {
+			standarUser.setBuyedArticles("");
+			standarUser.setPremium_remain(5);
+			userRepository.save(standarUser);
+			}
+		List<User> premiumUsers = userRepository.findBySubscription("premium");
+		for (User premiumUser:premiumUsers) {
+			premiumUser.setBuyedArticles("");
+			premiumUser.setPremium_remain(10);
+			userRepository.save(premiumUser);
+			}
+	}
 
 }
