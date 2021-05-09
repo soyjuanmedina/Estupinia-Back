@@ -1,12 +1,20 @@
 package com.columns.models;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -14,11 +22,8 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(	name = "users", 
-		uniqueConstraints = { 
-			@UniqueConstraint(columnNames = "username"),
-			@UniqueConstraint(columnNames = "email") 
-		})
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
+		@UniqueConstraint(columnNames = "email") })
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +33,11 @@ public class User {
 	@Size(max = 50)
 	@Email
 	private String username;
-	
+
 	@NotBlank
 	@Size(max = 50)
 	private String name;
-	
+
 	@NotBlank
 	@Size(max = 50)
 	private String surname;
@@ -52,19 +57,16 @@ public class User {
 	@Size(max = 120)
 	@JsonIgnore
 	private String password;
-	
+
 	private String uuid;
-	
+
 	private Boolean active  = false;
 	
 	private int premium_remain = 0;
 
-	@ManyToMany(cascade = {CascadeType.ALL})
-	@JoinTable(	name = "user_roles", 
-				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-	
 
 	public User() {
 	}
@@ -140,7 +142,7 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	public String getUuid() {
 		return uuid;
 	}
@@ -174,8 +176,8 @@ public class User {
 	}
 
 	@PrePersist
-	  public void autofill() {
-	      this.setUuid(UUID.randomUUID().toString());
-	  }
+	public void autofill() {
+		this.setUuid(UUID.randomUUID().toString());
+	}
 
 }
