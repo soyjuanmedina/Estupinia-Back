@@ -1,6 +1,11 @@
 package com.columns.security.services;
 
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,5 +28,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return UserDetailsImpl.build(user);
 	}
+	
+//	@Scheduled(cron = "*/5 * * * * *")
+//	public void resetUserArticles() {
+//		Optional<User> standarUsers = userRepository.findBySubscription("standar");
+////		for (user standaruser:standarusers) {
+////			system.out.println(
+////				      "resetuserarticles - " + system.currenttimemillis() / 1000);
+////			}
+//	    System.out.println(
+//	      "resetUserArticles - " + System.currentTimeMillis() / 1000);
+	//}
 
 }

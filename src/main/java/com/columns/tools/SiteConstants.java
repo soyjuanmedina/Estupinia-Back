@@ -10,9 +10,9 @@ public class SiteConstants {
 	
 	public static List<Media> MEDIAS = new ArrayList<Media>(
             Arrays.asList(
-           		new Media("El Confidencial", "https://rss.blogs.elconfidencial.com/"),
-           		new Media("Al Grano", "https://rss.blogs.elconfidencial.com/espana/al-grano/"),
-             new Media("El Mundo", "https://e00-elmundo.uecdn.es/elmundo/rss/opinion.xml"),	
+           		//new Media("El Confidencial", "https://rss.blogs.elconfidencial.com/"),
+           		//new Media("Al Grano", "https://rss.blogs.elconfidencial.com/espana/al-grano/"),
+             //new Media("El Mundo", "https://e00-elmundo.uecdn.es/elmundo/rss/opinion.xml"),	
            		new Media("El País", "http://ep00.epimg.net/rss/elpais/opinion.xml")
             		));
 	

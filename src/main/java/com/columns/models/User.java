@@ -36,6 +36,12 @@ public class User {
 	@NotBlank
 	@Size(max = 50)
 	private String surname;
+	
+	@NotBlank
+	private String buyedArticles;
+	
+	@NotBlank
+	private String subscription;
 
 	@NotBlank
 	@Size(max = 50)
@@ -49,7 +55,7 @@ public class User {
 	
 	private String uuid;
 	
-	private Boolean active  = true;;
+	private Boolean active  = false;
 	
 	private int premium_remain = 0;
 
@@ -77,6 +83,14 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getBuyedArticles() {
+		return buyedArticles;
+	}
+
+	public void setBuyedArticles(String buyedArticles) {
+		this.buyedArticles = buyedArticles;
 	}
 
 	public String getUsername() {
@@ -149,6 +163,14 @@ public class User {
 
 	public void setPremium_remain(int premium_remain) {
 		this.premium_remain = premium_remain;
+	}
+
+	public String getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(String subscription) {
+		this.subscription = subscription;
 	}
 
 	@PrePersist

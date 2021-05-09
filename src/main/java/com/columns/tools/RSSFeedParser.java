@@ -119,7 +119,7 @@ public class RSSFeedParser {
 							event.asEndElement().getName().getLocalPart() == ("entry")) {
 						Article article = new Article();
 						String uniqueID = UUID.randomUUID().toString();
-						article.setWriter(author);
+						article.setAuthor(author);
 						article.setExcrept(description);
 						article.setUrl(link);
 						article.setTitle(title);

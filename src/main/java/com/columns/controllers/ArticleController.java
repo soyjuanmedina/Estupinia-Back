@@ -51,14 +51,19 @@ public class ArticleController {
 	}
 
 	@PostMapping("/confirmreadpremium")
-	public ResponseEntity<Boolean> confirmReadPremium() {
+	public ResponseEntity<User> confirmReadPremium(@Valid @RequestBody Article article) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		User user = userRepository.findByUsername(currentPrincipalName).get();
 		user.setPremium_remain(user.getPremium_remain() - 1);
+		if(user.getBuyedArticles() == null || user.getBuyedArticles().isEmpty()) {
+			user.setBuyedArticles(article.getId());
+		} else {
+			user.setBuyedArticles(user.getBuyedArticles() + "," + article.getId());
+		}
+		
 		userRepository.save(user);
-		Boolean response = true;
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(user);
 	}
 
 	@PostMapping("/buypremiumaccess")
@@ -70,6 +75,22 @@ public class ArticleController {
 		userRepository.save(user);
 		Boolean response = true;
 		return ResponseEntity.ok(response);
+	}
+	
+	@PostMapping("/buyaccess")
+	public ResponseEntity<User> buyAccess(@Valid @RequestBody String type) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User user = userRepository.findByUsername(currentPrincipalName).get();
+		user.setSubscription(type);
+		if(type.equals("standar")) {
+			user.setPremium_remain(5);
+		}
+		if(type.equals("premium")) {
+			user.setPremium_remain(10);
+		}
+		userRepository.save(user);
+		return ResponseEntity.ok(user);
 	}
 
 }

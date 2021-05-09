@@ -5,14 +5,14 @@ public class Article {
 	private String id;
 	private String title;
 	private String media;
-	private String writer;
+	private String author;
 	private String date;
 	private String img;
 	private String fullcontent;
 	private String epigraph;
 	private String excrept;
 	private String url;
-	private Boolean premium;
+	private String tags;
 
 	public String getId() {
 		return id;
@@ -38,12 +38,12 @@ public class Article {
 		this.media = media;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getDate() {
@@ -94,12 +94,12 @@ public class Article {
 		this.url = url;
 	}
 
-	public Boolean getPremium() {
-		return premium;
+	public String getTags() {
+		return tags;
 	}
 
-	public void setPremium(Boolean premium) {
-		this.premium = premium;
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 }
