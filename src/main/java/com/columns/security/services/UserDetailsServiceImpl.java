@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return UserDetailsImpl.build(user);
 	}
 
-	@Scheduled(cron = "*/5 * 11 * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void resetUserArticles() {
 		System.out.println("Lanzado cron a medianoche");
 		List<User> standarUsers = userRepository.findBySubscription("standar");
@@ -46,9 +46,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 	}
 
-	@Scheduled(cron = "*/5 * * * * *")
-	public void testFunction() {
-		System.out.println("Cada 5 segundos");
-	}
+//	@Scheduled(cron = "*/5 * * * * *")
+//	public void testFunction() {
+//		System.out.println("Cada 5 segundos");
+//	}
 
 }
