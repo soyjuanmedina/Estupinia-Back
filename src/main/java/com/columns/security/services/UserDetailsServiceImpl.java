@@ -1,8 +1,6 @@
 package com.columns.security.services;
 
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,21 +26,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return UserDetailsImpl.build(user);
 	}
-	
+
 	@Scheduled(cron = "0 0 0 * * *")
 	public void resetUserArticles() {
+		System.out.println("Lanzado cron a medianoche");
 		List<User> standarUsers = userRepository.findBySubscription("standar");
-		for (User standarUser:standarUsers) {
+		for (User standarUser : standarUsers) {
 			standarUser.setBuyedArticles("");
 			standarUser.setPremium_remain(5);
 			userRepository.save(standarUser);
-			}
+			System.out.println("Actulizado usuario standar: " + standarUser.getEmail());
+		}
 		List<User> premiumUsers = userRepository.findBySubscription("premium");
-		for (User premiumUser:premiumUsers) {
+		for (User premiumUser : premiumUsers) {
 			premiumUser.setBuyedArticles("");
 			premiumUser.setPremium_remain(10);
 			userRepository.save(premiumUser);
-			}
+			System.out.println("Actulizado usuario premium: " + premiumUser.getEmail());
+		}
+	}
+
+	@Scheduled(cron = "*/5 * * * * *")
+	public void testFunction() {
+		System.out.println("Cada 5 segundos");
 	}
 
 }
