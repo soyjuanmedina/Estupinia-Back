@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return UserDetailsImpl.build(user);
 	}
 
-	@Scheduled(cron = "*/15 * * * * *")
+	@Scheduled(cron = "0 * * * * *")
 	public void resetUserArticles() {
 		System.out.println("Lanzado cron a medianoche");
 		List<User> standarUsers = userRepository.findBySubscription("standar");
