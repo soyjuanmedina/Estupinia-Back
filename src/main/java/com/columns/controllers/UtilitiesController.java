@@ -3,6 +3,7 @@ package com.columns.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,11 @@ public class UtilitiesController {
 		String content = "Nombre del usuario: " + params.getName() + " - Mail del usuario: " + params.getEmail()
 				+ " - Mensaje: " + params.getMessage();
 		emailService.sendEmailTool(content, "soyjuanmedina@gmail.com", "Mensaje desde coolumns");
+		return ResponseEntity.ok(true);
+	}
+
+	@GetMapping("/wakeup")
+	public ResponseEntity<Boolean> Wakeup() {
 		return ResponseEntity.ok(true);
 	}
 
