@@ -1,5 +1,6 @@
 package com.estupinia.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estupinia.models.Params;
+import com.estupinia.models.Theme;
 import com.estupinia.models.User;
 import com.estupinia.repository.UserRepository;
 
@@ -63,6 +65,12 @@ public class UserController {
 			return ResponseEntity.ok(false);
 		}
 
+	}
+	
+	@PostMapping("/getconnected")
+	public ResponseEntity<List<User>> getConnected() {
+		List<User> connectedUsers = userRepository.findAll();
+		return ResponseEntity.ok(connectedUsers);
 	}
 
 }

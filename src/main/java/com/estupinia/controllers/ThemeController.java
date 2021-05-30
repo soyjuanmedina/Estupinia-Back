@@ -21,7 +21,7 @@ public class ThemeController {
 	ThemeRepository themeRepository;
 	
 	@PostMapping("/get")
-	public ResponseEntity<List<Theme>> getUser() {
+	public ResponseEntity<List<Theme>> getThemes() {
 		List<Theme> theme = themeRepository.findAll();
 		return ResponseEntity.ok(theme);
 	}
