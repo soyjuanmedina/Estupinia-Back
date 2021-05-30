@@ -36,7 +36,7 @@ public class EmailService {
 		map.put("baseURL", SiteConstants.MAIL.BASE_URL);
 		map.put("registrationURL", SiteConstants.MAIL.REGISTRATION_URL + user.getUuid());
 		String content = fillMailContentData(input, map);
-		String subject = "Confirma tu mail para acceder a Coolumns";
+		String subject = "Confirma tu mail para acceder a Estupinia";
 		sendEmailTool(content, user.getEmail(), subject);
 	}
 

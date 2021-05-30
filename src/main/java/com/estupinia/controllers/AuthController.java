@@ -119,6 +119,8 @@ public class AuthController {
 				}
 			});
 		}
+		
+		user.setThemes(signUpRequest.getThemes());;
 
 		user.setRoles(roles);
 		user.setActive(false);

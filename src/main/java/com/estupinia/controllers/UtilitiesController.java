@@ -25,7 +25,7 @@ public class UtilitiesController {
 
 		String content = "Nombre del usuario: " + params.getName() + " - Mail del usuario: " + params.getEmail()
 				+ " - Mensaje: " + params.getMessage();
-		emailService.sendEmailTool(content, "soyjuanmedina@gmail.com", "Mensaje desde coolumns");
+		emailService.sendEmailTool(content, "soyjuanmedina@gmail.com", "Mensaje desde Estupinia");
 		return ResponseEntity.ok(true);
 	}
 

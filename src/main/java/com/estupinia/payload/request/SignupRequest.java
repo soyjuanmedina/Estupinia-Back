@@ -3,6 +3,8 @@ package com.estupinia.payload.request;
 import java.util.Set;
 
 import javax.validation.constraints.*;
+
+import com.estupinia.models.Theme;
  
 public class SignupRequest {
 
@@ -18,6 +20,8 @@ public class SignupRequest {
     private String email;
     
     private Set<String> role;
+    
+    private Set<Theme> themes;
     
     @NotBlank
     @Size(min = 6, max = 40)
@@ -62,4 +66,12 @@ public class SignupRequest {
     public void setRole(Set<String> role) {
       this.role = role;
     }
+
+	public Set<Theme> getThemes() {
+		return themes;
+	}
+
+	public void setThemes(Set<Theme> themes) {
+		this.themes = themes;
+	}
 }

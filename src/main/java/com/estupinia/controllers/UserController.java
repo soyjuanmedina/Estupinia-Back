@@ -34,8 +34,8 @@ public class UserController {
 		return ResponseEntity.ok(user);
 	}
 
-	@PostMapping("/save")
-	public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
+	@PostMapping("/update")
+	public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		Optional<User> currentUser = userRepository.findByUsername(currentPrincipalName);

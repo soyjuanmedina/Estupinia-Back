@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -28,6 +29,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private Boolean active  = false;
 
 	@NotBlank
 	@Size(max = 50)
@@ -41,12 +44,6 @@ public class User {
 	@NotBlank
 	@Size(max = 50)
 	private String surname;
-	
-	@NotBlank
-	private String buyedArticles;
-	
-	@NotBlank
-	private String subscription;
 
 	@NotBlank
 	@Size(max = 50)
@@ -60,13 +57,18 @@ public class User {
 
 	private String uuid;
 
-	private Boolean active  = false;
-	
-	private int premium_remain = 0;
-
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.REMOVE })
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+	@ManyToMany(cascade = { CascadeType.REMOVE })
+	@JoinTable(name = "user_themes", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
+	private Set<Theme> themes = new HashSet<>();
+	
+	private Boolean acceptReservations  = false;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Schedule schedule;
 
 	public User() {
 	}
@@ -87,12 +89,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getBuyedArticles() {
-		return buyedArticles;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setBuyedArticles(String buyedArticles) {
-		this.buyedArticles = buyedArticles;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public String getUsername() {
@@ -143,36 +145,36 @@ public class User {
 		this.roles = roles;
 	}
 
+	public Set<Theme> getThemes() {
+		return themes;
+	}
+
+	public void setThemes(Set<Theme> themes) {
+		this.themes = themes;
+	}
+
+	public Boolean getAcceptReservations() {
+		return acceptReservations;
+	}
+
+	public void setAcceptReservations(Boolean acceptReservations) {
+		this.acceptReservations = acceptReservations;
+	}
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}
 
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public int getPremium_remain() {
-		return premium_remain;
-	}
-
-	public void setPremium_remain(int premium_remain) {
-		this.premium_remain = premium_remain;
-	}
-
-	public String getSubscription() {
-		return subscription;
-	}
-
-	public void setSubscription(String subscription) {
-		this.subscription = subscription;
 	}
 
 	@PrePersist
