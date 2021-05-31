@@ -19,6 +19,8 @@ public class SignupRequest {
     @Email
     private String email;
     
+    private String img;
+    
     private Set<String> role;
     
     private Set<Theme> themes;
@@ -51,7 +53,15 @@ public class SignupRequest {
         this.email = email;
     }
  
-    public String getPassword() {
+    public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getPassword() {
         return password;
     }
  

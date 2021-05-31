@@ -31,6 +31,9 @@ public class User {
 	private Long id;
 	
 	private Boolean active  = false;
+	
+	private String img = "assets/img/img-profile.png";
+
 
 	@NotBlank
 	@Size(max = 50)
@@ -95,6 +98,14 @@ public class User {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getUsername() {
