@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estupinia.models.Params;
-import com.estupinia.models.Theme;
 import com.estupinia.models.User;
 import com.estupinia.repository.UserRepository;
+import com.estupinia.services.UserServices;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,8 +26,11 @@ import com.estupinia.repository.UserRepository;
 public class UserController {
 
 	@Autowired
-	UserRepository userRepository;
-
+	UserRepository userRepository;	
+	
+	@Autowired
+	UserServices userServices;
+	
 	@PostMapping("/get")
 	public ResponseEntity<Optional<User>> getUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -69,8 +72,10 @@ public class UserController {
 	
 	@PostMapping("/getconnected")
 	public ResponseEntity<List<User>> getConnected() {
-		List<User> connectedUsers = userRepository.findAll();
-		return ResponseEntity.ok(connectedUsers);
+	
+		final List<User> userList = userServices.getConnectedUsers();
+		
+		return ResponseEntity.ok(userList);
 	}
 
 }

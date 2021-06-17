@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "themes")
 public class Theme {
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,6 +25,15 @@ public class Theme {
 	@NotBlank
 	@Size(max = 50)
 	private String name;
+	
+	//Constructor
+	public Theme( String name) {
+		this.name = name;
+	}	
+	
+	public Theme() {
+		
+	}
 	
 	@ManyToMany(mappedBy = "themes")
 	@JsonIgnore
