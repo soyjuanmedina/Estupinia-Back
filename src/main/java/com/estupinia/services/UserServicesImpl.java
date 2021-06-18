@@ -41,9 +41,9 @@ public class UserServicesImpl implements UserServices{
 		return userList;
 	}
 	
-    @Scheduled(cron = "0/5 * * * * *")
+    @Scheduled(cron = "* 0/15 * * * *")
 	public void wakeupHeroku() {
-    	System.out.println("Despertando Heroku cada 5 segundos");
+    	System.out.println("Despertando Heroku cada 15 minutos");
     	themeRepository.findAll();
 	}
 }
