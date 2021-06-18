@@ -1,4 +1,4 @@
-package com.estupinia.services.impl;
+package com.estupinia.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.user.SimpUser;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.estupinia.models.User;
+import com.estupinia.repository.ThemeRepository;
 import com.estupinia.repository.UserRepository;
-import com.estupinia.services.UserServices;
 
 @Service
 public class UserServicesImpl implements UserServices{
@@ -21,6 +22,9 @@ public class UserServicesImpl implements UserServices{
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ThemeRepository themeRepository;
 	
 	
 	@Override
@@ -35,5 +39,11 @@ public class UserServicesImpl implements UserServices{
 			}
 		}
 		return userList;
+	}
+	
+    @Scheduled(cron = "0/5 * * * * *")
+	public void wakeupHeroku() {
+    	System.out.println("Despertando Heroku cada 5 segundos");
+    	themeRepository.findAll();
 	}
 }
