@@ -28,8 +28,7 @@ public class UserServicesImpl implements UserServices{
 	
 	
 	@Override
-	public List<User> getConnectedUsers() {
-		
+	public List<User> getConnectedUsers() {		
 		Set<SimpUser> userSet = simpUserRegistry.getUsers();
 		List<User> userList = new ArrayList<User>();
 		for (SimpUser user : userSet) {
@@ -41,7 +40,19 @@ public class UserServicesImpl implements UserServices{
 		return userList;
 	}
 	
-    @Scheduled(cron = "* 0/15 * * * *")
+	public List<User> getConnectedByTheme() {		
+		Set<SimpUser> userSet = simpUserRegistry.getUsers();
+		List<User> userList = new ArrayList<User>();
+		for (SimpUser user : userSet) {
+			User userComplet = userRepository.findUserByUsername(user.getName());
+			if(userComplet != null) {
+				userList.add(userComplet);
+			}
+		}
+		return userList;
+	}
+	
+    @Scheduled(cron = "0 0/15 * * * *")
 	public void wakeupHeroku() {
     	System.out.println("Despertando Heroku cada 15 minutos");
     	themeRepository.findAll();
