@@ -35,8 +35,7 @@ public class AuthChannelInterceptorAdapter implements ChannelInterceptor {
         // Check that the object is not null
         assert accessor != null;
         // If the frame is a CONNECT frame
-        if(accessor.getCommand() == StompCommand.CONNECT){
-            
+        if(accessor.getCommand() == StompCommand.CONNECT){    
             // retrieve the username from the headers
             final String username = accessor.getFirstNativeHeader(USERNAME_HEADER);
             // retrieve the password from the headers

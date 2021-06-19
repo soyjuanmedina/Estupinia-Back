@@ -47,7 +47,11 @@ public class UserServicesImpl implements UserServices{
 		for (SimpUser user : userSet) {
 			User userComplet = userRepository.findUserByUsername(user.getName());
 			if(userComplet != null) {
-				userList.add(userComplet);
+				for (Theme usertheme : userComplet.getThemes()) {
+					if(usertheme.getId().equals(theme.getId())) {
+						userList.add(userComplet);
+					}
+				}
 			}
 		}
 		return userList;

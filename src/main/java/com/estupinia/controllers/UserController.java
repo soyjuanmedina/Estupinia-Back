@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estupinia.models.Params;
+import com.estupinia.models.Theme;
 import com.estupinia.models.User;
 import com.estupinia.repository.UserRepository;
 import com.estupinia.services.UserServices;
@@ -72,9 +73,13 @@ public class UserController {
 	
 	@PostMapping("/getconnected")
 	public ResponseEntity<List<User>> getConnected() {
+		final List<User> userList = userServices.getConnectedUsers();	
+		return ResponseEntity.ok(userList);
+	}
 	
-		final List<User> userList = userServices.getConnectedUsers();
-		
+	@PostMapping("/getconnectedbytheme")
+	public ResponseEntity<List<User>> getConnectedByTheme(@Valid @RequestBody Theme theme) {
+		final List<User> userList = userServices.getConnectedByTheme(theme);	
 		return ResponseEntity.ok(userList);
 	}
 
