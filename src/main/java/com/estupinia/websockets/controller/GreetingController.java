@@ -38,6 +38,13 @@ public class GreetingController {
         return new Greeting("Buenas tardes, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
     
+//    @MessageMapping("/communicationproposal")
+//    @SendTo("/userresponse/proposal")
+//    public Greeting greeting2(HelloMessage message) throws Exception {
+//        Thread.sleep(1000); // simulated delay   
+//        return new Greeting("Buenas noches");
+//    }
+    
     @MessageMapping("/users")
     @SendTo("/topic/greetings")
     public ResponseEntity<List<User>> getConnected() {
